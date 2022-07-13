@@ -62,4 +62,8 @@ data class RealtimeArrival(
     val trainLineNm: String,
     @SerializedName("updnLine")
     val updnLine: String
-)
+) {
+    fun toSmallData() : SubwayArrivalSmallData{
+        return SubwayArrivalSmallData(bstatnNm,barvlDt.toInt(),arvlMsg2)
+    }
+}
