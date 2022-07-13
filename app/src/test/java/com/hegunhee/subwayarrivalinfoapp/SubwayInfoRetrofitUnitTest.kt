@@ -1,5 +1,6 @@
 package com.hegunhee.subwayarrivalinfoapp
 
+import com.hegunhee.subwayarrivalinfoapp.Util.subway_line_limit
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
 import com.hegunhee.subwayarrivalinfoapp.network.getSubwayInfoApi
 import kotlinx.coroutines.Dispatchers
@@ -40,6 +41,33 @@ class SubwayInfoRetrofitUnitTest {
                 }
             }
 
+        }.join()
+    }
+
+    @Test
+    fun `test subwayLine Color`() = runBlocking {
+        launch(Dispatchers.IO) {
+            getSubwayInfoApi().getSubwayInfo(BuildConfig.SUBWAY_INFO_API_KEY).awaitResponse().body()?.run {
+                searchInfoBySubwayNameService.row.let {
+                    println(it.map { if(it.line_num[0] == '0') {it.line_num.substring(1)} else it.line_num}.filter { it in subway_line_limit }.distinct())
+                }
+            }
+
+        }.join()
+    }
+
+    @Test
+    fun `get one to nine line Entity`() = runBlocking {
+        launch(Dispatchers.IO) {
+            getSubwayInfoApi().getSubwayInfo(BuildConfig.SUBWAY_INFO_API_KEY).awaitResponse().body()?.run {
+                searchInfoBySubwayNameService.row.let {
+                    it.filter { it.station_nm in subway_line_limit }.groupBy { it.station_nm }.map { subway ->
+                        SubwayInfoEntity(subway.key,subway.value.map{it.line_num.substring(1)})
+                    }.let {
+                        println(it)
+                    }
+                }
+            }
         }.join()
     }
 
