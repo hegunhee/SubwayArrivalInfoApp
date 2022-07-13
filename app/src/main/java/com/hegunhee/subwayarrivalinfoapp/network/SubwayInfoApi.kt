@@ -1,7 +1,6 @@
 package com.hegunhee.subwayarrivalinfoapp.network
 
-import com.hegunhee.subwayarrivalinfoapp.BuildConfig
-import com.hegunhee.subwayarrivalinfoapp.data.json.JsonSubwayInfo
+import com.hegunhee.subwayarrivalinfoapp.data.json.subway_info.JsonSubwayInfo
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

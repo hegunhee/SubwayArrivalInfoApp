@@ -10,7 +10,7 @@ import retrofit2.awaitResponse
 import kotlin.system.measureNanoTime
 import kotlin.system.measureTimeMillis
 
-class RetrofitUnitTest {
+class SubwayInfoRetrofitUnitTest {
 
     @Test
     fun `test Retrofit`() = runBlocking {
@@ -35,11 +35,13 @@ class RetrofitUnitTest {
             api.getSubwayInfo(BuildConfig.SUBWAY_INFO_API_KEY).awaitResponse().body()?.run {
                 searchInfoBySubwayNameService.row.let {
                     println(it.groupBy { it.station_nm }.map { subway ->
-                        SubwayInfoEntity(subway.key, subway.value.map { it.line_num })
+                        SubwayInfoEntity(subway.key, subway.value.map { if(it.line_num[0] == '0') {it.line_num.substring(1)} else{it.line_num }})
                     })
                 }
             }
 
         }.join()
     }
+
+
 }
