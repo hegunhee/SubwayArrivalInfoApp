@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.hegunhee.subwayarrivalinfoapp.R
 import com.hegunhee.subwayarrivalinfoapp.databinding.FragmentMainBinding
 import com.hegunhee.subwayarrivalinfoapp.ui.BaseFragment
@@ -17,6 +18,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         SubwayInfoAdpater(listOf(),
             toggleSubwayInfo = {
                 viewModel.toggleSubwayInfo(it)
+            },
+            navigateToDetail = {
+                MainFragmentDirections.mainToDetail(it).let {
+                    findNavController().navigate(it)
+                }
+
             }
         )
     }

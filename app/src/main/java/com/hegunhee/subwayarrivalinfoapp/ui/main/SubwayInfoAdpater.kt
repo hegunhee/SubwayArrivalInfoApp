@@ -13,7 +13,8 @@ import com.hegunhee.subwayarrivalinfoapp.databinding.ItemMainAdapterBinding
 
 class SubwayInfoAdpater(
     private var subwayInfoList : List<SubwayInfoEntity>,
-    private val toggleSubwayInfo : (SubwayInfoEntity) -> Unit
+    private val toggleSubwayInfo : (SubwayInfoEntity) -> Unit,
+    private val navigateToDetail : (String) -> Unit
 ) : RecyclerView.Adapter<SubwayInfoAdpater.MainViewHolder>() {
 
     inner class MainViewHolder(private val binding : ItemMainAdapterBinding) : RecyclerView.ViewHolder(binding.root){
@@ -36,6 +37,12 @@ class SubwayInfoAdpater(
         fun initListener(subwayInfoEntity: SubwayInfoEntity) = with(binding){
             imageButton.setOnClickListener {
                 toggleSubwayInfo(subwayInfoEntity.copy(isBookmarked = !subwayInfoEntity.isBookmarked))
+            }
+            subwayName.setOnClickListener{
+                navigateToDetail(subwayInfoEntity.subwayName)
+            }
+            chipGroup.setOnClickListener{
+                navigateToDetail(subwayInfoEntity.subwayName)
             }
         }
     }
