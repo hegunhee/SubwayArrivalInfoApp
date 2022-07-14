@@ -9,7 +9,7 @@ import com.google.android.material.chip.Chip
 import com.hegunhee.subwayarrivalinfoapp.R
 import com.hegunhee.subwayarrivalinfoapp.Util.SubwayLineColor
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
-import com.hegunhee.subwayarrivalinfoapp.databinding.ItemMainAdapterBinding
+import com.hegunhee.subwayarrivalinfoapp.databinding.ItemSubwayInfoBinding
 
 class SubwayInfoAdpater(
     private var subwayInfoList : List<SubwayInfoEntity>,
@@ -17,7 +17,7 @@ class SubwayInfoAdpater(
     private val navigateToDetail : (String) -> Unit
 ) : RecyclerView.Adapter<SubwayInfoAdpater.MainViewHolder>() {
 
-    inner class MainViewHolder(private val binding : ItemMainAdapterBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class MainViewHolder(private val binding : ItemSubwayInfoBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(subwayInfoEntity: SubwayInfoEntity) = with(binding) {
             chipGroup.removeAllViews()
             subwayName.text = subwayInfoEntity.subwayName
@@ -48,7 +48,7 @@ class SubwayInfoAdpater(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        return MainViewHolder(ItemMainAdapterBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return MainViewHolder(ItemSubwayInfoBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {

@@ -3,6 +3,7 @@ package com.hegunhee.subwayarrivalinfoapp.di
 import com.hegunhee.subwayarrivalinfoapp.db.SubwayInfoDao
 import com.hegunhee.subwayarrivalinfoapp.model.DefaultRepository
 import com.hegunhee.subwayarrivalinfoapp.model.Repository
+import com.hegunhee.subwayarrivalinfoapp.network.SubwayArrivalApi
 import com.hegunhee.subwayarrivalinfoapp.network.SubwayInfoApi
 import dagger.Module
 import dagger.Provides
@@ -19,8 +20,9 @@ class RepositoryModule {
     @Provides
     fun provideDefaultRepository(
         subwayInfoDao: SubwayInfoDao,
-        subwayInfoApi: SubwayInfoApi
+        subwayInfoApi: SubwayInfoApi,
+        subwayArrivalApi: SubwayArrivalApi
     ) : Repository {
-        return DefaultRepository(subwayInfoDao,subwayInfoApi)
+        return DefaultRepository(subwayInfoDao,subwayInfoApi,subwayArrivalApi)
     }
 }

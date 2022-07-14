@@ -2,7 +2,7 @@ package com.hegunhee.subwayarrivalinfoapp.ui.main
 
 import androidx.lifecycle.*
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
-import com.hegunhee.subwayarrivalinfoapp.domain.GetAllSubwayInfoListByFlowUseCase
+import com.hegunhee.subwayarrivalinfoapp.domain.GetSubwayInfoListByFlowUseCase
 import com.hegunhee.subwayarrivalinfoapp.domain.InsertSubwayInfoListUseCase
 import com.hegunhee.subwayarrivalinfoapp.domain.ToggleSubwayInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainFragmentViewModel @Inject constructor(
-    private val getAllSubwayInfoListByFlowUseCase: GetAllSubwayInfoListByFlowUseCase,
+    private val getSubwayInfoListByFlowUseCase: GetSubwayInfoListByFlowUseCase,
     private val insertSubwayInfoListUseCase: InsertSubwayInfoListUseCase,
     private val toggleSubwayInfoUseCase: ToggleSubwayInfoUseCase
 ): ViewModel() {
@@ -22,7 +22,7 @@ class MainFragmentViewModel @Inject constructor(
     val editTextLiveData : LiveData<String>
         get() = _editTextLiveData
 
-    val subwayInfoList : LiveData<List<SubwayInfoEntity>> = editTextLiveData.asFlow().combine(getAllSubwayInfoListByFlowUseCase()){ str , list ->
+    val subwayInfoList : LiveData<List<SubwayInfoEntity>> = editTextLiveData.asFlow().combine(getSubwayInfoListByFlowUseCase()){ str, list ->
         if(editTextLiveData.value == ""){
             return@combine list
         }else{

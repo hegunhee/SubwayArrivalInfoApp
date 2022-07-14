@@ -64,6 +64,6 @@ data class RealtimeArrival(
     val updnLine: String
 ) {
     fun toSmallData() : SubwayArrivalSmallData{
-        return SubwayArrivalSmallData(bstatnNm,barvlDt.toInt(),arvlMsg2)
+        return SubwayArrivalSmallData(bstatnNm,barvlDt.toInt(),arvlMsg2,trainLineNm)
     }
 }

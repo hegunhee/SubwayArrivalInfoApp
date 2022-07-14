@@ -18,4 +18,7 @@ interface SubwayInfoDao {
 
     @Query("SELECT * FROM subwayInfoEntity ORDER BY isBookmarked DESC")
     fun getAllSubwayInfoByFlow() : Flow<List<SubwayInfoEntity>>
+
+    @Query("SELECT * FROM subwayInfoEntity WHERE subwayName == :name")
+    fun getSubwayInfoByName(name : String) : SubwayInfoEntity?
 }
