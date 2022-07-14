@@ -38,6 +38,10 @@ android {
     hilt {
         enableTransformForLocalTests = true
     }
+    buildFeatures{
+        viewBinding = true
+        dataBinding = true
+    }
 }
 
 dependencies {
@@ -76,4 +80,11 @@ dependencies {
     kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.28-alpha'
     // ...with Java.
     androidTestAnnotationProcessor 'com.google.dagger:hilt-android-compiler:2.28-alpha'
+
+    //navigation
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
+
+    //flow as LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
 }
