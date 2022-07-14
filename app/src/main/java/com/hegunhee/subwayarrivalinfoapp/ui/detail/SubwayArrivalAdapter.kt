@@ -1,21 +1,31 @@
 package com.hegunhee.subwayarrivalinfoapp.ui.detail
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.hegunhee.subwayarrivalinfoapp.Util.SubwayLineColor
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallData
+import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithStationLine
 import com.hegunhee.subwayarrivalinfoapp.databinding.ItemSubwayArrivalBinding
 
 class SubwayArrivalAdapter(
-    private var arrivalSmallDataList: List<SubwayArrivalSmallData>
+    private var arrivalSmallDataList: List<SubwayArrivalSmallDataWithStationLine>
 ) : RecyclerView.Adapter<SubwayArrivalAdapter.SubwayArrivalViewHolder>() {
 
     inner class SubwayArrivalViewHolder(private val binding : ItemSubwayArrivalBinding) : RecyclerView.ViewHolder(binding.root){
 
-        fun bind(subwayArrivalSmallData: SubwayArrivalSmallData) = with(binding) {
-            stationInfo.text = subwayArrivalSmallData.fullName
-            time.text = "${subwayArrivalSmallData.time/60} 분 ${subwayArrivalSmallData.time%60}"
-            message.text = subwayArrivalSmallData.message
+        fun bind(subwayArrivalSmallDataWithSationLine: SubwayArrivalSmallDataWithStationLine) = with(binding) {
+            stationInfo.text = subwayArrivalSmallDataWithSationLine.fullName
+            time.text = "${subwayArrivalSmallDataWithSationLine.time/60} 분 ${subwayArrivalSmallDataWithSationLine.time%60} 초"
+            message.text = subwayArrivalSmallDataWithSationLine.message
+            stationLine.text = subwayArrivalSmallDataWithSationLine.station_line
+            for(subwayColor in SubwayLineColor.values()){
+                if(subwayColor.line == subwayArrivalSmallDataWithSationLine.station_line){
+                    stationLine.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(stationLine.context,subwayColor.getColor()))
+                }
+            }
         }
     }
 
@@ -31,7 +41,7 @@ class SubwayArrivalAdapter(
         return arrivalSmallDataList.size
     }
 
-    fun setData(list : List<SubwayArrivalSmallData>){
+    fun setData(list : List<SubwayArrivalSmallDataWithStationLine>){
         arrivalSmallDataList = list
         notifyDataSetChanged()
     }
