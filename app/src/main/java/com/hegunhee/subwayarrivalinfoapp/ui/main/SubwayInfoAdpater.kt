@@ -12,7 +12,8 @@ import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
 import com.hegunhee.subwayarrivalinfoapp.databinding.ItemMainAdapterBinding
 
 class SubwayInfoAdpater(
-    private var subwayInfoList : List<SubwayInfoEntity>
+    private var subwayInfoList : List<SubwayInfoEntity>,
+    private val toggleSubwayInfo : (SubwayInfoEntity) -> Unit
 ) : RecyclerView.Adapter<SubwayInfoAdpater.MainViewHolder>() {
 
     inner class MainViewHolder(private val binding : ItemMainAdapterBinding) : RecyclerView.ViewHolder(binding.root){
@@ -29,6 +30,13 @@ class SubwayInfoAdpater(
                     }
                 })
             }
+            val imageButtonColor = if(subwayInfoEntity.isBookmarked) R.color.yellow else R.color.black
+            imageButton.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this.imageButton.context,imageButtonColor))
+        }
+        fun initListener(subwayInfoEntity: SubwayInfoEntity) = with(binding){
+            imageButton.setOnClickListener {
+                toggleSubwayInfo(subwayInfoEntity.copy(isBookmarked = !subwayInfoEntity.isBookmarked))
+            }
         }
     }
 
@@ -38,6 +46,7 @@ class SubwayInfoAdpater(
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         holder.bind(subwayInfoList[position])
+        holder.initListener(subwayInfoList[position])
     }
 
     override fun getItemCount(): Int = subwayInfoList.size

@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
 import com.hegunhee.subwayarrivalinfoapp.domain.GetAllSubwayInfoListByFlowUseCase
 import com.hegunhee.subwayarrivalinfoapp.domain.InsertSubwayInfoListUseCase
+import com.hegunhee.subwayarrivalinfoapp.domain.ToggleSubwayInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.combine
@@ -13,7 +14,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainFragmentViewModel @Inject constructor(
     private val getAllSubwayInfoListByFlowUseCase: GetAllSubwayInfoListByFlowUseCase,
-    private val insertSubwayInfoListUseCase: InsertSubwayInfoListUseCase
+    private val insertSubwayInfoListUseCase: InsertSubwayInfoListUseCase,
+    private val toggleSubwayInfoUseCase: ToggleSubwayInfoUseCase
 ): ViewModel() {
 
     var _editTextLiveData : MutableLiveData<String> = MutableLiveData<String>("")
@@ -30,6 +32,10 @@ class MainFragmentViewModel @Inject constructor(
 
     fun insertSubwayList() = viewModelScope.launch(Dispatchers.IO) {
         insertSubwayInfoListUseCase()
+    }
+
+    fun toggleSubwayInfo(subwayInfoEntity: SubwayInfoEntity) = viewModelScope.launch(Dispatchers.IO) {
+        toggleSubwayInfoUseCase(subwayInfoEntity)
     }
 
 
