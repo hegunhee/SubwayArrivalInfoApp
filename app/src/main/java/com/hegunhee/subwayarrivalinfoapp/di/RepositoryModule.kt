@@ -3,6 +3,7 @@ package com.hegunhee.subwayarrivalinfoapp.di
 import com.hegunhee.subwayarrivalinfoapp.db.SubwayInfoDao
 import com.hegunhee.subwayarrivalinfoapp.model.DefaultRepository
 import com.hegunhee.subwayarrivalinfoapp.model.Repository
+import com.hegunhee.subwayarrivalinfoapp.network.SubwayInfoApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,8 +18,9 @@ class RepositoryModule {
     @Singleton
     @Provides
     fun provideDefaultRepository(
-        subwayInfoDao: SubwayInfoDao
+        subwayInfoDao: SubwayInfoDao,
+        subwayInfoApi: SubwayInfoApi
     ) : Repository {
-        return DefaultRepository(subwayInfoDao)
+        return DefaultRepository(subwayInfoDao,subwayInfoApi)
     }
 }
