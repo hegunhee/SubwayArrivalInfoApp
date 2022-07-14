@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.hegunhee.subwayarrivalinfoapp.Util.SubwayLineColor
+import com.hegunhee.subwayarrivalinfoapp.Util.setColor
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallData
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithStationLine
 import com.hegunhee.subwayarrivalinfoapp.databinding.ItemSubwayArrivalBinding
@@ -23,7 +24,7 @@ class SubwayArrivalAdapter(
             stationLine.text = subwayArrivalSmallDataWithSationLine.station_line
             for(subwayColor in SubwayLineColor.values()){
                 if(subwayColor.line == subwayArrivalSmallDataWithSationLine.station_line){
-                    stationLine.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(stationLine.context,subwayColor.getColor()))
+                    stationLine.setColor(subwayColor.getColor())
                 }
             }
         }

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import com.hegunhee.subwayarrivalinfoapp.R
 import com.hegunhee.subwayarrivalinfoapp.Util.SubwayLineColor
+import com.hegunhee.subwayarrivalinfoapp.Util.setColor
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
 import com.hegunhee.subwayarrivalinfoapp.databinding.ItemSubwayInfoBinding
 
@@ -26,7 +27,7 @@ class SubwayInfoAdpater(
                     text = it
                     for(subwayColor in SubwayLineColor.values()){
                         if(subwayColor.line == it){
-                            this.chipBackgroundColor = ColorStateList.valueOf(ContextCompat.getColor(this.context,subwayColor.getColor()))
+                            setColor(subwayColor.getColor())
                         }
                     }
                 })
