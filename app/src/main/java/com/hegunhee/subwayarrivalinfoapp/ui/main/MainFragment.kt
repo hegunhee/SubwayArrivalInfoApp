@@ -20,8 +20,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                 viewModel.toggleSubwayInfo(it)
             },
             navigateToDetail = {
-                MainFragmentDirections.mainToDetail(it).let { _ ->
-                    findNavController().navigate(it)
+                MainFragmentDirections.mainToDetail(it).let { direction ->
+                    findNavController().navigate(direction)
                 }
 
             }
