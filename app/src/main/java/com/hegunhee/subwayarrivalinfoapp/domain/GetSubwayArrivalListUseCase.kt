@@ -19,10 +19,8 @@ class GetSubwayArrivalListUseCase @Inject constructor(
     suspend operator fun invoke(station_name : String) : List<SubwayArrivalSmallData>{
         var list = listOf<SubwayArrivalSmallData>()
         repository.getAllSubwayArrivalList(station_name).awaitResponse().body()?.let {
-            Log.d("ArrivalTest","Row Data ${it.realtimeArrivalList.toString()}")
             list = it.realtimeArrivalList.map { it.toSmallData() }
         }
-        Log.d("ArrivalTest",list.toString())
         return list
     }
 }

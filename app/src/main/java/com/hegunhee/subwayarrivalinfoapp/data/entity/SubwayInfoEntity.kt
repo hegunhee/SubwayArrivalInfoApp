@@ -8,5 +8,4 @@ data class SubwayInfoEntity(
     @PrimaryKey val subwayName : String,
     val subwayLine : List<String>,
     val isBookmarked : Boolean = false
-) {
-}
+)

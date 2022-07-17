@@ -26,6 +26,8 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
         observeData()
     }
 
+
+
     private fun observeData() = with(viewModel){
         stationArrivalList.observe(viewLifecycleOwner){
             if(it.isEmpty()){

@@ -48,6 +48,7 @@
         android:layout_height="wrap_content"
         tools:text="전역 도착"
         android:textSize="20dp"
+        android:layout_marginStart="10dp"
         app:layout_constraintStart_toEndOf="@id/time"
         app:layout_constraintTop_toTopOf="@id/time"
         app:layout_constraintBottom_toBottomOf="@id/time"

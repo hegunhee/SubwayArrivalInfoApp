@@ -20,7 +20,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                 viewModel.toggleSubwayInfo(it)
             },
             navigateToDetail = {
-                MainFragmentDirections.mainToDetail(it).let {
+                MainFragmentDirections.mainToDetail(it).let { _ ->
                     findNavController().navigate(it)
                 }
 
@@ -41,15 +41,12 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         subwayInfoList.observe(viewLifecycleOwner) {
             if (it.isEmpty()) {
                 if (editTextLiveData.value == "") {
-                    Log.d("InsertTest", "IsEmpty real ")
                     insertSubwayList()
                 } else {
                     adapter.setData(it)
-                    Log.d("InsertTest", "IsEmpty but search is okay")
                 }
             } else {
                 adapter.setData(it)
-                Log.d("InsertTest", it.toString())
             }
         }
     }

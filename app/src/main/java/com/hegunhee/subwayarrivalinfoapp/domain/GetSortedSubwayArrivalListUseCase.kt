@@ -16,9 +16,6 @@ class GetSortedSubwayArrivalListUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(station_name : String) : List<SubwayArrivalSmallDataWithStationLine>{
-        // 역에대한 정보를 가져와야됨
-        // 가져오고 null인지 아닌지 체크
-        //
         val thisStation = repository.getSubwayInfoByName(station_name) ?: return listOf()
         var subwayList = listOf<SubwayArrivalSmallDataWithStationLine>()
         getSubwayArrivalListUseCase(station_name).forEach {
@@ -31,8 +28,6 @@ class GetSortedSubwayArrivalListUseCase @Inject constructor(
 
         }
         Log.d("ArrivalTest",subwayList.toString())
-//        getSubwayArrivalListUseCase(station_name).filter { repository.getSubwayInfoByName(it.nextStation) != null }.
-//                filter { repository.getSubwayInfoByName(it.nextStation)}
         return subwayList
     }
 
