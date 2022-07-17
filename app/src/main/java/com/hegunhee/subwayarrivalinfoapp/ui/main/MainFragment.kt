@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.hegunhee.subwayarrivalinfoapp.MainActivity
 import com.hegunhee.subwayarrivalinfoapp.R
 import com.hegunhee.subwayarrivalinfoapp.databinding.FragmentMainBinding
 import com.hegunhee.subwayarrivalinfoapp.ui.BaseFragment
@@ -35,6 +36,13 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
             recyclerView.adapter = adapter
         }
         initObserver()
+        setActionBarTitle()
+    }
+
+    private fun setActionBarTitle(){
+            (requireActivity() as MainActivity).supportActionBar?.title = "Main"
+
+
     }
 
     private fun initObserver() = with(viewModel) {
