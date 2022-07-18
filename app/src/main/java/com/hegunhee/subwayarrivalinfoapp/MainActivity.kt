@@ -3,6 +3,7 @@ package com.hegunhee.subwayarrivalinfoapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.navigation.fragment.NavHostFragment
 import com.hegunhee.subwayarrivalinfoapp.databinding.ActivityMainBinding
 import com.hegunhee.subwayarrivalinfoapp.network.SubwayInfoApi
@@ -29,6 +30,15 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.run {
             setDisplayHomeAsUpEnabled(true)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home ->{
+                onBackPressed()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setNavigation() = with(binding){
