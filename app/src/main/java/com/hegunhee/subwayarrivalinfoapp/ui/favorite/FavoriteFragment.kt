@@ -1,6 +1,7 @@
 package com.hegunhee.subwayarrivalinfoapp.ui.favorite
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.hegunhee.subwayarrivalinfoapp.MainActivity
@@ -19,10 +20,16 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment
             viewmodel = viewModel
         }
         setActionBarTitle()
-
+        observeData()
     }
 
     private fun setActionBarTitle(){
         (requireActivity() as MainActivity).supportActionBar?.title = "즐겨찾기"
+    }
+
+    private fun observeData() = with(viewModel){
+        favoriteList.observe(viewLifecycleOwner){
+            Log.d("observeData",it.toString())
+        }
     }
 }

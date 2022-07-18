@@ -53,4 +53,8 @@ class DefaultRepository(
     override suspend fun deleteFavorite(station_info: String) {
         favoritesDao.deleteFavorites(station_info)
     }
+
+    override fun getFavoritesListByFlow(): Flow<List<Favorites>> {
+        return favoritesDao.getFavoritesListByFlow()
+    }
 }

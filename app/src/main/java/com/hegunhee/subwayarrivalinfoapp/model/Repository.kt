@@ -26,4 +26,6 @@ interface Repository {
     suspend fun insertFavorite(favorites: Favorites)
 
     suspend fun deleteFavorite(station_info : String)
+
+    fun getFavoritesListByFlow() : Flow<List<Favorites>>
 }
