@@ -6,7 +6,7 @@ data class SubwayArrivalSmallData(
     val message : String,
     val fullName : String
 ){
-    fun toWithStationLine(station_line : String) : SubwayArrivalSmallDataWithStationLine{
-        return SubwayArrivalSmallDataWithStationLine(nextStation,time,message,fullName,station_line)
+    fun toWithStationLine(station_line : String,isFavorite : Boolean) : SubwayArrivalSmallDataWithStationLine{
+        return SubwayArrivalSmallDataWithStationLine(nextStation,time,message,fullName,station_line,isFavorite)
     }
 }

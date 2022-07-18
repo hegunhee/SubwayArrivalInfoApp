@@ -13,9 +13,20 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_detail) {
 
-    val args : DetailFragmentArgs by navArgs()
-    private val viewModel : DetailViewModel by viewModels()
-    private val adapter : SubwayArrivalAdapter by lazy { SubwayArrivalAdapter(listOf()) }
+    val args: DetailFragmentArgs by navArgs()
+    private val viewModel: DetailViewModel by viewModels()
+    private val adapter: SubwayArrivalAdapter by lazy {
+        SubwayArrivalAdapter(listOf(),
+            deleteFavorite = {
+                viewModel.deleteFavorites(it)
+            },
+            insertFavorite = {
+                viewModel.insertFavorites(it)
+            },
+            station_name = args.subwayNm
+        )
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
@@ -27,16 +38,16 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
         observeData()
     }
 
-    private fun setActionBarTitle(){
+    private fun setActionBarTitle() {
         (requireActivity() as MainActivity).supportActionBar?.title = args.subwayNm
     }
 
 
-    private fun observeData() = with(viewModel){
-        stationArrivalList.observe(viewLifecycleOwner){
-            if(it.isEmpty()){
+    private fun observeData() = with(viewModel) {
+        stationArrivalList.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) {
 
-            }else{
+            } else {
                 adapter.setData(it)
             }
         }
