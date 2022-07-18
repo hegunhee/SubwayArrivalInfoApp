@@ -4,6 +4,7 @@ import com.hegunhee.subwayarrivalinfoapp.BuildConfig
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalJson
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_info.JsonSubwayInfo
+import com.hegunhee.subwayarrivalinfoapp.db.FavoritesDao
 import com.hegunhee.subwayarrivalinfoapp.db.SubwayInfoDao
 import com.hegunhee.subwayarrivalinfoapp.network.SubwayArrivalApi
 import com.hegunhee.subwayarrivalinfoapp.network.SubwayInfoApi
@@ -13,7 +14,8 @@ import retrofit2.Call
 class DefaultRepository(
     private val subwayInfoDao: SubwayInfoDao,
     private val subwayInfoApi : SubwayInfoApi,
-    private val subwayArrivalApi: SubwayArrivalApi
+    private val subwayArrivalApi: SubwayArrivalApi,
+    private val favoritesDao: FavoritesDao
     ) : Repository{
     override suspend fun insertSubwayInfoList(infoList: List<SubwayInfoEntity>) {
         subwayInfoDao.insertSubwayInfoList(infoList)

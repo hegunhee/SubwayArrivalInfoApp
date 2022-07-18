@@ -3,6 +3,7 @@ package com.hegunhee.subwayarrivalinfoapp.di
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.hegunhee.subwayarrivalinfoapp.db.FavoritesDao
 import com.hegunhee.subwayarrivalinfoapp.db.SubwayDatabase
 import com.hegunhee.subwayarrivalinfoapp.db.SubwayInfoDao
 import dagger.Module
@@ -26,5 +27,11 @@ class DatabaseModule {
     @Provides
     fun provideSubwayInfoDao(database : SubwayDatabase) : SubwayInfoDao {
         return database.SubwayInfoDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideFavoritesDao(database: SubwayDatabase) : FavoritesDao{
+        return database.FavoritesDao()
     }
 }
