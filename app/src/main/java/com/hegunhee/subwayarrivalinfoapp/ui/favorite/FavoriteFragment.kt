@@ -14,10 +14,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment_favorite){
 
     private val viewModel : FavoriteViewModel by viewModels()
+    private val adapter : FavoriteAdapter by lazy { FavoriteAdapter(listOf(),{str ->
+
+    }) }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             viewmodel = viewModel
+            recyclerView.adapter = adapter
         }
         setActionBarTitle()
         observeData()
@@ -29,7 +33,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment
 
     private fun observeData() = with(viewModel){
         favoriteList.observe(viewLifecycleOwner){
-            Log.d("observeData",it.toString())
+            adapter.setData(it)
         }
     }
 }

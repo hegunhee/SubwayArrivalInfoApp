@@ -14,7 +14,6 @@ import javax.inject.Inject
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(
     private val getFavoritesListByFlow: GetFavoritesListByFlow,
-    private val insertFavoritesUseCase: InsertFavoritesUseCase,
     private val deleteFavoritesUseCase: DeleteFavoritesUseCase
 
 ): ViewModel() {
