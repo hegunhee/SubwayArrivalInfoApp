@@ -10,7 +10,8 @@ import com.hegunhee.subwayarrivalinfoapp.databinding.ItemFavoriteBinding
 
 class FavoriteAdapter(
     private var favoriteList : List<Favorites>,
-    private val deleteFavorite : (String) -> Unit
+    private val deleteFavorite : (String) -> Unit,
+    private val showDetail : (Favorites) -> Unit
 ) : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>(){
     inner class FavoriteViewHolder(private val binding : ItemFavoriteBinding) : RecyclerView.ViewHolder(binding.root){
 
@@ -23,9 +24,13 @@ class FavoriteAdapter(
                     stationLine.setColor(subwayColor.getColor())
                 }
             }
+            root.setOnClickListener{
+                showDetail(favorites)
+            }
             star.setOnClickListener {
                 deleteFavorite(favorites.subway_info)
             }
+
         }
     }
 

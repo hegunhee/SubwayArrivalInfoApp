@@ -33,8 +33,21 @@
         android:id="@+id/favorite"
         android:name="com.hegunhee.subwayarrivalinfoapp.ui.favorite.FavoriteFragment"
         android:label="FavoriteFragment"
-        tools:layout="@layout/fragment_favorite"
-        />
+        tools:layout="@layout/fragment_favorite">
+        <action
+            android:id="@+id/favorite_to_favoriteDetail"
+            app:destination="@id/favoriteDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteDetail"
+        android:name="com.hegunhee.subwayarrivalinfoapp.ui.favorite.detail.FavoriteDetailFragment"
+        android:label="FavoriteDetailFragment"
+        tools:layout="@layout/fragment_favorite_detail">
+
+        <argument
+            android:name="favorites"
+            app:argType="com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites" />
+    </fragment>
 
 
 </navigation>
