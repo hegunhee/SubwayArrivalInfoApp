@@ -14,7 +14,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment_favorite){
 
     private val viewModel : FavoriteViewModel by viewModels()
-    private val adapter : FavoriteAdapter by lazy { FavoriteAdapter(listOf(),{str ->
+    private val adapter : FavoriteAdapter by lazy { FavoriteAdapter(listOf(),{station_info ->
+        viewModel.deleteFavorite(station_info)
 
     }) }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

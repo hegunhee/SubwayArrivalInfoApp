@@ -17,12 +17,15 @@ class FavoriteAdapter(
         fun bind(favorites: Favorites) = with(binding){
             stationInfo.text = favorites.subway_info
             stationName.text = favorites.subway_name
+            stationLine.text = favorites.subway_line
             for(subwayColor in SubwayLineColor.values()){
                 if(subwayColor.line == favorites.subway_line){
                     stationLine.setColor(subwayColor.getColor())
                 }
             }
-            stationLine.text = favorites.subway_line
+            star.setOnClickListener {
+                deleteFavorite(favorites.subway_info)
+            }
         }
     }
 
