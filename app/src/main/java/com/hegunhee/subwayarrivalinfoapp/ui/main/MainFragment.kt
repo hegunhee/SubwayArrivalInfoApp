@@ -20,7 +20,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
     private val viewModel: MainFragmentViewModel by viewModels()
     private val adapter: SubwayInfoAdpater by lazy {
-        SubwayInfoAdpater(listOf(),
+        SubwayInfoAdpater(
+            arrayListOf(),
             toggleSubwayInfo = {
                 viewModel.toggleSubwayInfo(it)
             },

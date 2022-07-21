@@ -4,6 +4,7 @@ import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import com.hegunhee.subwayarrivalinfoapp.R
@@ -13,7 +14,7 @@ import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
 import com.hegunhee.subwayarrivalinfoapp.databinding.ItemSubwayInfoBinding
 
 class SubwayInfoAdpater(
-    private var subwayInfoList : List<SubwayInfoEntity>,
+    private val subwayInfoList : ArrayList<SubwayInfoEntity>,
     private val toggleSubwayInfo : (SubwayInfoEntity) -> Unit,
     private val navigateToDetail : (String) -> Unit
 ) : RecyclerView.Adapter<SubwayInfoAdpater.MainViewHolder>() {
@@ -60,7 +61,13 @@ class SubwayInfoAdpater(
     override fun getItemCount(): Int = subwayInfoList.size
 
     fun setData(list : List<SubwayInfoEntity>){
-        subwayInfoList = list
-        notifyDataSetChanged()
+        val diffCallback = SubwayInfoDiffUtil(subwayInfoList,list)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
+        subwayInfoList.run {
+            clear()
+            addAll(list)
+            diffResult.dispatchUpdatesTo(this@SubwayInfoAdpater)
+        }
     }
 }
