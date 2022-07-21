@@ -3,12 +3,15 @@
 ## 소개  
 지하철 실시간 시간 정보를 불러오는 앱입니다.  
 ## 앱사진  
-![AppMain](https://user-images.githubusercontent.com/57277631/179129344-960258b6-d401-4865-a2e0-d10bf20528a3.PNG)  
+![AppMain](https://user-images.githubusercontent.com/57277631/179871012-d5bc6b99-f48d-41f5-8b71-c652240f5aad.png)  
 앱 메인  
-![appMainSearch](https://user-images.githubusercontent.com/57277631/179129350-60982b46-a823-499b-a149-7298feb756d7.PNG)  
+![AppMainSearch](https://user-images.githubusercontent.com/57277631/179871098-e15e55e3-9e5a-4ab8-887c-242213394305.png)  
 검색 결과  
 ![Detail](https://user-images.githubusercontent.com/57277631/179129352-b3de002b-ae67-4c12-8d68-36f3e26adf60.PNG)  
-역 선택
+상세 보기  
+![Favorite](https://user-images.githubusercontent.com/57277631/179871124-538ef26b-68cd-410b-9c5a-ef22a8e2562f.png)  
+역 선택  
+![FavoriteDetail](https://user-images.githubusercontent.com/57277631/179871163-2588c9c3-5901-4267-a496-36c1b89dd941.png)  
 ## 기술 정보  
 * **Retrofit** 사용  
  지하철 역 정보와 지하철 도착 정보를 공공api를 통해서 받아야하기때문에  
