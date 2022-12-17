@@ -6,6 +6,7 @@ import com.hegunhee.subwayarrivalinfoapp.network.SUBWAY_INFO_BASE_URL
 import com.hegunhee.subwayarrivalinfoapp.network.SubwayArrivalApi
 import com.hegunhee.subwayarrivalinfoapp.network.SubwayInfoApi
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,24 +23,26 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideMoshi() : Moshi = Moshi.Builder().build()
+    fun provideMoshi() : Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 
     @Singleton
     @Provides
-    fun provideSubwayInfoApi() : SubwayInfoApi{
+    fun provideSubwayInfoApi(
+        moshi : Moshi
+    ) : SubwayInfoApi{
         return Retrofit.Builder()
             .baseUrl(SUBWAY_INFO_BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create(provideMoshi()))
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
             .create(SubwayInfoApi::class.java)
     }
 
     @Singleton
     @Provides
-    fun provideSubwayArrivalApi() : SubwayArrivalApi{
+    fun provideSubwayArrivalApi(moshi : Moshi) : SubwayArrivalApi{
         return Retrofit.Builder()
             .baseUrl(SUBWAY_ARRIVAL_BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create(provideMoshi()))
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
             .create(SubwayArrivalApi::class.java)
     }

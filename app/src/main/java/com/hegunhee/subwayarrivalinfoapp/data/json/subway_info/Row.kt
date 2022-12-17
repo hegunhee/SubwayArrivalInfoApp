@@ -3,15 +3,18 @@ package com.hegunhee.subwayarrivalinfoapp.data.json.subway_info
 
 import com.google.gson.annotations.SerializedName
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class Row(
-    @SerializedName("FR_CODE")
+    @field:Json(name ="FR_CODE")
     val fr_code: String,
-    @SerializedName("LINE_NUM")
+    @field:Json(name ="LINE_NUM")
     val line_num: String,
-    @SerializedName("STATION_CD")
+    @field:Json(name ="STATION_CD")
     val station_cd: String,
-    @SerializedName("STATION_NM")
+    @field:Json(name ="STATION_NM")
     val station_nm: String
 ) {
 }
