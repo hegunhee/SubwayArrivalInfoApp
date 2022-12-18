@@ -2,65 +2,68 @@ package com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival
 
 
 import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class RealtimeArrival(
-    @SerializedName("arvlCd")
+    @field:Json(name = "arvlCd")
     val arvlCd: String,
-    @SerializedName("arvlMsg2")
+    @field:Json(name = "arvlMsg2")
     val arvlMsg2: String,
-    @SerializedName("arvlMsg3")
+    @field:Json(name = "arvlMsg3")
     val arvlMsg3: String,
-    @SerializedName("barvlDt")
+    @field:Json(name = "barvlDt")
     val barvlDt: String,
-    @SerializedName("beginRow")
+    @field:Json(name = "beginRow")
     val beginRow: Any,
-    @SerializedName("bstatnId")
+    @field:Json(name ="bstatnId")
     val bstatnId: String,
-    @SerializedName("bstatnNm")
+    @field:Json(name = "bstatnNm")
     val bstatnNm: String,
-    @SerializedName("btrainNo")
+    @field:Json(name = "btrainNo")
     val btrainNo: String,
-    @SerializedName("btrainSttus")
+    @field:Json(name = "btrainSttus")
     val btrainSttus: Any,
-    @SerializedName("curPage")
+    @field:Json(name ="curPage")
     val curPage: Any,
-    @SerializedName("endRow")
+    @field:Json(name ="endRow")
     val endRow: Any,
-    @SerializedName("ordkey")
+    @field:Json(name = "ordkey")
     val ordkey: String,
-    @SerializedName("pageRow")
+    @field:Json(name ="pageRow")
     val pageRow: Any,
-    @SerializedName("recptnDt")
+    @field:Json(name ="recptnDt")
     val recptnDt: String,
-    @SerializedName("rowNum")
+    @field:Json( name = "rowNum")
     val rowNum: Int,
-    @SerializedName("selectedCount")
+    @field:Json(name ="selectedCount")
     val selectedCount: Int,
-    @SerializedName("statnFid")
+    @field:Json(name ="statnFid")
     val statnFid: String,
-    @SerializedName("statnId")
+    @field:Json(name ="statnId")
     val statnId: String,
-    @SerializedName("statnList")
+    @field:Json(name ="statnList")
     val statnList: String,
-    @SerializedName("statnNm")
+    @field:Json(name ="statnNm")
     val statnNm: String,
-    @SerializedName("statnTid")
+    @field:Json(name ="statnTid")
     val statnTid: String,
-    @SerializedName("subwayHeading")
+    @field:Json(name ="subwayHeading")
     val subwayHeading: String,
-    @SerializedName("subwayId")
+    @field:Json(name ="subwayId")
     val subwayId: String,
-    @SerializedName("subwayList")
+    @field:Json(name ="subwayList")
     val subwayList: String,
-    @SerializedName("subwayNm")
+    @field:Json(name ="subwayNm")
     val subwayNm: Any,
-    @SerializedName("totalCount")
+    @field:Json(name ="totalCount")
     val totalCount: Int,
-    @SerializedName("trainCo")
+    @field:Json(name ="trainCo")
     val trainCo: Any,
-    @SerializedName("trainLineNm")
+    @field:Json(name ="trainLineNm")
     val trainLineNm: String,
-    @SerializedName("updnLine")
+    @field:Json(name ="updnLine")
     val updnLine: String
 ) {
     fun toSmallData() : SubwayArrivalSmallData{
