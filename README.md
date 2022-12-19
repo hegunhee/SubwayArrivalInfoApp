@@ -15,7 +15,7 @@
 ## 기술 정보  
 * **Retrofit** 사용  
  지하철 역 정보와 지하철 도착 정보를 공공api를 통해서 받아야하기때문에  
- Retrofit을 사용했습니다. 그리고 Json을 파싱해야되기때문에 GsonConverter를 사용했습니다.  
+ Retrofit을 사용했습니다. 그리고 Json을 파싱해야되기때문에 Moshi를 사용했습니다.  
 * **DataBinding** 적용  
  dataBinding을 사용하여 findViewById를 사용하지 않으며 xml 파일과 데이터 객체를 연결해줍니다.  
 * **Hilt** 적용  
