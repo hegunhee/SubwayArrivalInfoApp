@@ -2,7 +2,6 @@ package com.hegunhee.subwayarrivalinfoapp.di
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.hegunhee.subwayarrivalinfoapp.db.FavoritesDao
 import com.hegunhee.subwayarrivalinfoapp.db.SubwayDatabase
 import com.hegunhee.subwayarrivalinfoapp.db.SubwayInfoDao

@@ -1,6 +1,5 @@
 package com.hegunhee.subwayarrivalinfoapp.di
 
-import com.google.gson.Gson
 import com.hegunhee.subwayarrivalinfoapp.network.SUBWAY_ARRIVAL_BASE_URL
 import com.hegunhee.subwayarrivalinfoapp.network.SUBWAY_INFO_BASE_URL
 import com.hegunhee.subwayarrivalinfoapp.network.SubwayArrivalApi
@@ -12,7 +11,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
