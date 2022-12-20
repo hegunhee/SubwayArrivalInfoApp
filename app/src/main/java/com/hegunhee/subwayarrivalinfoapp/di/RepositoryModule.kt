@@ -6,6 +6,7 @@ import com.hegunhee.subwayarrivalinfoapp.model.DefaultRepository
 import com.hegunhee.subwayarrivalinfoapp.model.Repository
 import com.hegunhee.subwayarrivalinfoapp.network.SubwayArrivalApi
 import com.hegunhee.subwayarrivalinfoapp.network.SubwayInfoApi
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,16 +16,11 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-class RepositoryModule {
+abstract class RepositoryModule {
 
+    @Binds
     @Singleton
-    @Provides
-    fun provideDefaultRepository(
-        subwayInfoDao: SubwayInfoDao,
-        subwayInfoApi: SubwayInfoApi,
-        subwayArrivalApi: SubwayArrivalApi,
-        favoritesDao: FavoritesDao
-    ) : Repository {
-        return DefaultRepository(subwayInfoDao,subwayInfoApi,subwayArrivalApi,favoritesDao)
-    }
+    abstract fun provideDefaultRepository(
+        defaultRepository: DefaultRepository
+    ) : Repository
 }

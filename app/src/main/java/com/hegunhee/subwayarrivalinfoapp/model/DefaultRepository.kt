@@ -11,8 +11,11 @@ import com.hegunhee.subwayarrivalinfoapp.network.SubwayArrivalApi
 import com.hegunhee.subwayarrivalinfoapp.network.SubwayInfoApi
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Call
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class DefaultRepository(
+@Singleton
+class DefaultRepository @Inject constructor(
     private val subwayInfoDao: SubwayInfoDao,
     private val subwayInfoApi : SubwayInfoApi,
     private val subwayArrivalApi: SubwayArrivalApi,
