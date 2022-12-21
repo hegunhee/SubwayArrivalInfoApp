@@ -9,10 +9,7 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class SearchInfoBySubwayNameService(
-    @field:Json(name ="list_total_count")
-    val listTotalCount: Int,
-    @field:Json(name ="RESULT")
-    val result: Result,
-    @field:Json(name ="row")
-    val row: List<Row>
+    @field:Json(name ="list_total_count") val listTotalCount: Int,
+    @field:Json(name ="RESULT") val result: Result,
+    @field:Json(name ="row") val row: List<Row>
 )

@@ -7,8 +7,6 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class Result(
-    @field:Json(name ="CODE")
-    val code: String,
-    @field:Json(name ="MESSAGE")
-    val message: String
+    @field:Json(name ="CODE") val code: String,
+    @field:Json(name ="MESSAGE") val message: String
 )

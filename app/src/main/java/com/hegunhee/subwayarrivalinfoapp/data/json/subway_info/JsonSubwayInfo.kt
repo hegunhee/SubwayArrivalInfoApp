@@ -7,6 +7,5 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class JsonSubwayInfo(
-    @field:Json(name = "SearchInfoBySubwayNameService")
-    val searchInfoBySubwayNameService: SearchInfoBySubwayNameService
+    @field:Json(name = "SearchInfoBySubwayNameService") val searchInfoBySubwayNameService: SearchInfoBySubwayNameService
 )

@@ -8,8 +8,6 @@ import retrofit2.http.Field
 
 @JsonClass(generateAdapter = true)
 data class SubwayArrivalJson(
-    @field:Json(name = "errorMessage")
-    val errorMessage: ErrorMessage,
-    @field:Json(name ="realtimeArrivalList")
-    val realtimeArrivalList: List<RealtimeArrival>
+    @field:Json(name = "errorMessage") val errorMessage: ErrorMessage,
+    @field:Json(name ="realtimeArrivalList") val realtimeArrivalList: List<RealtimeArrival>
 )
