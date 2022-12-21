@@ -15,12 +15,13 @@ import com.hegunhee.subwayarrivalinfoapp.databinding.ItemSubwayInfoBinding
 
 class SubwayInfoAdpater(
     private val subwayInfoList : ArrayList<SubwayInfoEntity>,
-    private val toggleSubwayInfo : (SubwayInfoEntity) -> Unit,
-    private val navigateToDetail : (String) -> Unit
+    private val eventHandler: MainFragmentActionHandler
 ) : RecyclerView.Adapter<SubwayInfoAdpater.MainViewHolder>() {
 
     inner class MainViewHolder(private val binding : ItemSubwayInfoBinding) : RecyclerView.ViewHolder(binding.root){
+
         fun bind(subwayInfoEntity: SubwayInfoEntity) = with(binding) {
+            this.subwayInfoEntity = subwayInfoEntity
             chipGroup.removeAllViews()
             subwayName.text = subwayInfoEntity.subwayName
             subwayInfoEntity.subwayLine.forEach {
@@ -36,26 +37,17 @@ class SubwayInfoAdpater(
             val imageButtonColor = if(subwayInfoEntity.isBookmarked) R.color.yellow else R.color.black
             imageButton.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this.imageButton.context,imageButtonColor))
         }
-        fun initListener(subwayInfoEntity: SubwayInfoEntity) = with(binding){
-            imageButton.setOnClickListener {
-                toggleSubwayInfo(subwayInfoEntity.copy(isBookmarked = !subwayInfoEntity.isBookmarked))
-            }
-            subwayName.setOnClickListener{
-                navigateToDetail(subwayInfoEntity.subwayName)
-            }
-            chipGroup.setOnClickListener{
-                navigateToDetail(subwayInfoEntity.subwayName)
-            }
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        return MainViewHolder(ItemSubwayInfoBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return MainViewHolder(ItemSubwayInfoBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+            .apply {
+                eventHandler = this@SubwayInfoAdpater.eventHandler
+            })
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         holder.bind(subwayInfoList[position])
-        holder.initListener(subwayInfoList[position])
     }
 
     override fun getItemCount(): Int = subwayInfoList.size

@@ -8,34 +8,25 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.hegunhee.subwayarrivalinfoapp.MainActivity
 import com.hegunhee.subwayarrivalinfoapp.R
 import com.hegunhee.subwayarrivalinfoapp.databinding.FragmentMainBinding
 import com.hegunhee.subwayarrivalinfoapp.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
     private val viewModel: MainFragmentViewModel by viewModels()
-    private val adapter: SubwayInfoAdpater by lazy {
-        SubwayInfoAdpater(
-            arrayListOf(),
-            toggleSubwayInfo = {
-                viewModel.toggleSubwayInfo(it)
-            },
-            navigateToDetail = {
-                MainFragmentDirections.mainToDetail(it).let { direction ->
-                    findNavController().navigate(direction)
-                }
-
-            }
-        )
-    }
+    private lateinit var adapter: SubwayInfoAdpater
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        adapter = SubwayInfoAdpater(arrayListOf(),viewModel)
         binding.apply {
             viewmodel = viewModel
             recyclerView.adapter = adapter
@@ -66,6 +57,15 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     }
 
     private fun initObserver() = with(viewModel) {
+        lifecycleScope.launchWhenStarted {
+            launch {
+                viewModel.navigateDetail.collect{
+                    MainFragmentDirections.mainToDetail(it).let { direction ->
+                        findNavController().navigate(direction)
+                    }
+                }
+            }
+        }
         subwayInfoList.observe(viewLifecycleOwner) {
             if (it.isEmpty()) {
                 if (editTextLiveData.value == "") {
