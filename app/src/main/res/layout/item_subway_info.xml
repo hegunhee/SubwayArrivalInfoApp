@@ -38,7 +38,7 @@
             app:layout_constraintBottom_toBottomOf="@id/subway_name"
             app:layout_constraintStart_toEndOf="@id/subway_name"
             android:layout_marginStart="10dp"
-            app:setChips="@{subwayInfoEntity.subwayLine}"
+            app:setSubwayLines="@{subwayInfoEntity.subwayLine}"
             app:layout_constraintEnd_toStartOf="@id/image_button"
             android:onClick="@{() -> eventHandler.navigateToDetail(subwayInfoEntity.subwayName)}"
             />
@@ -52,6 +52,7 @@
             app:layout_constraintTop_toTopOf="@id/subway_name"
             app:layout_constraintBottom_toBottomOf="@id/subway_name"
             app:layout_constraintEnd_toEndOf="parent"
+            app:isBookMarked="@{subwayInfoEntity.bookmarked}"
             android:onClick="@{() -> eventHandler.toggleSubwayInfo(subwayInfoEntity)}"
 
 

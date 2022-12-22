@@ -22,8 +22,6 @@ class SubwayInfoAdpater(
 
         fun bind(subwayInfoEntity: SubwayInfoEntity) = with(binding) {
             this.subwayInfoEntity = subwayInfoEntity
-            val imageButtonColor = if(subwayInfoEntity.isBookmarked) R.color.yellow else R.color.black
-            imageButton.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this.imageButton.context,imageButtonColor))
         }
     }
 
