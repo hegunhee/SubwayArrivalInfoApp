@@ -1,12 +1,10 @@
 package com.hegunhee.subwayarrivalinfoapp.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -26,7 +24,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = SubwayInfoAdpater(arrayListOf(),viewModel)
+        adapter = SubwayInfoAdpater(viewModel)
         binding.apply {
             viewmodel = viewModel
             recyclerView.adapter = adapter
@@ -36,8 +34,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         setHasOptionsMenu(true)
     }
 
-    private fun setActionBarTitle(){
-            (requireActivity() as MainActivity).supportActionBar?.title = "Main"
+    private fun setActionBarTitle() {
+        (requireActivity() as MainActivity).supportActionBar?.title = "Main"
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

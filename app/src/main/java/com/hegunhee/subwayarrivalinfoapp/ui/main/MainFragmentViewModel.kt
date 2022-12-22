@@ -1,6 +1,5 @@
 package com.hegunhee.subwayarrivalinfoapp.ui.main
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
 import com.hegunhee.subwayarrivalinfoapp.domain.GetSubwayInfoListByFlowUseCase
