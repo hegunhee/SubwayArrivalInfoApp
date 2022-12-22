@@ -22,18 +22,6 @@ class SubwayInfoAdpater(
 
         fun bind(subwayInfoEntity: SubwayInfoEntity) = with(binding) {
             this.subwayInfoEntity = subwayInfoEntity
-            chipGroup.removeAllViews()
-            subwayName.text = subwayInfoEntity.subwayName
-            subwayInfoEntity.subwayLine.forEach {
-                chipGroup.addView(Chip(chipGroup.context).apply {
-                    text = it
-                    for(subwayColor in SubwayLineColor.values()){
-                        if(subwayColor.line == it){
-                            setColor(subwayColor.getColor())
-                        }
-                    }
-                })
-            }
             val imageButtonColor = if(subwayInfoEntity.isBookmarked) R.color.yellow else R.color.black
             imageButton.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this.imageButton.context,imageButtonColor))
         }
