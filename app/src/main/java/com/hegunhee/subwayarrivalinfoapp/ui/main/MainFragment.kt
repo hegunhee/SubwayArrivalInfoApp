@@ -67,14 +67,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
             }
         }
         subwayInfoList.observe(viewLifecycleOwner) {
-            if (it.isEmpty()) {
-                if (editTextLiveData.value == "") {
-                    insertSubwayList()
-                } else {
-                    adapter.setData(it)
-                }
-            } else {
-                adapter.setData(it)
+            if(it.isEmpty() && editTextLiveData.value =="") {
+                insertSubwayList()
+            }else{
+                adapter.submitList(it)
             }
         }
     }
