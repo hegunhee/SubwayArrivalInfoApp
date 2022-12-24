@@ -6,6 +6,7 @@
         <variable
             name="favorite"
             type="com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites" />
+
         <variable
             name="eventHandler"
             type="com.hegunhee.subwayarrivalinfoapp.ui.favorite.FavoriteFragmentActionHandler" />
@@ -16,14 +17,15 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{() -> eventHandler.showDetailFavorite(favorite)}"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:onClick="@{() -> eventHandler.showDetailFavorite(favorite)}">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/station_line"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:text="@{favorite.subway_line}"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -36,6 +38,7 @@
             android:layout_marginStart="10dp"
             android:autoSizeTextType="uniform"
             android:gravity="center_vertical"
+            android:text="@{favorite.subway_name}"
             android:textColor="@color/black"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="@id/station_line"
@@ -47,6 +50,7 @@
             android:id="@+id/station_info"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:text="@{favorite.subway_info}"
             android:textColor="@color/black"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="@id/station_line"
@@ -60,10 +64,10 @@
             android:layout_height="60dp"
             android:background="@drawable/ic_star"
             android:backgroundTint="@color/yellow"
+            android:onClick="@{() -> eventHandler.deleteFavorite(favorite.subway_info)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:onClick="@{() -> eventHandler.deleteFavorite(favorite.subway_info)}"
 
             />
 
