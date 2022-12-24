@@ -1,8 +1,5 @@
 package com.hegunhee.subwayarrivalinfoapp.ui.favorite.detail
 
-import android.widget.ListView
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites
@@ -10,6 +7,9 @@ import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalS
 import com.hegunhee.subwayarrivalinfoapp.domain.GetFavoriteSubwayInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,13 +18,12 @@ class FavoriteDetailViewModel @Inject constructor(
     private val getFavoriteSubwayInfoUseCase: GetFavoriteSubwayInfoUseCase
 ) : ViewModel() {
 
-    private var _subwayInfoList: MutableLiveData<List<SubwayArrivalSmallDataWithStationLine>> = MutableLiveData(listOf())
-    val subwayInfoList : LiveData<List<SubwayArrivalSmallDataWithStationLine>>
-    get() = _subwayInfoList
+    private var _subwayInfoList: MutableStateFlow<List<SubwayArrivalSmallDataWithStationLine>> = MutableStateFlow(emptyList())
+    val subwayInfoList : StateFlow<List<SubwayArrivalSmallDataWithStationLine>> = _subwayInfoList.asStateFlow()
 
 
 
     fun getFavoriteSubwayInfo(favorites: Favorites) = viewModelScope.launch(Dispatchers.IO) {
-        _subwayInfoList.postValue(getFavoriteSubwayInfoUseCase(favorites))
+        _subwayInfoList.emit(getFavoriteSubwayInfoUseCase(favorites))
     }
 }
