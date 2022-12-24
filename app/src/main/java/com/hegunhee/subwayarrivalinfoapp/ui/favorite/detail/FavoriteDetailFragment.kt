@@ -3,12 +3,14 @@ package com.hegunhee.subwayarrivalinfoapp.ui.favorite.detail
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.hegunhee.subwayarrivalinfoapp.MainActivity
 import com.hegunhee.subwayarrivalinfoapp.R
 import com.hegunhee.subwayarrivalinfoapp.databinding.FragmentFavoriteDetailBinding
 import com.hegunhee.subwayarrivalinfoapp.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class FavoriteDetailFragment :
@@ -31,8 +33,10 @@ class FavoriteDetailFragment :
     }
 
     private fun observeData() = with(viewModel) {
-        subwayInfoList.observe(viewLifecycleOwner){
-            adapter.submitList(it)
+        lifecycleScope.launchWhenStarted {
+            subwayInfoList.collect {
+                adapter.submitList(it)
+            }
         }
     }
 
