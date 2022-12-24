@@ -1,16 +1,17 @@
 package com.hegunhee.subwayarrivalinfoapp.ui.favorite
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.hegunhee.subwayarrivalinfoapp.MainActivity
 import com.hegunhee.subwayarrivalinfoapp.R
 import com.hegunhee.subwayarrivalinfoapp.databinding.FragmentFavoriteBinding
 import com.hegunhee.subwayarrivalinfoapp.ui.BaseFragment
-import com.hegunhee.subwayarrivalinfoapp.ui.main.MainFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment_favorite) {
@@ -45,8 +46,12 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment
     }
 
     private fun observeData() = with(viewModel) {
-        favoriteList.observe(viewLifecycleOwner) {
-            adapter.setData(it)
+        lifecycleScope.launchWhenStarted {
+            launch {
+                favoriteList.collect {
+                    adapter.setData(it)
+                }
+            }
         }
     }
 }
