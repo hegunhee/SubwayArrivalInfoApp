@@ -21,7 +21,7 @@ class DetailViewModel @Inject constructor(
     private val getSortedSubwayArrivalListUseCase: GetSortedSubwayArrivalListUseCase,
     private val deleteFavoritesUseCase: DeleteFavoritesUseCase,
     private val insertFavoritesUseCase: InsertFavoritesUseCase
-) : ViewModel(){
+) : ViewModel(), DetailFragmentActionHandler{
 
     private var _stationArrivalList : MutableLiveData<List<SubwayArrivalSmallDataWithStationLine>> = MutableLiveData(listOf())
     val stationArrivalList : LiveData<List<SubwayArrivalSmallDataWithStationLine>>
@@ -31,11 +31,15 @@ class DetailViewModel @Inject constructor(
         _stationArrivalList.postValue(getSortedSubwayArrivalListUseCase(station_name))
     }
 
-    fun deleteFavorites(station_info : String) = viewModelScope.launch(Dispatchers.IO) {
-        deleteFavoritesUseCase(station_info)
+    override fun deleteFavorite(station_info : String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            deleteFavoritesUseCase(station_info)
+        }
     }
 
-    fun insertFavorites(favorites: Favorites)= viewModelScope.launch(Dispatchers.IO) {
-        insertFavoritesUseCase(favorites)
+    override fun insertFavorite(favorites: Favorites) {
+        viewModelScope.launch(Dispatchers.IO) {
+            insertFavoritesUseCase(favorites)
+        }
     }
 }

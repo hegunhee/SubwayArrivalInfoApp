@@ -18,10 +18,10 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
     private val adapter: SubwayArrivalAdapter by lazy {
         SubwayArrivalAdapter(listOf(),
             deleteFavorite = {
-                viewModel.deleteFavorites(it)
+                viewModel.deleteFavorite(it)
             },
             insertFavorite = {
-                viewModel.insertFavorites(it)
+                viewModel.insertFavorite(it)
             },
             station_name = args.subwayNm
         )
