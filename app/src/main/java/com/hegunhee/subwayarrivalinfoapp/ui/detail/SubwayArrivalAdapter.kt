@@ -24,15 +24,6 @@ class SubwayArrivalAdapter(
 
         fun bind(subwayInfo: SubwayArrivalSmallDataWithStationLine) = with(binding) {
             subwayArrivalData = subwayInfo
-            stationInfo.text = subwayInfo.fullName
-            time.text = "${subwayInfo.time/60} 분 ${subwayInfo.time%60} 초"
-            message.text = subwayInfo.message
-            stationLine.text = subwayInfo.station_line
-            for(subwayColor in SubwayLineColor.values()){
-                if(subwayColor.line == subwayInfo.station_line){
-                    stationLine.setColor(subwayColor.getColor())
-                }
-            }
             star.setOnClickListener {
                 if(star.backgroundTintList == ColorStateList.valueOf(ContextCompat.getColor(this.star.context,R.color.yellow))){
                     deleteFavorite(subwayInfo.fullName)
@@ -40,7 +31,6 @@ class SubwayArrivalAdapter(
                     insertFavorite(subwayInfo.toFavorites(station_name))
                 }
             }
-
         }
     }
 
