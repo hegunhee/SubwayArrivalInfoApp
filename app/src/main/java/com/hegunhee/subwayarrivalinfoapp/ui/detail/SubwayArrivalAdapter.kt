@@ -23,6 +23,7 @@ class SubwayArrivalAdapter(
     inner class SubwayArrivalViewHolder(private val binding : ItemSubwayArrivalBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(subwayInfo: SubwayArrivalSmallDataWithStationLine) = with(binding) {
+            subwayArrivalData = subwayInfo
             stationInfo.text = subwayInfo.fullName
             time.text = "${subwayInfo.time/60} 분 ${subwayInfo.time%60} 초"
             message.text = subwayInfo.message
@@ -32,15 +33,11 @@ class SubwayArrivalAdapter(
                     stationLine.setColor(subwayColor.getColor())
                 }
             }
-            val favorite = if(subwayInfo.isFavorite) R.color.yellow else R.color.black
-            star.setColor(favorite)
             star.setOnClickListener {
                 if(star.backgroundTintList == ColorStateList.valueOf(ContextCompat.getColor(this.star.context,R.color.yellow))){
                     deleteFavorite(subwayInfo.fullName)
-                    star.setColor(R.color.black)
                 }else{
                     insertFavorite(subwayInfo.toFavorites(station_name))
-                    star.setColor(R.color.yellow)
                 }
             }
 
