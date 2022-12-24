@@ -5,8 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hegunhee.subwayarrivalinfoapp.Util.SubwayLineColor
-import com.hegunhee.subwayarrivalinfoapp.Util.setColor
 import com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites
 import com.hegunhee.subwayarrivalinfoapp.databinding.ItemFavoriteBinding
 
