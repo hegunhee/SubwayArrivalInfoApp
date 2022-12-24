@@ -31,15 +31,14 @@ class DetailViewModel @Inject constructor(
         _stationArrivalList.postValue(getSortedSubwayArrivalListUseCase(station_name))
     }
 
-    override fun deleteFavorite(station_info : String) {
+    override fun toggleFavorite(subwayArrivalData: SubwayArrivalSmallDataWithStationLine, stationName : String) {
         viewModelScope.launch(Dispatchers.IO) {
-            deleteFavoritesUseCase(station_info)
+            if(subwayArrivalData.isFavorite){
+                deleteFavoritesUseCase(subwayArrivalData.fullName)
+            }else{
+                insertFavoritesUseCase(subwayArrivalData.toFavorites(stationName))
+            }
         }
-    }
 
-    override fun insertFavorite(favorites: Favorites) {
-        viewModelScope.launch(Dispatchers.IO) {
-            insertFavoritesUseCase(favorites)
-        }
     }
 }

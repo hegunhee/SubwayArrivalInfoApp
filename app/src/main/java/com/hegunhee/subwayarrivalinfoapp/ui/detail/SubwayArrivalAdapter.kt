@@ -15,27 +15,23 @@ import com.hegunhee.subwayarrivalinfoapp.databinding.ItemSubwayArrivalBinding
 
 class SubwayArrivalAdapter(
     private var arrivalSmallDataList: List<SubwayArrivalSmallDataWithStationLine>,
-    private val insertFavorite : (Favorites) -> Unit,
-    private val deleteFavorite : (String) -> Unit,
+    private val actionHandler : DetailFragmentActionHandler,
     private val station_name : String
 ) : RecyclerView.Adapter<SubwayArrivalAdapter.SubwayArrivalViewHolder>() {
 
     inner class SubwayArrivalViewHolder(private val binding : ItemSubwayArrivalBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(subwayInfo: SubwayArrivalSmallDataWithStationLine) = with(binding) {
+            stationName = station_name
             subwayArrivalData = subwayInfo
-            star.setOnClickListener {
-                if(star.backgroundTintList == ColorStateList.valueOf(ContextCompat.getColor(this.star.context,R.color.yellow))){
-                    deleteFavorite(subwayInfo.fullName)
-                }else{
-                    insertFavorite(subwayInfo.toFavorites(station_name))
-                }
-            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubwayArrivalViewHolder {
-        return SubwayArrivalViewHolder(ItemSubwayArrivalBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return SubwayArrivalViewHolder(ItemSubwayArrivalBinding.inflate(LayoutInflater.from(parent.context),parent,false).apply {
+            eventHandler = actionHandler
+
+        })
     }
 
     override fun onBindViewHolder(holder: SubwayArrivalViewHolder, position: Int) {

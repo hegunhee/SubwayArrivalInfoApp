@@ -4,8 +4,15 @@
     <data>
 
         <variable
+            name="eventHandler"
+            type="com.hegunhee.subwayarrivalinfoapp.ui.detail.DetailFragmentActionHandler" />
+        <variable
             name="subwayArrivalData"
             type="com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithStationLine" />
+
+        <variable
+            name="stationName"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -77,6 +84,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="@{eventHandler.toggleFavorite(subwayArrivalData,stationName)}"
             app:isBookMarked="@{subwayArrivalData.isFavorite}"
             android:background="@drawable/ic_star"
 

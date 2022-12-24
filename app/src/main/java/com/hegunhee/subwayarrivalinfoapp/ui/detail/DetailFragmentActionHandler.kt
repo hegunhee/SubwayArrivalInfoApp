@@ -1,10 +1,8 @@
 package com.hegunhee.subwayarrivalinfoapp.ui.detail
 
-import com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites
+import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithStationLine
 
 interface DetailFragmentActionHandler {
 
-    fun deleteFavorite(fullName : String)
-
-    fun insertFavorite(favorite : Favorites)
+    fun toggleFavorite(subwayArrivalData : SubwayArrivalSmallDataWithStationLine, stationName : String)
 }
