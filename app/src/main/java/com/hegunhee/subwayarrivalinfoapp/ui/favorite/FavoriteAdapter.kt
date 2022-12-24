@@ -17,11 +17,6 @@ class FavoriteAdapter(
 
         fun bind(favorites: Favorites) = with(binding){
             favorite = favorites
-            for(subwayColor in SubwayLineColor.values()){
-                if(subwayColor.line == favorites.subway_line){
-                    stationLine.setColor(subwayColor.getColor())
-                }
-            }
         }
     }
 
