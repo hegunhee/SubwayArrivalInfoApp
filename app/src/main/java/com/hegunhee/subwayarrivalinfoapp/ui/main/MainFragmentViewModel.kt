@@ -7,10 +7,7 @@ import com.hegunhee.subwayarrivalinfoapp.domain.InsertSubwayInfoListUseCase
 import com.hegunhee.subwayarrivalinfoapp.domain.ToggleSubwayInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,15 +18,14 @@ class MainFragmentViewModel @Inject constructor(
     private val toggleSubwayInfoUseCase: ToggleSubwayInfoUseCase
 ): ViewModel(), MainFragmentActionHandler{
 
-    var _editTextLiveData : MutableLiveData<String> = MutableLiveData<String>("")
-    val editTextLiveData : LiveData<String>
-        get() = _editTextLiveData
+    val _searchText : MutableStateFlow<String> = MutableStateFlow<String>("")
+    val searchText : StateFlow<String> = _searchText.asStateFlow()
 
     private val _navigateDetail : MutableSharedFlow<String> = MutableSharedFlow<String>()
     val navigateDetail : SharedFlow<String> = _navigateDetail.asSharedFlow()
 
-    val subwayInfoList : LiveData<List<SubwayInfoEntity>> = editTextLiveData.asFlow().combine(getSubwayInfoListByFlowUseCase()){ str, list ->
-        if(editTextLiveData.value == ""){
+    val subwayInfoList : LiveData<List<SubwayInfoEntity>> = searchText.combine(getSubwayInfoListByFlowUseCase()){ str, list ->
+        if(searchText.value.isBlank()){
             return@combine list
         }else{
             return@combine list.filter { str in it.subwayName  }

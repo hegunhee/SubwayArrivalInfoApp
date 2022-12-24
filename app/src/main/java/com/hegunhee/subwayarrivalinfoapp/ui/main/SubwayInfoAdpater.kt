@@ -43,6 +43,4 @@ internal object diff_util : DiffUtil.ItemCallback<SubwayInfoEntity>(){
 
     override fun areContentsTheSame(oldItem: SubwayInfoEntity, newItem: SubwayInfoEntity): Boolean =
         oldItem == newItem
-
-
 }

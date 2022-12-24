@@ -65,7 +65,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
             }
         }
         subwayInfoList.observe(viewLifecycleOwner) {
-            if(it.isEmpty() && editTextLiveData.value =="") {
+            if(it.isEmpty() && searchText.value =="") {
                 insertSubwayList()
             }else{
                 adapter.submitList(it)
