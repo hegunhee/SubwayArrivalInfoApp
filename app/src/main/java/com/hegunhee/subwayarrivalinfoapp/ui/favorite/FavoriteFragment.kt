@@ -19,7 +19,6 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment
     private val viewModel: FavoriteViewModel by viewModels()
     private val adapter: FavoriteAdapter by lazy {
         FavoriteAdapter(
-            listOf(),
             deleteFavorite = { station_info ->
                 viewModel.deleteFavorite(station_info)
             },
@@ -49,7 +48,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment
         lifecycleScope.launchWhenStarted {
             launch {
                 favoriteList.collect {
-                    adapter.setData(it)
+                    adapter.submitList(it)
                 }
             }
         }

@@ -2,6 +2,8 @@ package com.hegunhee.subwayarrivalinfoapp.ui.favorite
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hegunhee.subwayarrivalinfoapp.Util.SubwayLineColor
 import com.hegunhee.subwayarrivalinfoapp.Util.setColor
@@ -9,10 +11,9 @@ import com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites
 import com.hegunhee.subwayarrivalinfoapp.databinding.ItemFavoriteBinding
 
 class FavoriteAdapter(
-    private var favoriteList : List<Favorites>,
     private val deleteFavorite : (String) -> Unit,
     private val showDetail : (Favorites) -> Unit
-) : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>(){
+) : ListAdapter<Favorites,FavoriteAdapter.FavoriteViewHolder>(diff_util){
     inner class FavoriteViewHolder(private val binding : ItemFavoriteBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(favorites: Favorites) = with(binding){
@@ -39,13 +40,14 @@ class FavoriteAdapter(
     }
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
-        holder.bind(favoriteList[position])
+        holder.bind(getItem(position))
     }
+}
 
-    override fun getItemCount(): Int = favoriteList.size
+internal object diff_util : DiffUtil.ItemCallback<Favorites>(){
+    override fun areItemsTheSame(oldItem: Favorites, newItem: Favorites): Boolean =
+        oldItem.subway_info == newItem.subway_info
+    override fun areContentsTheSame(oldItem: Favorites, newItem: Favorites): Boolean =
+        oldItem == newItem
 
-    fun setData(list : List<Favorites>){
-        favoriteList = list
-        notifyDataSetChanged()
-    }
 }
