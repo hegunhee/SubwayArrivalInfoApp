@@ -15,11 +15,12 @@ class FavoriteDetailFragment :
     BaseFragment<FragmentFavoriteDetailBinding>(R.layout.fragment_favorite_detail) {
 
     private val viewModel: FavoriteDetailViewModel by viewModels()
-    val args: FavoriteDetailFragmentArgs by navArgs()
-    private val adapter : FavoriteDetailAdapter by lazy { FavoriteDetailAdapter(listOf()) }
+    private val args: FavoriteDetailFragmentArgs by navArgs()
+    private lateinit var adapter : FavoriteDetailAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        adapter = FavoriteDetailAdapter()
         binding.apply {
             viewmodel = viewModel
             recyclerView.adapter = adapter
@@ -31,7 +32,7 @@ class FavoriteDetailFragment :
 
     private fun observeData() = with(viewModel) {
         subwayInfoList.observe(viewLifecycleOwner){
-            adapter.setData(it)
+            adapter.submitList(it)
         }
     }
 
