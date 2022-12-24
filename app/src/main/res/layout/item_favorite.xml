@@ -1,57 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white">
+<layout>
 
-    <com.google.android.material.chip.Chip
-        android:id="@+id/station_line"
-        android:layout_width="wrap_content"
+    <data>
+
+        <variable
+            name="favorite"
+            type="com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites" />
+        <variable
+            name="eventHandler"
+            type="com.hegunhee.subwayarrivalinfoapp.ui.favorite.FavoriteFragmentActionHandler" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="1호선" />
+        android:onClick="@{() -> eventHandler.showDetailFavorite(favorite)}"
+        android:background="@color/white">
 
-    <TextView
-        android:id="@+id/station_name"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:autoSizeTextType="uniform"
-        android:gravity="center_vertical"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@id/station_line"
-        app:layout_constraintStart_toEndOf="@id/station_line"
-        app:layout_constraintTop_toTopOf="@id/station_line"
-        tools:text="부평" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/station_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1호선" />
 
-    <TextView
-        android:id="@+id/station_info"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="@id/station_line"
-        app:layout_constraintTop_toBottomOf="@id/station_line"
-        tools:text="부개 - 소요산 방향" />
+        <TextView
+            android:id="@+id/station_name"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/station_line"
+            app:layout_constraintStart_toEndOf="@id/station_line"
+            app:layout_constraintTop_toTopOf="@id/station_line"
+            tools:text="부평" />
 
-
-    <ImageButton
-        android:id="@+id/star"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@drawable/ic_star"
-        android:backgroundTint="@color/yellow"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        />
+        <TextView
+            android:id="@+id/station_info"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="@id/station_line"
+            app:layout_constraintTop_toBottomOf="@id/station_line"
+            tools:text="부개 - 소요산 방향" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/star"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/ic_star"
+            android:backgroundTint="@color/yellow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="@{() -> eventHandler.deleteFavorite(favorite.subway_info)}"
+
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -11,8 +11,7 @@ import com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites
 import com.hegunhee.subwayarrivalinfoapp.databinding.ItemFavoriteBinding
 
 class FavoriteAdapter(
-    private val deleteFavorite : (String) -> Unit,
-    private val showDetail : (Favorites) -> Unit
+    private val eventHandler: FavoriteFragmentActionHandler
 ) : ListAdapter<Favorites,FavoriteAdapter.FavoriteViewHolder>(diff_util){
     inner class FavoriteViewHolder(private val binding : ItemFavoriteBinding) : RecyclerView.ViewHolder(binding.root){
 
@@ -25,18 +24,13 @@ class FavoriteAdapter(
                     stationLine.setColor(subwayColor.getColor())
                 }
             }
-            root.setOnClickListener{
-                showDetail(favorites)
-            }
-            star.setOnClickListener {
-                deleteFavorite(favorites.subway_info)
-            }
-
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
-        return FavoriteViewHolder(ItemFavoriteBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return FavoriteViewHolder(ItemFavoriteBinding.inflate(LayoutInflater.from(parent.context),parent,false).apply {
+            eventHandler = this@FavoriteAdapter.eventHandler
+        })
     }
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {

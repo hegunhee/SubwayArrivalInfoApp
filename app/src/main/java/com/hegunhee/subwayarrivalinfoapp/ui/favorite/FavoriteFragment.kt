@@ -17,21 +17,11 @@ import kotlinx.coroutines.launch
 class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment_favorite) {
 
     private val viewModel: FavoriteViewModel by viewModels()
-    private val adapter: FavoriteAdapter by lazy {
-        FavoriteAdapter(
-            deleteFavorite = { station_info ->
-                viewModel.deleteFavorite(station_info)
-            },
-            showDetail = { favorites ->
-                FavoriteFragmentDirections.favoriteToFavoriteDetail(favorites).let { direction ->
-                    findNavController().navigate(direction)
-                }
-            }
-            )
-    }
+    private lateinit var adapter: FavoriteAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        adapter = FavoriteAdapter(viewModel)
         binding.apply {
             viewmodel = viewModel
             recyclerView.adapter = adapter
@@ -49,6 +39,13 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment
             launch {
                 favoriteList.collect {
                     adapter.submitList(it)
+                }
+            }
+            launch {
+                navigateToDetailFavorite.collect{
+                    FavoriteFragmentDirections.favoriteToFavoriteDetail(it).let { direction ->
+                        findNavController().navigate(direction)
+                    }
                 }
             }
         }
