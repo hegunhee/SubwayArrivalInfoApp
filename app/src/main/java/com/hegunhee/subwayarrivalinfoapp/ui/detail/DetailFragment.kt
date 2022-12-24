@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_detail) {
 
-    val args: DetailFragmentArgs by navArgs()
+    private val args: DetailFragmentArgs by navArgs()
     private val viewModel: DetailViewModel by viewModels()
     private val adapter: SubwayArrivalAdapter by lazy {
         SubwayArrivalAdapter(listOf(),
