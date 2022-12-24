@@ -16,6 +16,7 @@ class FavoriteAdapter(
     inner class FavoriteViewHolder(private val binding : ItemFavoriteBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(favorites: Favorites) = with(binding){
+            favorite = favorites
             stationInfo.text = favorites.subway_info
             stationName.text = favorites.subway_name
             stationLine.text = favorites.subway_line
