@@ -37,7 +37,7 @@ class SubwayInfoAdpater(
     }
 }
 
-object diff_util : DiffUtil.ItemCallback<SubwayInfoEntity>(){
+internal object diff_util : DiffUtil.ItemCallback<SubwayInfoEntity>(){
     override fun areItemsTheSame(oldItem: SubwayInfoEntity, newItem: SubwayInfoEntity): Boolean =
         oldItem.subwayName == newItem.subwayName
 
