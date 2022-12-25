@@ -1,15 +1,8 @@
 package com.hegunhee.subwayarrivalinfoapp.ui.detail
 
-import android.content.res.ColorStateList
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.hegunhee.subwayarrivalinfoapp.R
-import com.hegunhee.subwayarrivalinfoapp.Util.SubwayLineColor
-import com.hegunhee.subwayarrivalinfoapp.Util.setColor
-import com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithStationLine
 import com.hegunhee.subwayarrivalinfoapp.databinding.ItemSubwayArrivalBinding
 
