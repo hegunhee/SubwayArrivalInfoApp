@@ -1,7 +1,5 @@
 package com.hegunhee.subwayarrivalinfoapp.ui.detail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithStationLine
@@ -10,6 +8,9 @@ import com.hegunhee.subwayarrivalinfoapp.domain.GetSortedSubwayArrivalListUseCas
 import com.hegunhee.subwayarrivalinfoapp.domain.InsertFavoritesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,12 +21,11 @@ class DetailViewModel @Inject constructor(
     private val insertFavoritesUseCase: InsertFavoritesUseCase
 ) : ViewModel(), DetailFragmentActionHandler{
 
-    private var _stationArrivalList : MutableLiveData<List<SubwayArrivalSmallDataWithStationLine>> = MutableLiveData(listOf())
-    val stationArrivalList : LiveData<List<SubwayArrivalSmallDataWithStationLine>>
-    get() = _stationArrivalList
+    private val _stationArrivalList : MutableStateFlow<List<SubwayArrivalSmallDataWithStationLine>> = MutableStateFlow(emptyList())
+    val stationArrivalList : StateFlow<List<SubwayArrivalSmallDataWithStationLine>> = _stationArrivalList.asStateFlow()
 
     fun initData(station_name : String) = viewModelScope.launch(Dispatchers.IO){
-        _stationArrivalList.postValue(getSortedSubwayArrivalListUseCase(station_name))
+        _stationArrivalList.emit(getSortedSubwayArrivalListUseCase(station_name))
     }
 
     override fun toggleFavorite(subwayArrivalData: SubwayArrivalSmallDataWithStationLine, stationName : String) {

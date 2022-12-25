@@ -3,12 +3,15 @@ package com.hegunhee.subwayarrivalinfoapp.ui.detail
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.hegunhee.subwayarrivalinfoapp.MainActivity
 import com.hegunhee.subwayarrivalinfoapp.R
 import com.hegunhee.subwayarrivalinfoapp.databinding.FragmentDetailBinding
 import com.hegunhee.subwayarrivalinfoapp.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_detail) {
@@ -35,8 +38,13 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
 
 
     private fun observeData() = with(viewModel) {
-        stationArrivalList.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+        lifecycleScope.launchWhenStarted {
+            launch {
+                stationArrivalList.collect {
+                    adapter.submitList(it)
+                }
+            }
+
         }
     }
 }
