@@ -15,20 +15,11 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
 
     private val args: DetailFragmentArgs by navArgs()
     private val viewModel: DetailViewModel by viewModels()
-    private val adapter: SubwayArrivalAdapter by lazy {
-        SubwayArrivalAdapter(listOf(),
-            deleteFavorite = {
-                viewModel.deleteFavorite(it)
-            },
-            insertFavorite = {
-                viewModel.insertFavorite(it)
-            },
-            station_name = args.subwayNm
-        )
-    }
+    private lateinit var adapter: SubwayArrivalAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        adapter = SubwayArrivalAdapter(emptyList(), actionHandler = viewModel, station_name = args.subwayNm)
         binding.apply {
             viewmodel = viewModel
             recyclerView.adapter = adapter
