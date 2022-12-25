@@ -4,12 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites
-import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallData
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithStationLine
 import com.hegunhee.subwayarrivalinfoapp.domain.DeleteFavoritesUseCase
 import com.hegunhee.subwayarrivalinfoapp.domain.GetSortedSubwayArrivalListUseCase
-import com.hegunhee.subwayarrivalinfoapp.domain.GetSubwayArrivalListUseCase
 import com.hegunhee.subwayarrivalinfoapp.domain.InsertFavoritesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
