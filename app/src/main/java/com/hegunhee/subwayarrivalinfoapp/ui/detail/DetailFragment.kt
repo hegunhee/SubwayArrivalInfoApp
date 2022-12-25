@@ -19,7 +19,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = SubwayArrivalAdapter(emptyList(), actionHandler = viewModel, station_name = args.subwayNm)
+        adapter = SubwayArrivalAdapter(actionHandler = viewModel, station_name = args.subwayNm)
         binding.apply {
             viewmodel = viewModel
             recyclerView.adapter = adapter
@@ -36,11 +36,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
 
     private fun observeData() = with(viewModel) {
         stationArrivalList.observe(viewLifecycleOwner) {
-            if (it.isEmpty()) {
-
-            } else {
-                adapter.setData(it)
-            }
+            adapter.submitList(it)
         }
     }
 }

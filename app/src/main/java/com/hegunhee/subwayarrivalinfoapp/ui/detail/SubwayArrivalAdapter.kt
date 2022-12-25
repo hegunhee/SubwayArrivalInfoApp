@@ -2,15 +2,16 @@ package com.hegunhee.subwayarrivalinfoapp.ui.detail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithStationLine
 import com.hegunhee.subwayarrivalinfoapp.databinding.ItemSubwayArrivalBinding
 
 class SubwayArrivalAdapter(
-    private var arrivalSmallDataList: List<SubwayArrivalSmallDataWithStationLine>,
     private val actionHandler : DetailFragmentActionHandler,
     private val station_name : String
-) : RecyclerView.Adapter<SubwayArrivalAdapter.SubwayArrivalViewHolder>() {
+) : ListAdapter<SubwayArrivalSmallDataWithStationLine,SubwayArrivalAdapter.SubwayArrivalViewHolder>(diff_util) {
 
     inner class SubwayArrivalViewHolder(private val binding : ItemSubwayArrivalBinding) : RecyclerView.ViewHolder(binding.root){
 
@@ -28,15 +29,21 @@ class SubwayArrivalAdapter(
     }
 
     override fun onBindViewHolder(holder: SubwayArrivalViewHolder, position: Int) {
-        holder.bind(arrivalSmallDataList[position])
+        holder.bind(getItem(position))
     }
+}
 
-    override fun getItemCount(): Int {
-        return arrivalSmallDataList.size
-    }
+internal object diff_util : DiffUtil.ItemCallback<SubwayArrivalSmallDataWithStationLine>() {
+    override fun areItemsTheSame(
+        oldItem: SubwayArrivalSmallDataWithStationLine,
+        newItem: SubwayArrivalSmallDataWithStationLine
+    ): Boolean =
+        oldItem.fullName == newItem.fullName
 
-    fun setData(list : List<SubwayArrivalSmallDataWithStationLine>){
-        arrivalSmallDataList = list
-        notifyDataSetChanged()
-    }
+    override fun areContentsTheSame(
+        oldItem: SubwayArrivalSmallDataWithStationLine,
+        newItem: SubwayArrivalSmallDataWithStationLine
+    ): Boolean =
+        oldItem == newItem
+
 }
