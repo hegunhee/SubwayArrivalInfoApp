@@ -1,6 +1,5 @@
 package com.hegunhee.subwayarrivalinfoapp.model
 
-import com.hegunhee.subwayarrivalinfoapp.BuildConfig
 import com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalJson
@@ -11,6 +10,7 @@ import com.hegunhee.subwayarrivalinfoapp.network.SubwayArrivalApi
 import com.hegunhee.subwayarrivalinfoapp.network.SubwayInfoApi
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Call
+import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -34,11 +34,11 @@ class DefaultRepository @Inject constructor(
     }
 
     override suspend fun getAllSubwayList(): Call<JsonSubwayInfo> {
-        return subwayInfoApi.getSubwayInfo(BuildConfig.SUBWAY_INFO_API_KEY)
+        return subwayInfoApi.getSubwayInfo()
     }
 
-    override suspend fun getAllSubwayArrivalList(stationName : String): Call<SubwayArrivalJson> {
-        return subwayArrivalApi.getSubwayInfo(key = BuildConfig.SUBWAY_ARRIVAL_API_KEY, station_nm =stationName )
+    override suspend fun getAllSubwayArrivalList(stationName : String): SubwayArrivalJson {
+        return subwayArrivalApi.getSubwayInfo(station_nm =stationName )
     }
 
     override suspend fun getSubwayInfoByName(station_name: String): SubwayInfoEntity? {
