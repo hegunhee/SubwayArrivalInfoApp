@@ -84,10 +84,9 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:onClick="@{eventHandler.toggleFavorite(subwayArrivalData,stationName)}"
+            android:onClick="@{() -> eventHandler.toggleFavorite(subwayArrivalData,stationName)}"
             app:isBookMarked="@{subwayArrivalData.isFavorite}"
             android:background="@drawable/ic_star"
-
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
