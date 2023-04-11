@@ -2,18 +2,9 @@ package com.hegunhee.subwayarrivalinfoapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
-import androidx.navigation.fragment.NavHostFragment
 import com.hegunhee.subwayarrivalinfoapp.databinding.ActivityMainBinding
-import com.hegunhee.subwayarrivalinfoapp.network.SubwayInfoApi
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import retrofit2.awaitResponse
-import javax.inject.Inject
-
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
