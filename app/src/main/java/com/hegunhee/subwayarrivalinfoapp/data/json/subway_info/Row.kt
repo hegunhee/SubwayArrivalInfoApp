@@ -11,4 +11,5 @@ data class Row(
     @Json(name ="STATION_CD") val station_cd: String,
     @Json(name ="STATION_NM") val station_nm: String
 ) {
+    fun getFormattedLineNum() = line_num.substring(1)
 }
