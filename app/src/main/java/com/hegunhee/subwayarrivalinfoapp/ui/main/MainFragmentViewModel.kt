@@ -25,11 +25,13 @@ class MainFragmentViewModel @Inject constructor(
     val navigateDetail : SharedFlow<String> = _navigateDetail.asSharedFlow()
 
     val subwayInfoList : Flow<List<SubwayInfoEntity>> = searchText.combine(getSubwayInfoListByFlowUseCase()){ str, list ->
-        return@combine if(searchText.value.isBlank()) list
-        else list.filter { str in it.subwayName }
+        return@combine if(searchText.value.isBlank()) {
+            list
+        } else
+            list.filter { str in it.subwayName }
     }
 
-    fun insertSubwayList() = viewModelScope.launch(Dispatchers.IO) {
+    fun insertSubwayList() = viewModelScope.launch {
         insertSubwayInfoListUseCase()
     }
 
