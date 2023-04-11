@@ -55,7 +55,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     }
 
     private fun initObserver() = with(viewModel) {
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             launch {
                 viewModel.navigateDetail.collect{
                     MainFragmentDirections.mainToDetail(it).let { direction ->
