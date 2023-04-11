@@ -40,8 +40,8 @@ class DefaultRepository @Inject constructor(
             .onSuccess {info ->
                 info.searchInfoBySubwayNameService.let { subwayInfo ->
                     if(subwayInfo.result.isSuccess()){
-                        val subwayInfoList = subwayInfo.row.filter { it.line_num.substring(1) in subway_line_limit }.groupBy { it.station_nm }.map { subway ->
-                            SubwayInfoEntity(subway.key,subway.value.map { it.line_num.substring(1) })
+                        val subwayInfoList = subwayInfo.row.filter { it.getFormattedLineNum() in subway_line_limit }.groupBy { it.station_nm }.map { subway ->
+                            SubwayInfoEntity(subway.key,subway.value.map { it.getFormattedLineNum() })
                         }.toList()
                         subwayInfoDao.insertSubwayInfoList(subwayInfoList)
                     }
