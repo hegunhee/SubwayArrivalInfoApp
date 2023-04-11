@@ -8,4 +8,8 @@ import com.squareup.moshi.JsonClass
 data class Result(
     @Json(name ="CODE") val code: String,
     @Json(name ="MESSAGE") val message: String
-)
+)  {
+    fun isSuccess() : Boolean{
+        return code == "INFO-000"
+    }
+}
