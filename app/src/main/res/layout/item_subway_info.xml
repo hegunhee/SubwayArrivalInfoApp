@@ -53,7 +53,7 @@
             app:layout_constraintBottom_toBottomOf="@id/subway_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:isBookMarked="@{subwayInfoEntity.bookmarked}"
-            android:onClick="@{() -> eventHandler.toggleSubwayInfo(subwayInfoEntity)}"
+            android:onClick="@{() -> eventHandler.toggleSubwayInfoBookMarked(subwayInfoEntity)}"
 
 
             />

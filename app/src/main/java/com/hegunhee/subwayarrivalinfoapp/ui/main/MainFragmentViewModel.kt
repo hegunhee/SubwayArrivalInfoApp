@@ -35,7 +35,7 @@ class MainFragmentViewModel @Inject constructor(
         insertSubwayInfoListUseCase()
     }
 
-    override fun toggleSubwayInfo(subwayInfoEntity: SubwayInfoEntity) {
+    override fun toggleSubwayInfoBookMarked(subwayInfoEntity: SubwayInfoEntity) {
         viewModelScope.launch(Dispatchers.IO) {
             toggleSubwayInfoBookMarkedUseCase(subwayInfoEntity.copy(isBookmarked = !subwayInfoEntity.isBookmarked))
         }
