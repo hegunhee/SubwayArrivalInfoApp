@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initActionBar()
-        setNavigation()
     }
 
     private fun initActionBar() = with(binding){
@@ -39,11 +38,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun setNavigation() = with(binding){
-        (supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment).let {
-            val navController = it.navController
-        }
     }
 }
