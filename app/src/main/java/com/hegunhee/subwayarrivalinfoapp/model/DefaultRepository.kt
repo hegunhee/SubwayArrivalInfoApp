@@ -1,5 +1,7 @@
 package com.hegunhee.subwayarrivalinfoapp.model
 
+import android.util.Log
+import com.hegunhee.subwayarrivalinfoapp.Util.subway_line_limit
 import com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalJson
@@ -33,8 +35,25 @@ class DefaultRepository @Inject constructor(
         return subwayInfoDao.getAllSubwayInfoByFlow()
     }
 
-    override suspend fun getAllSubwayList(): Call<JsonSubwayInfo> {
-        return subwayInfoApi.getSubwayInfo()
+    override suspend fun insertAllSubwayList() {
+        getAllSubwayList()
+            .onSuccess {info ->
+                info.searchInfoBySubwayNameService.let { subwayInfo ->
+                    if(subwayInfo.result.isSuccess()){
+                        val subwayInfoList = subwayInfo.row.filter { it.line_num.substring(1) in subway_line_limit }.groupBy { it.station_nm }.map { subway ->
+                            SubwayInfoEntity(subway.key,subway.value.map { it.line_num.substring(1) })
+                        }.toList()
+                        subwayInfoDao.insertSubwayInfoList(subwayInfoList)
+                    }
+                }
+            }
+            .onFailure {
+
+            }
+    }
+
+    override suspend fun getAllSubwayList(): Result<JsonSubwayInfo> {
+        return runCatching { subwayInfoApi.getSubwayInfo() }
     }
 
     override suspend fun getAllSubwayArrivalList(stationName : String): SubwayArrivalJson {

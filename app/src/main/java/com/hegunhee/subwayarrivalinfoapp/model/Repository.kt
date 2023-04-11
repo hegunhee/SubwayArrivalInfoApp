@@ -16,7 +16,9 @@ interface Repository {
 
     fun getAllSubwayInfoListByFlow() : Flow<List<SubwayInfoEntity>>
 
-    suspend fun getAllSubwayList() : Call<JsonSubwayInfo>
+    suspend fun insertAllSubwayList()
+
+    suspend fun getAllSubwayList() : Result<JsonSubwayInfo>
 
     suspend fun getAllSubwayArrivalList(station_name : String) : SubwayArrivalJson
 
