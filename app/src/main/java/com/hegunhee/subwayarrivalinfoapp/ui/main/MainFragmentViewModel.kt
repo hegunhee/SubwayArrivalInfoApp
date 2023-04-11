@@ -4,7 +4,7 @@ import androidx.lifecycle.*
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
 import com.hegunhee.subwayarrivalinfoapp.domain.GetSubwayInfoListByFlowUseCase
 import com.hegunhee.subwayarrivalinfoapp.domain.InsertSubwayInfoListUseCase
-import com.hegunhee.subwayarrivalinfoapp.domain.ToggleSubwayInfoUseCase
+import com.hegunhee.subwayarrivalinfoapp.domain.ToggleSubwayInfoBookMarkedUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -15,7 +15,7 @@ import javax.inject.Inject
 class MainFragmentViewModel @Inject constructor(
     private val getSubwayInfoListByFlowUseCase: GetSubwayInfoListByFlowUseCase,
     private val insertSubwayInfoListUseCase: InsertSubwayInfoListUseCase,
-    private val toggleSubwayInfoUseCase: ToggleSubwayInfoUseCase
+    private val toggleSubwayInfoBookMarkedUseCase: ToggleSubwayInfoBookMarkedUseCase
 ): ViewModel(), MainFragmentActionHandler{
 
     val _searchText : MutableStateFlow<String> = MutableStateFlow<String>("")
@@ -37,7 +37,7 @@ class MainFragmentViewModel @Inject constructor(
 
     override fun toggleSubwayInfo(subwayInfoEntity: SubwayInfoEntity) {
         viewModelScope.launch(Dispatchers.IO) {
-            toggleSubwayInfoUseCase(subwayInfoEntity)
+            toggleSubwayInfoBookMarkedUseCase(subwayInfoEntity.copy(isBookmarked = !subwayInfoEntity.isBookmarked))
         }
     }
 

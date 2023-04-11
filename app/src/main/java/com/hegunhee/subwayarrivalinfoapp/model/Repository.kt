@@ -12,7 +12,7 @@ interface Repository {
 
     suspend fun insertSubwayInfoList(infoList : List<SubwayInfoEntity>)
 
-    suspend fun toggleSubwayInfo(subwayInfoEntity: SubwayInfoEntity)
+    suspend fun toggleSubwayInfoBookMarked(subwayInfoEntity: SubwayInfoEntity)
 
     fun getAllSubwayInfoListByFlow() : Flow<List<SubwayInfoEntity>>
 

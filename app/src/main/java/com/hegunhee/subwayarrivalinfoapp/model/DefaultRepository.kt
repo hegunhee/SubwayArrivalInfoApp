@@ -27,8 +27,8 @@ class DefaultRepository @Inject constructor(
         subwayInfoDao.insertSubwayInfoList(infoList)
     }
 
-    override suspend fun toggleSubwayInfo(subwayInfoEntity: SubwayInfoEntity) {
-        subwayInfoDao.toggleSubwayInfo(subwayInfoEntity)
+    override suspend fun toggleSubwayInfoBookMarked(subwayInfoEntity: SubwayInfoEntity) {
+        subwayInfoDao.toggleSubwayInfoBookMarked(subwayInfoEntity)
     }
 
     override fun getAllSubwayInfoListByFlow(): Flow<List<SubwayInfoEntity>> {
