@@ -6,6 +6,9 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
+/**
+ * Nullable 하게 처리하지않는 방식 고민 필요
+ */
 data class RealtimeArrival(
     @Json(name = "arvlCd") val arvlCd: String?=null,
     @Json(name = "arvlMsg2") val arvlMsg2: String,
