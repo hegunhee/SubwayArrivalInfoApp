@@ -66,7 +66,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
             launch {
                 subwayInfoList.collect {
                     if(it.isEmpty() && searchText.value.isBlank()){
-                        insertSubwayList()
+                        fetchSubwayInfoList()
                     }else{
                         adapter.submitList(it)
                     }

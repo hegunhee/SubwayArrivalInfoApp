@@ -8,10 +8,10 @@ import javax.inject.Inject
 
 @InstallIn(SingletonComponent::class)
 @Module
-class InsertSubwayInfoListUseCase @Inject constructor(
+class FetchSubwayListInfoUseCase @Inject constructor(
     private val repository: Repository
 ) : UseCase {
     suspend operator fun invoke(){
-        repository.insertAllSubwayList()
+        repository.fetchAllSubwayList()
     }
 }

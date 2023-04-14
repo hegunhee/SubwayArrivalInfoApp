@@ -5,8 +5,6 @@ import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalJson
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_info.JsonSubwayInfo
 import kotlinx.coroutines.flow.Flow
-import retrofit2.Call
-import retrofit2.Response
 
 interface Repository {
 
@@ -16,7 +14,7 @@ interface Repository {
 
     fun getAllSubwayInfoListByFlow() : Flow<List<SubwayInfoEntity>>
 
-    suspend fun insertAllSubwayList()
+    suspend fun fetchAllSubwayList()
 
     suspend fun getAllSubwayList() : Result<JsonSubwayInfo>
 

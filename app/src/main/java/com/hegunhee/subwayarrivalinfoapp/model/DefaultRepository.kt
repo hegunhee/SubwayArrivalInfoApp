@@ -35,7 +35,7 @@ class DefaultRepository @Inject constructor(
         return subwayInfoDao.getAllSubwayInfoByFlow()
     }
 
-    override suspend fun insertAllSubwayList() {
+    override suspend fun fetchAllSubwayList() {
         getAllSubwayList()
             .onSuccess {info ->
                 info.searchInfoBySubwayNameService.let { subwayInfo ->
@@ -57,6 +57,12 @@ class DefaultRepository @Inject constructor(
     }
 
     override suspend fun getAllSubwayArrivalList(stationName : String): SubwayArrivalJson {
+        val result = runCatching{ subwayArrivalApi.getSubwayInfo(station_nm = stationName) }
+        result.onSuccess {
+            Log.d("TEST!!",it.toString())
+        }.onFailure {
+            Log.d("TEST!!",it.toString())
+        }
         return subwayArrivalApi.getSubwayInfo(station_nm =stationName )
     }
 
