@@ -10,7 +10,7 @@ import com.hegunhee.subwayarrivalinfoapp.databinding.ItemSubwayInfoBinding
 
 class SubwayInfoAdpater(
     private val eventHandler: MainFragmentActionHandler
-) : ListAdapter<SubwayInfoEntity,SubwayInfoAdpater.MainViewHolder>(diff_util) {
+) : ListAdapter<SubwayInfoEntity,SubwayInfoAdpater.MainViewHolder>(diffUtil) {
 
     inner class MainViewHolder(private val binding : ItemSubwayInfoBinding) : RecyclerView.ViewHolder(binding.root){
 
@@ -31,7 +31,7 @@ class SubwayInfoAdpater(
     }
 }
 
-internal object diff_util : DiffUtil.ItemCallback<SubwayInfoEntity>(){
+internal object diffUtil : DiffUtil.ItemCallback<SubwayInfoEntity>(){
     override fun areItemsTheSame(oldItem: SubwayInfoEntity, newItem: SubwayInfoEntity): Boolean =
         oldItem.subwayName == newItem.subwayName
 

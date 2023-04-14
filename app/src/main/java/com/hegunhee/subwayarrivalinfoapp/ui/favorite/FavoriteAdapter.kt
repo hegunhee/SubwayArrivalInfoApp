@@ -10,7 +10,7 @@ import com.hegunhee.subwayarrivalinfoapp.databinding.ItemFavoriteBinding
 
 class FavoriteAdapter(
     private val eventHandler: FavoriteFragmentActionHandler
-) : ListAdapter<Favorites,FavoriteAdapter.FavoriteViewHolder>(diff_util){
+) : ListAdapter<Favorites,FavoriteAdapter.FavoriteViewHolder>(diffUtil){
     inner class FavoriteViewHolder(private val binding : ItemFavoriteBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(favorites: Favorites) = with(binding){
@@ -29,7 +29,7 @@ class FavoriteAdapter(
     }
 }
 
-internal object diff_util : DiffUtil.ItemCallback<Favorites>(){
+internal object diffUtil : DiffUtil.ItemCallback<Favorites>(){
     override fun areItemsTheSame(oldItem: Favorites, newItem: Favorites): Boolean =
         oldItem.subway_info == newItem.subway_info
     override fun areContentsTheSame(oldItem: Favorites, newItem: Favorites): Boolean =

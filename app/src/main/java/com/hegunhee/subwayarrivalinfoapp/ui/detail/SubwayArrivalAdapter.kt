@@ -11,7 +11,7 @@ import com.hegunhee.subwayarrivalinfoapp.databinding.ItemSubwayArrivalBinding
 class SubwayArrivalAdapter(
     private val actionHandler : DetailFragmentActionHandler,
     private val station_name : String
-) : ListAdapter<SubwayArrivalSmallDataWithStationLine,SubwayArrivalAdapter.SubwayArrivalViewHolder>(diff_util) {
+) : ListAdapter<SubwayArrivalSmallDataWithStationLine,SubwayArrivalAdapter.SubwayArrivalViewHolder>(diffUtil) {
 
     inner class SubwayArrivalViewHolder(private val binding : ItemSubwayArrivalBinding) : RecyclerView.ViewHolder(binding.root){
 
@@ -33,7 +33,7 @@ class SubwayArrivalAdapter(
     }
 }
 
-internal object diff_util : DiffUtil.ItemCallback<SubwayArrivalSmallDataWithStationLine>() {
+internal object diffUtil : DiffUtil.ItemCallback<SubwayArrivalSmallDataWithStationLine>() {
     override fun areItemsTheSame(
         oldItem: SubwayArrivalSmallDataWithStationLine,
         newItem: SubwayArrivalSmallDataWithStationLine
