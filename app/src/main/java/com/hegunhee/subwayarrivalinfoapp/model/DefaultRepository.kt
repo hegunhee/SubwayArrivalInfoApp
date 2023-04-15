@@ -56,14 +56,15 @@ class DefaultRepository @Inject constructor(
         return runCatching { subwayInfoApi.getSubwayInfo() }
     }
 
-    override suspend fun getAllSubwayArrivalList(stationName : String): SubwayArrivalJson {
-        val result = runCatching{ subwayArrivalApi.getSubwayInfo(station_nm = stationName) }
-        result.onSuccess {
-            Log.d("TEST!!",it.toString())
-        }.onFailure {
-            Log.d("TEST!!",it.toString())
+    override suspend fun getAllSubwayArrivalList(stationName : String): Result<List<SubwayArrivalSmallDataWithFavorite>> {
+        val favoriteList = getFavoritesList()
+        return runCatching {
+            val subwayArrivalData = subwayArrivalApi.getSubwayInfo(stationName = stationName).realtimeArrivalList.map { it.toSmallData() }
+            subwayArrivalData.map { subwayArrivalSmallData ->
+                val isFavorite = favoriteList.any{favorites -> favorites.subway_info == subwayArrivalSmallData.subwayInfo}
+                subwayArrivalSmallData.toSubwayArrivalSmallDataWithFavorite(isFavorite)
+            }.toList()
         }
-        return subwayArrivalApi.getSubwayInfo(station_nm =stationName )
     }
 
     override suspend fun getSubwayInfoByName(station_name: String): SubwayInfoEntity? {

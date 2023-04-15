@@ -18,7 +18,7 @@ interface Repository {
 
     suspend fun getAllSubwayList() : Result<JsonSubwayInfo>
 
-    suspend fun getAllSubwayArrivalList(station_name : String) : SubwayArrivalJson
+    suspend fun getAllSubwayArrivalList(station_name : String) : Result<List<SubwayArrivalSmallDataWithFavorite>>
 
     suspend fun getSubwayInfoByName(station_name : String) : SubwayInfoEntity?
 
