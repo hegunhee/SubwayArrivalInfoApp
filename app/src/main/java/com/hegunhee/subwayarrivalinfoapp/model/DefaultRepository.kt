@@ -5,14 +5,13 @@ import com.hegunhee.subwayarrivalinfoapp.Util.subway_line_limit
 import com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalJson
+import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithFavorite
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_info.JsonSubwayInfo
 import com.hegunhee.subwayarrivalinfoapp.db.FavoritesDao
 import com.hegunhee.subwayarrivalinfoapp.db.SubwayInfoDao
 import com.hegunhee.subwayarrivalinfoapp.network.SubwayArrivalApi
 import com.hegunhee.subwayarrivalinfoapp.network.SubwayInfoApi
 import kotlinx.coroutines.flow.Flow
-import retrofit2.Call
-import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -77,6 +76,12 @@ class DefaultRepository @Inject constructor(
 
     override suspend fun insertFavorite(favorites: Favorites) {
         favoritesDao.insertFavorites(favorites)
+    }
+
+    override suspend fun getFavoriteSubwayInfoList(favorite: Favorites): Result<List<SubwayArrivalSmallDataWithFavorite>> {
+        return getAllSubwayArrivalList(favorite.subway_name).map { subwayArrivalSmallData ->
+            subwayArrivalSmallData.filter { it.fullName == favorite.subway_info }
+        }
     }
 
     override suspend fun deleteFavorite(station_info: String) {
