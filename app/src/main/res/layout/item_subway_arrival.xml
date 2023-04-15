@@ -8,7 +8,7 @@
             type="com.hegunhee.subwayarrivalinfoapp.ui.detail.DetailFragmentActionHandler" />
         <variable
             name="subwayArrivalData"
-            type="com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithStationLine" />
+            type="com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithFavorite" />
 
         <variable
             name="stationName"
@@ -29,8 +29,8 @@
             android:background="@color/white"
             android:textColor="@color/black"
             tools:text="1호선"
-            android:text="@{subwayArrivalData.station_line}"
-            app:setSubwayLineColor="@{subwayArrivalData.station_line}"
+            android:text="@{subwayArrivalData.stationLine}"
+            app:setSubwayLineColor="@{subwayArrivalData.stationLine}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             />

@@ -5,9 +5,9 @@ data class SubwayArrivalSmallData(
     val time : Int,
     val message : String,
     val fullName : String,
-    val subwayInfo : String
+    val stationLine : String
 ){
-    fun toWithStationLine(station_line : String,isFavorite : Boolean) : SubwayArrivalSmallDataWithStationLine{
-        return SubwayArrivalSmallDataWithStationLine(nextStation,time,message,fullName,station_line,isFavorite)
+    fun toSubwayArrivalSmallDataWithFavorite(isFavorite : Boolean) : SubwayArrivalSmallDataWithFavorite{
+        return SubwayArrivalSmallDataWithFavorite(nextStation,time,message,fullName,stationLine,isFavorite)
     }
 }

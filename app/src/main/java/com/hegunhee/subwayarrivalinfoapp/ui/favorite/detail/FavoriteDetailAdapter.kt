@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithStationLine
+import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithFavorite
 import com.hegunhee.subwayarrivalinfoapp.databinding.ItemFavoriteDetailBinding
 
-class FavoriteDetailAdapter() : ListAdapter<SubwayArrivalSmallDataWithStationLine,FavoriteDetailAdapter.FavoriteDetailViewHolder>(diff_util) {
+class FavoriteDetailAdapter() : ListAdapter<SubwayArrivalSmallDataWithFavorite,FavoriteDetailAdapter.FavoriteDetailViewHolder>(diff_util) {
 
     inner class FavoriteDetailViewHolder(private val binding : ItemFavoriteDetailBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(subway : SubwayArrivalSmallDataWithStationLine) = with(binding){
+        fun bind(subway : SubwayArrivalSmallDataWithFavorite) = with(binding){
             subwayArrivaldata = subway
         }
     }
@@ -25,17 +25,17 @@ class FavoriteDetailAdapter() : ListAdapter<SubwayArrivalSmallDataWithStationLin
     }
 
 }
-internal object diff_util : DiffUtil.ItemCallback<SubwayArrivalSmallDataWithStationLine>() {
+internal object diff_util : DiffUtil.ItemCallback<SubwayArrivalSmallDataWithFavorite>() {
     override fun areItemsTheSame(
-        oldItem: SubwayArrivalSmallDataWithStationLine,
-        newItem: SubwayArrivalSmallDataWithStationLine
+        oldItem: SubwayArrivalSmallDataWithFavorite,
+        newItem: SubwayArrivalSmallDataWithFavorite
     ): Boolean =
         oldItem.fullName == newItem.fullName
 
 
     override fun areContentsTheSame(
-        oldItem: SubwayArrivalSmallDataWithStationLine,
-        newItem: SubwayArrivalSmallDataWithStationLine
+        oldItem: SubwayArrivalSmallDataWithFavorite,
+        newItem: SubwayArrivalSmallDataWithFavorite
     ): Boolean =
         oldItem == newItem
 }
