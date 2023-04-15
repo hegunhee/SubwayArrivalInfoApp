@@ -41,6 +41,6 @@ class FavoriteDetailFragment :
     }
 
     private fun setActionBarTitle()   {
-        (requireActivity() as MainActivity).supportActionBar?.title = args.favorites.subway_info
+        (requireActivity() as MainActivity).supportActionBar?.title = args.favorites.subwayInfo
     }
 }

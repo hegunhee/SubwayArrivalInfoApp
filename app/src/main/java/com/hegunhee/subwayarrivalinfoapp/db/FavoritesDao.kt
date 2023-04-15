@@ -10,7 +10,7 @@ interface FavoritesDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertFavorites(favorites: Favorites)
 
-    @Query("DELETE FROM favorites WHERE subway_info = :subway_info")
+    @Query("DELETE FROM favorites WHERE subwayInfo = :subway_info")
     suspend fun deleteFavorites(subway_info: String)
 
     @Query("SELECT * FROM favorites")

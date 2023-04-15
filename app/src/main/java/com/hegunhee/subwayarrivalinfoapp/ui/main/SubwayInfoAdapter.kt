@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
 import com.hegunhee.subwayarrivalinfoapp.databinding.ItemSubwayInfoBinding
 
-class SubwayInfoAdpater(
+class SubwayInfoAdapter(
     private val eventHandler: MainFragmentActionHandler
-) : ListAdapter<SubwayInfoEntity,SubwayInfoAdpater.MainViewHolder>(diffUtil) {
+) : ListAdapter<SubwayInfoEntity,SubwayInfoAdapter.MainViewHolder>(diffUtil) {
 
     inner class MainViewHolder(private val binding : ItemSubwayInfoBinding) : RecyclerView.ViewHolder(binding.root){
 
@@ -22,7 +22,7 @@ class SubwayInfoAdpater(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         return MainViewHolder(ItemSubwayInfoBinding.inflate(LayoutInflater.from(parent.context),parent,false)
             .apply {
-                eventHandler = this@SubwayInfoAdpater.eventHandler
+                eventHandler = this@SubwayInfoAdapter.eventHandler
             })
     }
 

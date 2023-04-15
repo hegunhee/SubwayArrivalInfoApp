@@ -1,10 +1,8 @@
 package com.hegunhee.subwayarrivalinfoapp.model
 
-import android.util.Log
 import com.hegunhee.subwayarrivalinfoapp.Util.subway_line_limit
 import com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
-import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalJson
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithFavorite
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_info.JsonSubwayInfo
 import com.hegunhee.subwayarrivalinfoapp.db.FavoritesDao
@@ -60,7 +58,7 @@ class DefaultRepository @Inject constructor(
         return runCatching {
             val subwayArrivalData = subwayArrivalApi.getSubwayInfo(stationName = stationName).realtimeArrivalList.map { it.toSmallData() }
             subwayArrivalData.map { subwayArrivalSmallData ->
-                val isFavorite = favoriteList.any{favorites -> favorites.subway_info == subwayArrivalSmallData.subwayInfo}
+                val isFavorite = favoriteList.any{favorites -> favorites.subwayInfo == subwayArrivalSmallData.subwayInfo}
                 subwayArrivalSmallData.toSubwayArrivalSmallDataWithFavorite(isFavorite)
             }.toList()
         }
@@ -79,8 +77,8 @@ class DefaultRepository @Inject constructor(
     }
 
     override suspend fun getFavoriteSubwayInfoList(favorite: Favorites): Result<List<SubwayArrivalSmallDataWithFavorite>> {
-        return getAllSubwayArrivalList(favorite.subway_name).map { subwayArrivalSmallData ->
-            subwayArrivalSmallData.filter { it.fullName == favorite.subway_info }
+        return getAllSubwayArrivalList(favorite.subwayName).map { subwayArrivalSmallData ->
+            subwayArrivalSmallData.filter { it.fullName == favorite.subwayInfo }
         }
     }
 

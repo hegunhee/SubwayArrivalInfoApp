@@ -33,9 +33,9 @@ class FavoriteViewModel @Inject constructor(
     }
 
 
-    override fun deleteFavorite(station_info : String) {
+    override fun deleteFavorite(stationInfo : String) {
          viewModelScope.launch(Dispatchers.IO){
-             deleteFavoritesUseCase(station_info)
+             deleteFavoritesUseCase(stationInfo)
          }
      }
 }

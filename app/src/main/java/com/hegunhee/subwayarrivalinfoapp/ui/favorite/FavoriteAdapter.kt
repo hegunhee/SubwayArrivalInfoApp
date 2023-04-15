@@ -31,7 +31,7 @@ class FavoriteAdapter(
 
 internal object diffUtil : DiffUtil.ItemCallback<Favorites>(){
     override fun areItemsTheSame(oldItem: Favorites, newItem: Favorites): Boolean =
-        oldItem.subway_info == newItem.subway_info
+        oldItem.subwayInfo == newItem.subwayInfo
     override fun areContentsTheSame(oldItem: Favorites, newItem: Favorites): Boolean =
         oldItem == newItem
 
