@@ -11,8 +11,8 @@ interface SubwayArrivalApi {
         @Path("key") key : String = BuildConfig.SUBWAY_ARRIVAL_API_KEY,
         @Path("type") type : String = "json",
         @Path("service") service : String = "realtimeStationArrival",
-        @Path("start_index") start_index : Int = 1,
-        @Path("end_index") end_index : Int = 5,
-        @Path("station") station_nm : String
+        @Path("start_index") startIndex : Int = 1,
+        @Path("end_index") endIndex : Int = 5,
+        @Path("station") stationName : String
     ) : SubwayArrivalJson
 }
