@@ -1,6 +1,7 @@
 package com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival
 
 
+import android.util.Log
 import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -32,7 +33,7 @@ data class RealtimeArrival(
     @Json(name ="statnNm") val statnNm: String?=null,
     @Json(name ="statnTid") val statnTid: String?= null,
     @Json(name ="subwayHeading") val subwayHeading: String?= null,
-    @Json(name ="subwayId") val subwayId: String? = null,
+    @Json(name ="subwayId") val subwayId: String,
     @Json(name ="subwayList") val subwayList: String? = null,
     @Json(name ="subwayNm") val subwayNm: Any? = null,
     @Json(name ="totalCount") val totalCount: Int? = null,
@@ -41,6 +42,14 @@ data class RealtimeArrival(
     @Json(name ="updnLine") val updnLine: String?= null
 ) {
     fun toSmallData() : SubwayArrivalSmallData{
-        return SubwayArrivalSmallData(bstatnNm,barvlDt.toInt(),arvlMsg2,trainLineNm)
+        return SubwayArrivalSmallData(bstatnNm,barvlDt.toInt(),arvlMsg2,trainLineNm,subwayInfo = subwayId.toSubwayLine())
+    }
+
+    /**
+    	지하철호선ID(subwayId)
+    	1001:1호선, 1002:2호선, 1003:3호선, 1004:4호선, 1005:5호선 1006:6호선, 1007:7호선, 1008:8호선, 1009:9호선
+     **/
+    private fun String.toSubwayLine() : String {
+        return "${this.toInt() % 10}호선"
     }
 }
