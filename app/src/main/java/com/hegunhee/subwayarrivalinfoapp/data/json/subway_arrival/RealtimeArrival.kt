@@ -42,7 +42,7 @@ data class RealtimeArrival(
     @Json(name ="updnLine") val updnLine: String?= null
 ) {
     fun toSmallData() : SubwayArrivalSmallData{
-        return SubwayArrivalSmallData(bstatnNm,barvlDt.toInt(),arvlMsg2,trainLineNm,subwayInfo = subwayId.toSubwayLine())
+        return SubwayArrivalSmallData(bstatnNm,barvlDt.toInt(),arvlMsg2,trainLineNm,subwayId.toSubwayLine())
     }
 
     /**
