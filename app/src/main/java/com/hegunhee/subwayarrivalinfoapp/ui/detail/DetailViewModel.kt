@@ -1,5 +1,6 @@
 package com.hegunhee.subwayarrivalinfoapp.ui.detail
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithFavorite
@@ -25,7 +26,11 @@ class DetailViewModel @Inject constructor(
     val stationArrivalList : StateFlow<List<SubwayArrivalSmallDataWithFavorite>> = _stationArrivalList.asStateFlow()
 
     fun fetchSubwayArrivalInfo(station_name : String) = viewModelScope.launch(Dispatchers.IO){
-        _stationArrivalList.emit(getSortedSubwayArrivalListUseCase(station_name))
+        getSortedSubwayArrivalListUseCase(station_name).onSuccess {
+            _stationArrivalList.emit(it)
+        }.onFailure {
+            _stationArrivalList.emit(listOf())
+        }
     }
 
     override fun toggleFavorite(subwayArrivalData: SubwayArrivalSmallDataWithFavorite, stationName : String) {

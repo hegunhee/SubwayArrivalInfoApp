@@ -27,7 +27,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
             viewmodel = viewModel
             recyclerView.adapter = adapter
         }
-        viewModel.initData(args.subwayNm)
+        viewModel.fetchSubwayArrivalInfo(args.subwayNm)
         setActionBarTitle()
         observeData()
     }
