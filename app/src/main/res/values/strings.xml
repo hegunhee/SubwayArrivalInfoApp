@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SubwayArrivalInfoApp</string>
+    <string name="networkErrorMessage">네트워크 환경이 안정적인 곳에서 사용해주세요</string>
 </resources>
