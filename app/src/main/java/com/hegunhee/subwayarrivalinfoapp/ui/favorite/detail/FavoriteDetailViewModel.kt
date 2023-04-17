@@ -18,16 +18,16 @@ class FavoriteDetailViewModel @Inject constructor(
     private val getFavoriteSubwayInfoUseCase: GetFavoriteSubwayInfoUseCase
 ) : ViewModel() {
 
-    private var _subwayInfoList: MutableStateFlow<List<SubwayArrivalSmallDataWithFavorite>> = MutableStateFlow(emptyList())
-    val subwayInfoList : StateFlow<List<SubwayArrivalSmallDataWithFavorite>> = _subwayInfoList.asStateFlow()
+    private var _subwayInfoListState: MutableStateFlow<SubwayInfoListState> = MutableStateFlow(SubwayInfoListState.Initialized)
+    val subwayInfoListState : StateFlow<SubwayInfoListState> = _subwayInfoListState.asStateFlow()
 
 
 
     fun getFavoriteSubwayInfo(favorites: Favorites) = viewModelScope.launch(Dispatchers.IO) {
         getFavoriteSubwayInfoUseCase(favorites).onSuccess {
-            _subwayInfoList.emit(it)
+            _subwayInfoListState.emit(SubwayInfoListState.Success(it))
         }.onFailure {
-            _subwayInfoList.emit(emptyList())
+            _subwayInfoListState.emit(SubwayInfoListState.Failure)
         }
     }
 }
