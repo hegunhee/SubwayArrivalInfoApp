@@ -2,6 +2,7 @@ package com.hegunhee.subwayarrivalinfoapp.ui.favorite.detail
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -36,8 +37,16 @@ class FavoriteDetailFragment :
     private fun observeData() = with(viewModel) {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             launch{
-                subwayInfoList.collect {
-                    adapter.submitList(it)
+                subwayInfoListState.collect {
+                    when(it){
+                        is SubwayInfoListState.Initialized -> {}
+                        is SubwayInfoListState.Success -> {
+                            adapter.submitList(it.subwayInfoList)
+                        }
+                        is SubwayInfoListState.Failure -> {
+                            Toast.makeText(requireContext(), R.string.networkErrorMessage, Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
             }
 
