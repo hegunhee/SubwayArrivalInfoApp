@@ -1,6 +1,5 @@
 package com.hegunhee.subwayarrivalinfoapp.ui.detail
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithFavorite
@@ -22,14 +21,14 @@ class DetailViewModel @Inject constructor(
     private val insertFavoritesUseCase: InsertFavoritesUseCase
 ) : ViewModel(), DetailFragmentActionHandler{
 
-    private val _stationArrivalList : MutableStateFlow<List<SubwayArrivalSmallDataWithFavorite>> = MutableStateFlow(emptyList())
-    val stationArrivalList : StateFlow<List<SubwayArrivalSmallDataWithFavorite>> = _stationArrivalList.asStateFlow()
+    private val _stationArrivalListState : MutableStateFlow<SubwayArrivalListState> = MutableStateFlow(SubwayArrivalListState.Initialized)
+    val stationArrivalListState : StateFlow<SubwayArrivalListState> = _stationArrivalListState.asStateFlow()
 
     fun fetchSubwayArrivalInfo(station_name : String) = viewModelScope.launch(Dispatchers.IO){
         getSortedSubwayArrivalListUseCase(station_name).onSuccess {
-            _stationArrivalList.emit(it)
+            _stationArrivalListState.emit(SubwayArrivalListState.Success(it))
         }.onFailure {
-            _stationArrivalList.emit(listOf())
+            _stationArrivalListState.emit(SubwayArrivalListState.Failure)
         }
     }
 
