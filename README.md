@@ -28,3 +28,6 @@
 지하철 이름, 지하철 호선 정보  
 [지하철 도착 정보](https://data.seoul.go.kr/dataList/OA-12764/F/1/datasetView.do)  
 지하철 현재 위치, 도착 시간, 근접 역  
+## 느낀점
+처음으로 Retrofit에서 Call type의 객체를 받지않고 suspend 함수를 사용해 데이터 객체를 그대로 받아 사용했습니다.  
+그러면서 Result객체를 이용해 에러 핸들링도 해봤습니다.  
