@@ -7,9 +7,6 @@ import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalS
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_info.JsonSubwayInfo
 import com.hegunhee.subwayarrivalinfoapp.datasource.LocalDataSource
 import com.hegunhee.subwayarrivalinfoapp.datasource.RemoteDataSource
-import com.hegunhee.subwayarrivalinfoapp.db.FavoritesDao
-import com.hegunhee.subwayarrivalinfoapp.network.SubwayArrivalApi
-import com.hegunhee.subwayarrivalinfoapp.network.SubwayInfoApi
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
