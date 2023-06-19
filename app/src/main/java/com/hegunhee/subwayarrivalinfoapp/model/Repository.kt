@@ -11,7 +11,7 @@ interface Repository {
 
     suspend fun insertSubwayInfoList(infoList : List<SubwayInfoEntity>)
 
-    suspend fun toggleSubwayInfoBookMarked(subwayInfoEntity: SubwayInfoEntity)
+    suspend fun updateSubwayInfoBookMark(subwayInfoEntity: SubwayInfoEntity)
 
     fun getAllSubwayInfoListByFlow() : Flow<List<SubwayInfoEntity>>
 
@@ -21,7 +21,7 @@ interface Repository {
 
     suspend fun getAllSubwayArrivalList(station_name : String) : Result<List<SubwayArrivalSmallDataWithFavorite>>
 
-    suspend fun getSubwayInfoByName(station_name : String) : SubwayInfoEntity?
+    suspend fun getSubwayInfoByNameOrNull(station_name : String) : SubwayInfoEntity?
 
     suspend fun getFavoritesList() : List<Favorites>
 
