@@ -15,7 +15,7 @@ interface Repository {
 
     fun getAllSubwayInfoListByFlow() : Flow<List<SubwayInfoEntity>>
 
-    suspend fun fetchAllSubwayList()
+    suspend fun saveAllSubwayListInLocalDB() : Result<Boolean>
 
     suspend fun getAllSubwayArrivalList(station_name : String) : Result<List<SubwayArrivalSmallDataWithFavorite>>
 

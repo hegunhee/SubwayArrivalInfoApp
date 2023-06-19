@@ -1,10 +1,8 @@
 package com.hegunhee.subwayarrivalinfoapp.model
 
-import com.hegunhee.subwayarrivalinfoapp.Util.subway_line_limit
 import com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithFavorite
-import com.hegunhee.subwayarrivalinfoapp.data.toSubwayInfoEntity
 import com.hegunhee.subwayarrivalinfoapp.data.toSubwayInfoEntityList
 import com.hegunhee.subwayarrivalinfoapp.datasource.LocalDataSource
 import com.hegunhee.subwayarrivalinfoapp.datasource.RemoteDataSource
@@ -45,8 +43,8 @@ class DefaultRepository @Inject constructor(
         return localDataSource.getFavoritesListByFlow()
     }
 
-    override suspend fun fetchAllSubwayList() {
-        runCatching {
+    override suspend fun saveAllSubwayListInLocalDB() : Result<Boolean> {
+        return runCatching {
             val subwayInfo = remoteDataSource.getAllSubwayList().searchInfoBySubwayNameService
             if(subwayInfo.result.isSuccess()){
                 localDataSource.insertSubwayInfoList(subwayInfo.toSubwayInfoEntityList())
