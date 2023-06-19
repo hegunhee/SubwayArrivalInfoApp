@@ -20,5 +20,5 @@ interface LocalDataSource {
 
     suspend fun deleteFavorite(stationInfo : String)
 
-    suspend fun getFavoritesListByFlow() : Flow<List<Favorites>>
+    fun getFavoritesListByFlow() : Flow<List<Favorites>>
 }

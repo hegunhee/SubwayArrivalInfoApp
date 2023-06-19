@@ -39,7 +39,7 @@ class DefaultLocalDataSource @Inject constructor(
         favoritesDao.deleteFavorites(stationInfo)
     }
 
-    override suspend fun getFavoritesListByFlow(): Flow<List<Favorites>> {
+    override fun getFavoritesListByFlow(): Flow<List<Favorites>> {
         return favoritesDao.getFavoritesListByFlow()
     }
 }
