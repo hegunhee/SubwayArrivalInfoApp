@@ -1,9 +1,9 @@
 package com.hegunhee.subwayarrivalinfoapp.model
 
-import com.hegunhee.subwayarrivalinfoapp.Util.subway_line_limit
 import com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithFavorite
+import com.hegunhee.subwayarrivalinfoapp.data.toSubwayInfoEntityList
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_info.JsonSubwayInfo
 import com.hegunhee.subwayarrivalinfoapp.datasource.LocalDataSource
 import com.hegunhee.subwayarrivalinfoapp.datasource.RemoteDataSource
@@ -28,25 +28,9 @@ class DefaultRepository @Inject constructor(
         return localDataSource.getAllSubwayInfoListByFlow()
     }
 
-    override suspend fun fetchAllSubwayList() {
-        getAllSubwayList().let{info ->
-                info.searchInfoBySubwayNameService.let { subwayInfo ->
-                    if(subwayInfo.result.isSuccess()){
-                        val subwayInfoList = subwayInfo.row.filter { it.getFormattedLineNum() in subway_line_limit }.groupBy { it.station_nm }.map { subway ->
-                            SubwayInfoEntity(subway.key,subway.value.map { it.getFormattedLineNum() })
-                        }.toList()
-                        localDataSource.insertSubwayInfoList(subwayInfoList)
-                    }
-                }
-            }
-    }
-
     override suspend fun getSubwayInfoByNameOrNull(stationName: String): SubwayInfoEntity? {
         return localDataSource.getSubwayInfoByNameOrNull(stationName)
     }
-
-    override suspend fun getFavoritesList(): List<Favorites> {
-        return localDataSource.getFavoritesList() }
 
     override suspend fun insertFavorite(favorites: Favorites) {
         localDataSource.insertFavorite(favorites)
@@ -60,12 +44,18 @@ class DefaultRepository @Inject constructor(
         return localDataSource.getFavoritesListByFlow()
     }
 
-    override suspend fun getAllSubwayList(): JsonSubwayInfo {
-        return remoteDataSource.getAllSubwayList()
+    override suspend fun saveAllSubwayListInLocalDB() : Result<Boolean> {
+        return runCatching {
+            val subwayInfo = remoteDataSource.getAllSubwayList().searchInfoBySubwayNameService
+            if(subwayInfo.result.isSuccess()){
+                localDataSource.insertSubwayInfoList(subwayInfo.toSubwayInfoEntityList())
+            }
+            return@runCatching subwayInfo.result.isSuccess()
+        }
     }
 
     override suspend fun getAllSubwayArrivalList(stationName : String): Result<List<SubwayArrivalSmallDataWithFavorite>> {
-        val favoriteList = getFavoritesList()
+        val favoriteList = localDataSource.getFavoritesList()
         return runCatching {
             val subwayArrivalData = remoteDataSource.getSubwayInfo(stationName = stationName).realtimeArrivalList.map { it.toSmallData() }
             subwayArrivalData.map { subwayArrivalSmallData ->
