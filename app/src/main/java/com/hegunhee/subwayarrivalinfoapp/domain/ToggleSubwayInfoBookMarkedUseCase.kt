@@ -14,6 +14,6 @@ class ToggleSubwayInfoBookMarkedUseCase @Inject constructor(
 )  : UseCase{
 
     suspend operator fun invoke(subwayInfoEntity: SubwayInfoEntity) {
-        repository.toggleSubwayInfoBookMarked(subwayInfoEntity)
+        repository.updateSubwayInfoBookMark(subwayInfoEntity)
     }
 }
