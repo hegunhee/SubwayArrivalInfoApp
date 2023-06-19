@@ -28,19 +28,6 @@ class DefaultRepository @Inject constructor(
         return localDataSource.getAllSubwayInfoListByFlow()
     }
 
-    override suspend fun fetchAllSubwayList() {
-        getAllSubwayList().let{info ->
-                info.searchInfoBySubwayNameService.let { subwayInfo ->
-                    if(subwayInfo.result.isSuccess()){
-                        val subwayInfoList = subwayInfo.row.filter { it.getFormattedLineNum() in subway_line_limit }.groupBy { it.station_nm }.map { subway ->
-                            SubwayInfoEntity(subway.key,subway.value.map { it.getFormattedLineNum() })
-                        }.toList()
-                        localDataSource.insertSubwayInfoList(subwayInfoList)
-                    }
-                }
-            }
-    }
-
     override suspend fun getSubwayInfoByNameOrNull(stationName: String): SubwayInfoEntity? {
         return localDataSource.getSubwayInfoByNameOrNull(stationName)
     }
@@ -62,6 +49,19 @@ class DefaultRepository @Inject constructor(
 
     override suspend fun getAllSubwayList(): JsonSubwayInfo {
         return remoteDataSource.getAllSubwayList()
+    }
+
+    override suspend fun fetchAllSubwayList() {
+        getAllSubwayList().let{info ->
+            info.searchInfoBySubwayNameService.let { subwayInfo ->
+                if(subwayInfo.result.isSuccess()){
+                    val subwayInfoList = subwayInfo.row.filter { it.getFormattedLineNum() in subway_line_limit }.groupBy { it.station_nm }.map { subway ->
+                        SubwayInfoEntity(subway.key,subway.value.map { it.getFormattedLineNum() })
+                    }.toList()
+                    localDataSource.insertSubwayInfoList(subwayInfoList)
+                }
+            }
+        }
     }
 
     override suspend fun getAllSubwayArrivalList(stationName : String): Result<List<SubwayArrivalSmallDataWithFavorite>> {
