@@ -6,6 +6,7 @@ import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithFavorite
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_info.JsonSubwayInfo
 import com.hegunhee.subwayarrivalinfoapp.datasource.LocalDataSource
+import com.hegunhee.subwayarrivalinfoapp.datasource.RemoteDataSource
 import com.hegunhee.subwayarrivalinfoapp.db.FavoritesDao
 import com.hegunhee.subwayarrivalinfoapp.network.SubwayArrivalApi
 import com.hegunhee.subwayarrivalinfoapp.network.SubwayInfoApi
@@ -15,9 +16,9 @@ import javax.inject.Singleton
 
 @Singleton
 class DefaultRepository @Inject constructor(
-    private val subwayInfoApi : SubwayInfoApi,
     private val subwayArrivalApi: SubwayArrivalApi,
-    private val localDataSource: LocalDataSource
+    private val localDataSource: LocalDataSource,
+    private val remoteDataSource : RemoteDataSource
     ) : Repository{
     override suspend fun insertSubwayInfoList(infoList: List<SubwayInfoEntity>) {
         localDataSource.insertSubwayInfoList(infoList)
@@ -32,8 +33,7 @@ class DefaultRepository @Inject constructor(
     }
 
     override suspend fun fetchAllSubwayList() {
-        getAllSubwayList()
-            .onSuccess {info ->
+        getAllSubwayList().let{info ->
                 info.searchInfoBySubwayNameService.let { subwayInfo ->
                     if(subwayInfo.result.isSuccess()){
                         val subwayInfoList = subwayInfo.row.filter { it.getFormattedLineNum() in subway_line_limit }.groupBy { it.station_nm }.map { subway ->
@@ -43,13 +43,10 @@ class DefaultRepository @Inject constructor(
                     }
                 }
             }
-            .onFailure {
-
-            }
     }
 
-    override suspend fun getAllSubwayList(): Result<JsonSubwayInfo> {
-        return runCatching { subwayInfoApi.getSubwayInfo() }
+    override suspend fun getAllSubwayList(): JsonSubwayInfo {
+        return remoteDataSource.getAllSubwayList()
     }
 
     override suspend fun getAllSubwayArrivalList(stationName : String): Result<List<SubwayArrivalSmallDataWithFavorite>> {
