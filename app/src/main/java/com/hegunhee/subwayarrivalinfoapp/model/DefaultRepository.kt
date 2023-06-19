@@ -41,6 +41,25 @@ class DefaultRepository @Inject constructor(
             }
     }
 
+    override suspend fun getSubwayInfoByNameOrNull(stationName: String): SubwayInfoEntity? {
+        return localDataSource.getSubwayInfoByNameOrNull(stationName)
+    }
+
+    override suspend fun getFavoritesList(): List<Favorites> {
+        return localDataSource.getFavoritesList() }
+
+    override suspend fun insertFavorite(favorites: Favorites) {
+        localDataSource.insertFavorite(favorites)
+    }
+
+    override suspend fun deleteFavorite(stationInfo: String) {
+        localDataSource.deleteFavorite(stationInfo)
+    }
+
+    override fun getFavoritesListByFlow(): Flow<List<Favorites>> {
+        return localDataSource.getFavoritesListByFlow()
+    }
+
     override suspend fun getAllSubwayList(): JsonSubwayInfo {
         return remoteDataSource.getAllSubwayList()
     }
@@ -56,28 +75,9 @@ class DefaultRepository @Inject constructor(
         }
     }
 
-    override suspend fun getSubwayInfoByNameOrNull(stationName: String): SubwayInfoEntity? {
-        return localDataSource.getSubwayInfoByNameOrNull(stationName)
-    }
-
-    override suspend fun getFavoritesList(): List<Favorites> {
-        return localDataSource.getFavoritesList() }
-
-    override suspend fun insertFavorite(favorites: Favorites) {
-        localDataSource.insertFavorite(favorites)
-    }
-
     override suspend fun getFavoriteSubwayInfoList(favorite: Favorites): Result<List<SubwayArrivalSmallDataWithFavorite>> {
         return getAllSubwayArrivalList(favorite.subwayName).map { subwayArrivalSmallData ->
             subwayArrivalSmallData.filter { it.fullName == favorite.subwayInfo }
         }
-    }
-
-    override suspend fun deleteFavorite(stationInfo: String) {
-        localDataSource.deleteFavorite(stationInfo)
-    }
-
-    override fun getFavoritesListByFlow(): Flow<List<Favorites>> {
-        return localDataSource.getFavoritesListByFlow()
     }
 }
