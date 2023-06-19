@@ -32,9 +32,6 @@ class DefaultRepository @Inject constructor(
         return localDataSource.getSubwayInfoByNameOrNull(stationName)
     }
 
-    override suspend fun getFavoritesList(): List<Favorites> {
-        return localDataSource.getFavoritesList() }
-
     override suspend fun insertFavorite(favorites: Favorites) {
         localDataSource.insertFavorite(favorites)
     }
@@ -47,12 +44,8 @@ class DefaultRepository @Inject constructor(
         return localDataSource.getFavoritesListByFlow()
     }
 
-    override suspend fun getAllSubwayList(): JsonSubwayInfo {
-        return remoteDataSource.getAllSubwayList()
-    }
-
     override suspend fun fetchAllSubwayList() {
-        getAllSubwayList().let{info ->
+        remoteDataSource.getAllSubwayList().let{info ->
             info.searchInfoBySubwayNameService.let { subwayInfo ->
                 if(subwayInfo.result.isSuccess()){
                     val subwayInfoList = subwayInfo.row.filter { it.getFormattedLineNum() in subway_line_limit }.groupBy { it.station_nm }.map { subway ->
@@ -65,7 +58,7 @@ class DefaultRepository @Inject constructor(
     }
 
     override suspend fun getAllSubwayArrivalList(stationName : String): Result<List<SubwayArrivalSmallDataWithFavorite>> {
-        val favoriteList = getFavoritesList()
+        val favoriteList = localDataSource.getFavoritesList()
         return runCatching {
             val subwayArrivalData = remoteDataSource.getSubwayInfo(stationName = stationName).realtimeArrivalList.map { it.toSmallData() }
             subwayArrivalData.map { subwayArrivalSmallData ->
