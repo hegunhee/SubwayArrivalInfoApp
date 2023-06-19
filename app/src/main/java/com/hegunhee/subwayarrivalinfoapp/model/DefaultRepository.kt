@@ -16,10 +16,9 @@ import javax.inject.Singleton
 
 @Singleton
 class DefaultRepository @Inject constructor(
-    private val subwayArrivalApi: SubwayArrivalApi,
     private val localDataSource: LocalDataSource,
     private val remoteDataSource : RemoteDataSource
-    ) : Repository{
+) : Repository{
     override suspend fun insertSubwayInfoList(infoList: List<SubwayInfoEntity>) {
         localDataSource.insertSubwayInfoList(infoList)
     }
@@ -52,7 +51,7 @@ class DefaultRepository @Inject constructor(
     override suspend fun getAllSubwayArrivalList(stationName : String): Result<List<SubwayArrivalSmallDataWithFavorite>> {
         val favoriteList = getFavoritesList()
         return runCatching {
-            val subwayArrivalData = subwayArrivalApi.getSubwayInfo(stationName = stationName).realtimeArrivalList.map { it.toSmallData() }
+            val subwayArrivalData = remoteDataSource.getSubwayInfo(stationName = stationName).realtimeArrivalList.map { it.toSmallData() }
             subwayArrivalData.map { subwayArrivalSmallData ->
                 val isFavorite = favoriteList.any{favorites -> favorites.subwayInfo == subwayArrivalSmallData.subwayInfo}
                 subwayArrivalSmallData.toSubwayArrivalSmallDataWithFavorite(isFavorite)
