@@ -5,6 +5,7 @@ import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
 import com.hegunhee.subwayarrivalinfoapp.domain.SaveAllSubwayListInLocalDBUseCase
 import com.hegunhee.subwayarrivalinfoapp.domain.GetSubwayInfoListByFlowUseCase
 import com.hegunhee.subwayarrivalinfoapp.domain.ToggleSubwayInfoBookMarkedUseCase
+import com.hegunhee.subwayarrivalinfoapp.network.networkErrorMessage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -24,6 +25,9 @@ class MainFragmentViewModel @Inject constructor(
     private val _navigateDetail : MutableSharedFlow<String> = MutableSharedFlow<String>()
     val navigateDetail : SharedFlow<String> = _navigateDetail.asSharedFlow()
 
+    private val _toastMessage : MutableSharedFlow<String> = MutableSharedFlow<String>()
+    val toastMessage : SharedFlow<String> = _toastMessage.asSharedFlow()
+
     val subwayInfoList : Flow<List<SubwayInfoEntity>> = searchText.combine(getSubwayInfoListByFlowUseCase()){ str, list ->
         return@combine if(searchText.value.isBlank()) {
             list
@@ -32,7 +36,13 @@ class MainFragmentViewModel @Inject constructor(
     }
 
     fun fetchSubwayInfoList() = viewModelScope.launch {
-        fetchSubwayListInfoUseCase()
+        saveAllSubwayListInLocalDBUseCase().onSuccess { result ->
+            if(!result){
+                _toastMessage.emit(networkErrorMessage)
+            }
+        }.onFailure {
+            _toastMessage.emit(networkErrorMessage)
+        }
     }
 
     override fun toggleSubwayInfoBookMarked(subwayInfoEntity: SubwayInfoEntity) {

@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -70,6 +71,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                     }else{
                         adapter.submitList(it)
                     }
+                }
+            }
+            launch{
+                toastMessage.collect{ message ->
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
