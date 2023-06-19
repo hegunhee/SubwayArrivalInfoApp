@@ -17,7 +17,7 @@ interface Repository {
 
     suspend fun fetchAllSubwayList()
 
-    suspend fun getAllSubwayList() : Result<JsonSubwayInfo>
+    suspend fun getAllSubwayList() : JsonSubwayInfo
 
     suspend fun getAllSubwayArrivalList(station_name : String) : Result<List<SubwayArrivalSmallDataWithFavorite>>
 
