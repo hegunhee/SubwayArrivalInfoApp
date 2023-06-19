@@ -7,7 +7,6 @@ import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalS
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_info.JsonSubwayInfo
 import com.hegunhee.subwayarrivalinfoapp.datasource.LocalDataSource
 import com.hegunhee.subwayarrivalinfoapp.db.FavoritesDao
-import com.hegunhee.subwayarrivalinfoapp.db.SubwayInfoDao
 import com.hegunhee.subwayarrivalinfoapp.network.SubwayArrivalApi
 import com.hegunhee.subwayarrivalinfoapp.network.SubwayInfoApi
 import kotlinx.coroutines.flow.Flow
@@ -18,7 +17,6 @@ import javax.inject.Singleton
 class DefaultRepository @Inject constructor(
     private val subwayInfoApi : SubwayInfoApi,
     private val subwayArrivalApi: SubwayArrivalApi,
-    private val favoritesDao: FavoritesDao,
     private val localDataSource: LocalDataSource
     ) : Repository{
     override suspend fun insertSubwayInfoList(infoList: List<SubwayInfoEntity>) {
@@ -70,11 +68,10 @@ class DefaultRepository @Inject constructor(
     }
 
     override suspend fun getFavoritesList(): List<Favorites> {
-        return favoritesDao.getFavoritesList()
-    }
+        return localDataSource.getFavoritesList() }
 
     override suspend fun insertFavorite(favorites: Favorites) {
-        favoritesDao.insertFavorites(favorites)
+        localDataSource.insertFavorite(favorites)
     }
 
     override suspend fun getFavoriteSubwayInfoList(favorite: Favorites): Result<List<SubwayArrivalSmallDataWithFavorite>> {
@@ -83,11 +80,11 @@ class DefaultRepository @Inject constructor(
         }
     }
 
-    override suspend fun deleteFavorite(station_info: String) {
-        favoritesDao.deleteFavorites(station_info)
+    override suspend fun deleteFavorite(stationInfo: String) {
+        localDataSource.deleteFavorite(stationInfo)
     }
 
     override fun getFavoritesListByFlow(): Flow<List<Favorites>> {
-        return favoritesDao.getFavoritesListByFlow()
+        return localDataSource.getFavoritesListByFlow()
     }
 }
