@@ -5,6 +5,7 @@ import com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithFavorite
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_info.JsonSubwayInfo
+import com.hegunhee.subwayarrivalinfoapp.datasource.LocalDataSource
 import com.hegunhee.subwayarrivalinfoapp.db.FavoritesDao
 import com.hegunhee.subwayarrivalinfoapp.db.SubwayInfoDao
 import com.hegunhee.subwayarrivalinfoapp.network.SubwayArrivalApi
@@ -15,21 +16,21 @@ import javax.inject.Singleton
 
 @Singleton
 class DefaultRepository @Inject constructor(
-    private val subwayInfoDao: SubwayInfoDao,
     private val subwayInfoApi : SubwayInfoApi,
     private val subwayArrivalApi: SubwayArrivalApi,
-    private val favoritesDao: FavoritesDao
+    private val favoritesDao: FavoritesDao,
+    private val localDataSource: LocalDataSource
     ) : Repository{
     override suspend fun insertSubwayInfoList(infoList: List<SubwayInfoEntity>) {
-        subwayInfoDao.insertSubwayInfoList(infoList)
+        localDataSource.insertSubwayInfoList(infoList)
     }
 
-    override suspend fun toggleSubwayInfoBookMarked(subwayInfoEntity: SubwayInfoEntity) {
-        subwayInfoDao.toggleSubwayInfoBookMarked(subwayInfoEntity)
+    override suspend fun updateSubwayInfoBookMark(subwayInfoEntity: SubwayInfoEntity) {
+        localDataSource.updateSubwayInfoBookMark(subwayInfoEntity)
     }
 
     override fun getAllSubwayInfoListByFlow(): Flow<List<SubwayInfoEntity>> {
-        return subwayInfoDao.getAllSubwayInfoByFlow()
+        return localDataSource.getAllSubwayInfoListByFlow()
     }
 
     override suspend fun fetchAllSubwayList() {
@@ -40,7 +41,7 @@ class DefaultRepository @Inject constructor(
                         val subwayInfoList = subwayInfo.row.filter { it.getFormattedLineNum() in subway_line_limit }.groupBy { it.station_nm }.map { subway ->
                             SubwayInfoEntity(subway.key,subway.value.map { it.getFormattedLineNum() })
                         }.toList()
-                        subwayInfoDao.insertSubwayInfoList(subwayInfoList)
+                        localDataSource.insertSubwayInfoList(subwayInfoList)
                     }
                 }
             }
@@ -64,8 +65,8 @@ class DefaultRepository @Inject constructor(
         }
     }
 
-    override suspend fun getSubwayInfoByName(station_name: String): SubwayInfoEntity? {
-        return subwayInfoDao.getSubwayInfoByName(station_name)
+    override suspend fun getSubwayInfoByNameOrNull(stationName: String): SubwayInfoEntity? {
+        return localDataSource.getSubwayInfoByNameOrNull(stationName)
     }
 
     override suspend fun getFavoritesList(): List<Favorites> {
