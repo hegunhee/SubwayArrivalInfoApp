@@ -2,9 +2,7 @@ package com.hegunhee.subwayarrivalinfoapp.model
 
 import com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
-import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalJson
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithFavorite
-import com.hegunhee.subwayarrivalinfoapp.data.json.subway_info.JsonSubwayInfo
 import kotlinx.coroutines.flow.Flow
 
 interface Repository {
