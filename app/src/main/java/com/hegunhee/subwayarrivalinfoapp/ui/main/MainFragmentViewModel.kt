@@ -2,7 +2,7 @@ package com.hegunhee.subwayarrivalinfoapp.ui.main
 
 import androidx.lifecycle.*
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
-import com.hegunhee.subwayarrivalinfoapp.domain.FetchSubwayListInfoUseCase
+import com.hegunhee.subwayarrivalinfoapp.domain.SaveAllSubwayListInLocalDBUseCase
 import com.hegunhee.subwayarrivalinfoapp.domain.GetSubwayInfoListByFlowUseCase
 import com.hegunhee.subwayarrivalinfoapp.domain.ToggleSubwayInfoBookMarkedUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainFragmentViewModel @Inject constructor(
     private val getSubwayInfoListByFlowUseCase: GetSubwayInfoListByFlowUseCase,
-    private val fetchSubwayListInfoUseCase: FetchSubwayListInfoUseCase,
+    private val saveAllSubwayListInLocalDBUseCase: SaveAllSubwayListInLocalDBUseCase,
     private val toggleSubwayInfoBookMarkedUseCase: ToggleSubwayInfoBookMarkedUseCase
 ): ViewModel(), MainFragmentActionHandler{
 
