@@ -4,7 +4,8 @@ import com.hegunhee.subwayarrivalinfoapp.Util.subway_line_limit
 import com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithFavorite
-import com.hegunhee.subwayarrivalinfoapp.data.json.subway_info.JsonSubwayInfo
+import com.hegunhee.subwayarrivalinfoapp.data.toSubwayInfoEntity
+import com.hegunhee.subwayarrivalinfoapp.data.toSubwayInfoEntityList
 import com.hegunhee.subwayarrivalinfoapp.datasource.LocalDataSource
 import com.hegunhee.subwayarrivalinfoapp.datasource.RemoteDataSource
 import kotlinx.coroutines.flow.Flow
@@ -45,15 +46,12 @@ class DefaultRepository @Inject constructor(
     }
 
     override suspend fun fetchAllSubwayList() {
-        remoteDataSource.getAllSubwayList().let{info ->
-            info.searchInfoBySubwayNameService.let { subwayInfo ->
-                if(subwayInfo.result.isSuccess()){
-                    val subwayInfoList = subwayInfo.row.filter { it.getFormattedLineNum() in subway_line_limit }.groupBy { it.station_nm }.map { subway ->
-                        SubwayInfoEntity(subway.key,subway.value.map { it.getFormattedLineNum() })
-                    }.toList()
-                    localDataSource.insertSubwayInfoList(subwayInfoList)
-                }
+        runCatching {
+            val subwayInfo = remoteDataSource.getAllSubwayList().searchInfoBySubwayNameService
+            if(subwayInfo.result.isSuccess()){
+                localDataSource.insertSubwayInfoList(subwayInfo.toSubwayInfoEntityList())
             }
+            return@runCatching subwayInfo.result.isSuccess()
         }
     }
 
