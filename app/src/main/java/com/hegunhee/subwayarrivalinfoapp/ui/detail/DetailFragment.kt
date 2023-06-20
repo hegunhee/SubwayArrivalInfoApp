@@ -4,14 +4,15 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.hegunhee.subwayarrivalinfoapp.MainActivity
 import com.hegunhee.subwayarrivalinfoapp.R
 import com.hegunhee.subwayarrivalinfoapp.databinding.FragmentDetailBinding
 import com.hegunhee.subwayarrivalinfoapp.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -39,21 +40,22 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
 
 
     private fun observeData() = with(viewModel) {
-        lifecycleScope.launchWhenStarted {
-            launch {
-                stationArrivalListState.collect {
-                    when(it){
-                        is SubwayArrivalListState.Initialized -> {}
-                        is SubwayArrivalListState.Success -> {
-                            adapter.submitList(it.subwayInfoList)
-                        }
-                        is SubwayArrivalListState.Failure ->{
-                            Toast.makeText(requireContext(), R.string.networkErrorMessage, Toast.LENGTH_SHORT).show()
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                launch {
+                    stationArrivalListState.collect {
+                        when(it){
+                            is SubwayArrivalListState.Initialized -> {}
+                            is SubwayArrivalListState.Success -> {
+                                adapter.submitList(it.subwayInfoList)
+                            }
+                            is SubwayArrivalListState.Failure ->{
+                                Toast.makeText(requireContext(), R.string.networkErrorMessage, Toast.LENGTH_SHORT).show()
+                            }
                         }
                     }
                 }
             }
-
         }
     }
 }
