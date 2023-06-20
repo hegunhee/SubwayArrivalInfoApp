@@ -7,7 +7,9 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.hegunhee.subwayarrivalinfoapp.MainActivity
 import com.hegunhee.subwayarrivalinfoapp.R
@@ -56,26 +58,28 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     }
 
     private fun initObserver() = with(viewModel) {
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            launch {
-                viewModel.navigateDetail.collect{
-                    MainFragmentDirections.mainToDetail(it).let { direction ->
-                        findNavController().navigate(direction)
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                launch {
+                    viewModel.navigateDetail.collect{
+                        MainFragmentDirections.mainToDetail(it).let { direction ->
+                            findNavController().navigate(direction)
+                        }
                     }
                 }
-            }
-            launch {
-                subwayInfoList.collect {
-                    if(it.isEmpty() && searchText.value.isBlank()){
-                        fetchSubwayInfoList()
-                    }else{
-                        adapter.submitList(it)
+                launch {
+                    subwayInfoList.collect {
+                        if(it.isEmpty() && searchText.value.isBlank()){
+                            fetchSubwayInfoList()
+                        }else{
+                            adapter.submitList(it)
+                        }
                     }
                 }
-            }
-            launch{
-                toastMessage.collect{ message ->
-                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                launch{
+                    toastMessage.collect{ message ->
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
