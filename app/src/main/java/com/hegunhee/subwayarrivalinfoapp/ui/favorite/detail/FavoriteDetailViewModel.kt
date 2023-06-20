@@ -23,7 +23,7 @@ class FavoriteDetailViewModel @Inject constructor(
 
 
 
-    fun getFavoriteSubwayInfo(favorites: Favorites) = viewModelScope.launch(Dispatchers.IO) {
+    fun getFavoriteSubwayInfo(favorites: Favorites) = viewModelScope.launch {
         getFavoriteSubwayInfoUseCase(favorites).onSuccess {
             _subwayInfoListState.emit(SubwayInfoListState.Success(it))
         }.onFailure {
