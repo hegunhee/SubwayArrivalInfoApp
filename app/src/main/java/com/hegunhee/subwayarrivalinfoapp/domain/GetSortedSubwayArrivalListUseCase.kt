@@ -9,9 +9,7 @@ import javax.inject.Inject
 
 @InstallIn(SingletonComponent::class)
 @Module
-class GetSortedSubwayArrivalListUseCase @Inject constructor(
-    private val repository: Repository,
-) {
+class GetSortedSubwayArrivalListUseCase @Inject constructor(private val repository: Repository) {
 
     suspend operator fun invoke(stationName : String) : Result<List<SubwayArrivalSmallDataWithFavorite>>{
         return repository.getAllSubwayArrivalList(stationName)

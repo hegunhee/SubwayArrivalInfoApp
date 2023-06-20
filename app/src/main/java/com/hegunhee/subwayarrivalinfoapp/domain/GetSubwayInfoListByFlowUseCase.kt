@@ -10,9 +10,7 @@ import javax.inject.Inject
 
 @InstallIn(SingletonComponent::class)
 @Module
-class GetSubwayInfoListByFlowUseCase @Inject constructor(
-    private val repository: Repository
-) : UseCase {
+class GetSubwayInfoListByFlowUseCase @Inject constructor(private val repository: Repository){
 
     operator fun invoke() : Flow<List<SubwayInfoEntity>>{
         return repository.getAllSubwayInfoListByFlow()

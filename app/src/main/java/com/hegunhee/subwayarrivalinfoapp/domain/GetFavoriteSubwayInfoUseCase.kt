@@ -10,9 +10,7 @@ import javax.inject.Inject
 
 @InstallIn(SingletonComponent::class)
 @Module
-class GetFavoriteSubwayInfoUseCase @Inject constructor(
-    private val repository : Repository,
-){
+class GetFavoriteSubwayInfoUseCase @Inject constructor(private val repository : Repository) {
     suspend operator fun invoke(favorite : Favorites) : Result<List<SubwayArrivalSmallDataWithFavorite>>{
         return repository.getFavoriteSubwayInfoList(favorite)
     }
