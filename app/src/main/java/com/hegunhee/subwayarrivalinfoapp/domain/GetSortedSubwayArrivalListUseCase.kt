@@ -1,6 +1,5 @@
 package com.hegunhee.subwayarrivalinfoapp.domain
 
-import android.util.Log
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithFavorite
 import com.hegunhee.subwayarrivalinfoapp.model.Repository
 import dagger.Module
@@ -14,8 +13,8 @@ class GetSortedSubwayArrivalListUseCase @Inject constructor(
     private val repository: Repository,
 ) {
 
-    suspend operator fun invoke(station_name : String) : Result<List<SubwayArrivalSmallDataWithFavorite>>{
-        return repository.getAllSubwayArrivalList(station_name)
+    suspend operator fun invoke(stationName : String) : Result<List<SubwayArrivalSmallDataWithFavorite>>{
+        return repository.getAllSubwayArrivalList(stationName)
     }
 
 }
