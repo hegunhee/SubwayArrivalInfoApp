@@ -6,8 +6,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
 
-@InstallIn(SingletonComponent::class)
-@Module
 class DeleteFavoritesUseCase @Inject constructor(private val repository: Repository){
     suspend operator fun invoke(stationInfo : String){
         repository.deleteFavorite(stationInfo)
