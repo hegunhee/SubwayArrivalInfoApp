@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 @InstallIn(SingletonComponent::class)
 @Module
-class GetFavoritesListByFlowUseCase @Inject constructor(private val repository: Repository) : UseCase {
+class GetFavoritesListByFlowUseCase @Inject constructor(private val repository: Repository){
     operator fun invoke()  : Flow<List<Favorites>>{
         return repository.getFavoritesListByFlow()
     }

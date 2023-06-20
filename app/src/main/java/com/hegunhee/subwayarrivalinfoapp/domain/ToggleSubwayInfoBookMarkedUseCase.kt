@@ -9,9 +9,7 @@ import javax.inject.Inject
 
 @InstallIn(SingletonComponent::class)
 @Module
-class ToggleSubwayInfoBookMarkedUseCase @Inject constructor(
-    private val repository: Repository
-)  : UseCase{
+class ToggleSubwayInfoBookMarkedUseCase @Inject constructor(private val repository: Repository){
 
     suspend operator fun invoke(subwayInfoEntity: SubwayInfoEntity) {
         repository.updateSubwayInfoBookMark(subwayInfoEntity)
