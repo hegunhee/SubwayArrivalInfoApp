@@ -24,7 +24,7 @@ class DetailViewModel @Inject constructor(
     private val _stationArrivalListState : MutableStateFlow<SubwayArrivalListState> = MutableStateFlow(SubwayArrivalListState.Initialized)
     val stationArrivalListState : StateFlow<SubwayArrivalListState> = _stationArrivalListState.asStateFlow()
 
-    fun fetchSubwayArrivalInfo(station_name : String) = viewModelScope.launch(Dispatchers.IO){
+    fun fetchSubwayArrivalInfo(station_name : String) = viewModelScope.launch{
         getSortedSubwayArrivalListUseCase(station_name).onSuccess {
             _stationArrivalListState.emit(SubwayArrivalListState.Success(it))
         }.onFailure {
