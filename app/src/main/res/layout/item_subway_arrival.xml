@@ -22,18 +22,18 @@
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <com.google.android.material.chip.Chip
+        <TextView
             android:id="@+id/station_line"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:textColor="@color/black"
-            tools:text="1호선"
+            android:background="@drawable/round_shape_20dp"
+            android:padding="5dp"
             android:text="@{subwayArrivalData.stationLine}"
-            app:setSubwayLineColor="@{subwayArrivalData.stationLine}"
-            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent"
+            app:setStationLineBackground="@{subwayArrivalData.stationLine}"
+            tools:text="1호선" />
 
         <TextView
             android:id="@+id/station_info"
