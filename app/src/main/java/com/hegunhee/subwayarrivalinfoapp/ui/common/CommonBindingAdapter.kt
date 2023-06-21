@@ -29,3 +29,10 @@ fun Chip.setChipColor(subwayLine : String){
 fun TextView.setTimeText(hour : Int){
     text = "${hour/60} 분 ${hour%60} 초"
 }
+
+@BindingAdapter("setStationLineBackground")
+fun TextView.setBackgroundColor(subwayLine : String) {
+    SubwayLineColor.values().firstOrNull { it.line == subwayLine }?.let {
+        backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context,it.getColor()))
+    }
+}
