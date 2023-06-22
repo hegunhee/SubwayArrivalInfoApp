@@ -15,7 +15,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:onClick="@{() -> eventHandler.navigateToDetail(subwayInfoEntity.subwayName)}">
 
         <TextView
             android:id="@+id/subway_name"
@@ -27,7 +28,6 @@
             android:textSize="30dp"
             android:text="@{subwayInfoEntity.subwayName}"
             android:textColor="@color/black"
-            android:onClick="@{() -> eventHandler.navigateToDetail(subwayInfoEntity.subwayName)}"
             tools:text="강남" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -39,7 +39,6 @@
             app:layout_constraintStart_toEndOf="@id/subway_name"
             app:setSubwayLines="@{subwayInfoEntity.subwayLine}"
             app:layout_constraintEnd_toStartOf="@id/image_button"
-            android:onClick="@{() -> eventHandler.navigateToDetail(subwayInfoEntity.subwayName)}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="horizontal"
             tools:listitem="@layout/item_subway_line" />
