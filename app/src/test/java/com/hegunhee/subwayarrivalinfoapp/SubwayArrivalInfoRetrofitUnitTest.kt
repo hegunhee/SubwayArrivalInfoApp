@@ -8,7 +8,7 @@ import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
 import retrofit2.awaitResponse
 
-class SubwayArrivalRetrofitUnitTest {
+class SubwayArrivalInfoRetrofitUnitTest {
 
     @Test
     fun `get Json Data`()= runBlocking{

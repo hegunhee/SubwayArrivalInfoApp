@@ -1,7 +1,7 @@
-package com.hegunhee.subwayarrivalinfoapp.domain
+package com.hegunhee.subwayarrivalinfoapp.domain.usecase
 
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithFavorite
-import com.hegunhee.subwayarrivalinfoapp.model.Repository
+import com.hegunhee.subwayarrivalinfoapp.domain.repository.Repository
 import javax.inject.Inject
 
 

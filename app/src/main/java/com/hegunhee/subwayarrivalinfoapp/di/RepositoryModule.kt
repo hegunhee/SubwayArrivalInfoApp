@@ -1,7 +1,7 @@
 package com.hegunhee.subwayarrivalinfoapp.di
 
-import com.hegunhee.subwayarrivalinfoapp.model.DefaultRepository
-import com.hegunhee.subwayarrivalinfoapp.model.Repository
+import com.hegunhee.subwayarrivalinfoapp.domain.repository.DefaultRepository
+import com.hegunhee.subwayarrivalinfoapp.domain.repository.Repository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

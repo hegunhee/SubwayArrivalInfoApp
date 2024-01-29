@@ -1,4 +1,4 @@
-package com.hegunhee.subwayarrivalinfoapp.model
+package com.hegunhee.subwayarrivalinfoapp.domain.repository
 
 import com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
