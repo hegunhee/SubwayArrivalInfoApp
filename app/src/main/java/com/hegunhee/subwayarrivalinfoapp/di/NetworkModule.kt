@@ -1,7 +1,6 @@
 package com.hegunhee.subwayarrivalinfoapp.di
 
-import com.hegunhee.subwayarrivalinfoapp.network.SUBWAY_ARRIVAL_BASE_URL
-import com.hegunhee.subwayarrivalinfoapp.network.SUBWAY_INFO_BASE_URL
+import com.hegunhee.subwayarrivalinfoapp.BuildConfig
 import com.hegunhee.subwayarrivalinfoapp.network.SubwayArrivalApi
 import com.hegunhee.subwayarrivalinfoapp.network.SubwayInfoApi
 import com.squareup.moshi.Moshi
@@ -29,7 +28,7 @@ class NetworkModule {
         moshi : Moshi
     ) : SubwayInfoApi{
         return Retrofit.Builder()
-            .baseUrl(SUBWAY_INFO_BASE_URL)
+            .baseUrl(BuildConfig.subwayInfoBaseUrl)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
             .create(SubwayInfoApi::class.java)
@@ -39,7 +38,7 @@ class NetworkModule {
     @Provides
     fun provideSubwayArrivalApi(moshi : Moshi) : SubwayArrivalApi{
         return Retrofit.Builder()
-            .baseUrl(SUBWAY_ARRIVAL_BASE_URL)
+            .baseUrl(BuildConfig.subwayArrivalBaseUrl)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
             .create(SubwayArrivalApi::class.java)
