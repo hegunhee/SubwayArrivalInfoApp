@@ -7,7 +7,7 @@ import com.hegunhee.subwayarrivalinfoapp.data.json.subway_info.SearchInfoBySubwa
 
 fun SearchInfoBySubwayNameService.toSubwayInfoEntityList() : List<SubwayInfoEntity> {
     val subwayInfo = this
-    return subwayInfo.row.filter {it.getFormattedLineNum() in subway_line_limit}.groupBy { it.station_nm }.map { subway ->
+    return subwayInfo.row.filter {it.getFormattedLineNum() in subway_line_limit}.groupBy { it.stationNm }.map { subway ->
         subway.value.toSubwayInfoEntity(subway.key)
     }
 }

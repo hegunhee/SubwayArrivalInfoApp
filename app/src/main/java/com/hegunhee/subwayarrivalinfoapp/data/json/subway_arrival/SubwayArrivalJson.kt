@@ -7,5 +7,5 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class SubwayArrivalJson(
     @Json(name = "errorMessage") val errorMessage: ErrorMessage?,
-    @Json(name ="realtimeArrivalList") val realtimeArrivalList: List<RealtimeArrival>
+    @Json(name = "realtimeArrivalList") val realtimeArrivalList: List<RealtimeArrival>
 )
