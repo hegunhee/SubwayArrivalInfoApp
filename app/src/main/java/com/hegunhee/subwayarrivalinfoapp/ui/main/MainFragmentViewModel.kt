@@ -2,9 +2,9 @@ package com.hegunhee.subwayarrivalinfoapp.ui.main
 
 import androidx.lifecycle.*
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
-import com.hegunhee.subwayarrivalinfoapp.domain.SaveAllSubwayListInLocalDBUseCase
-import com.hegunhee.subwayarrivalinfoapp.domain.GetSubwayInfoListByFlowUseCase
-import com.hegunhee.subwayarrivalinfoapp.domain.ToggleSubwayInfoBookMarkedUseCase
+import com.hegunhee.subwayarrivalinfoapp.domain.usecase.SaveAllSubwayListInLocalDBUseCase
+import com.hegunhee.subwayarrivalinfoapp.domain.usecase.GetSubwayInfoListByFlowUseCase
+import com.hegunhee.subwayarrivalinfoapp.domain.usecase.ToggleSubwayInfoBookMarkedUseCase
 import com.hegunhee.subwayarrivalinfoapp.network.networkErrorMessage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

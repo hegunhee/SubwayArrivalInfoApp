@@ -1,4 +1,4 @@
-package com.hegunhee.subwayarrivalinfoapp.model
+package com.hegunhee.subwayarrivalinfoapp.domain.repository
 
 import com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
@@ -14,7 +14,7 @@ import javax.inject.Singleton
 class DefaultRepository @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource : RemoteDataSource
-) : Repository{
+) : Repository {
     override suspend fun insertSubwayInfoList(infoList: List<SubwayInfoEntity>) {
         localDataSource.insertSubwayInfoList(infoList)
     }

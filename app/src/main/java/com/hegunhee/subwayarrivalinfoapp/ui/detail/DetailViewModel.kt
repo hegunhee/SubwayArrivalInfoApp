@@ -3,9 +3,9 @@ package com.hegunhee.subwayarrivalinfoapp.ui.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithFavorite
-import com.hegunhee.subwayarrivalinfoapp.domain.DeleteFavoritesUseCase
-import com.hegunhee.subwayarrivalinfoapp.domain.GetSortedSubwayArrivalListUseCase
-import com.hegunhee.subwayarrivalinfoapp.domain.InsertFavoritesUseCase
+import com.hegunhee.subwayarrivalinfoapp.domain.usecase.DeleteFavoritesUseCase
+import com.hegunhee.subwayarrivalinfoapp.domain.usecase.GetSortedSubwayArrivalListUseCase
+import com.hegunhee.subwayarrivalinfoapp.domain.usecase.InsertFavoritesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
