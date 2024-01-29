@@ -20,8 +20,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "SUBWAY_INFO_API_KEY", properties["subway_info_api_key"]
-        buildConfigField "String", "SUBWAY_ARRIVAL_API_KEY", properties["subway_arrival_api_key"]
+        buildConfigField "String", "subwayInfoBaseUrl" , properties["subwayInfoBaseUrl"]
+        buildConfigField "String", "subwayArrivalBaseUrl" , properties["subwayArrivalBaseUrl"]
+        buildConfigField "String", "subwayInfoApiKey", properties["subwayInfoApiKey"]
+        buildConfigField "String", "subwayArrivalApiKey", properties["subwayArrivalApiKey"]
     }
 
     buildTypes {

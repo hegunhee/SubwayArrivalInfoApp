@@ -6,9 +6,9 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface SubwayInfoApi {
-    @GET("/{key}/{type}/{service}/{start_index}/{end_index}")
+    @GET("{key}/{type}/{service}/{start_index}/{end_index}")
     suspend fun getSubwayInfo(
-        @Path("key") key : String = BuildConfig.SUBWAY_INFO_API_KEY,
+        @Path("key") key : String = BuildConfig.subwayInfoApiKey,
         @Path("type") type : String = "json",
         @Path("service") service : String = "SearchInfoBySubwayNameService",
         @Path("start_index") startIndex : Int = 1,

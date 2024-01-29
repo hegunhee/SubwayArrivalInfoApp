@@ -8,7 +8,7 @@ import retrofit2.http.Path
 interface SubwayArrivalApi {
     @GET("{key}/{type}/{service}/{start_index}/{end_index}/{station}")
     suspend fun getSubwayInfo(
-        @Path("key") key : String = BuildConfig.SUBWAY_ARRIVAL_API_KEY,
+        @Path("key") key : String = BuildConfig.subwayArrivalApiKey,
         @Path("type") type : String = "json",
         @Path("service") service : String = "realtimeStationArrival",
         @Path("start_index") startIndex : Int = 1,
