@@ -39,21 +39,5 @@ data class RealtimeArrivalResponse(
     @Json(name = "trainLineNm") val trainLineNm: String,
     @Json(name = "updnLine") val updnLine: String? = null
 ) {
-    fun toSmallData(): SubwayArrivalSmallData {
-        return SubwayArrivalSmallData(
-            bstatnNm,
-            barvlDt.toInt(),
-            arvlMsg2,
-            trainLineNm,
-            subwayId.toSubwayLine()
-        )
-    }
 
-    /**
-    지하철호선ID(subwayId)
-    1001:1호선, 1002:2호선, 1003:3호선, 1004:4호선, 1005:5호선 1006:6호선, 1007:7호선, 1008:8호선, 1009:9호선
-     **/
-    private fun String.toSubwayLine(): String {
-        return "${this.toInt() % 10}호선"
-    }
 }

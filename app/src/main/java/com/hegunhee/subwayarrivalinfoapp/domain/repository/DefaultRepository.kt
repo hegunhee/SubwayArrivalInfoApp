@@ -2,7 +2,8 @@ package com.hegunhee.subwayarrivalinfoapp.domain.repository
 
 import com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
-import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithFavorite
+import com.hegunhee.subwayarrivalinfoapp.data.toSubwayArrivalInfo
+import com.hegunhee.subwayarrivalinfoapp.model.SubwayArrivalInfo
 import com.hegunhee.subwayarrivalinfoapp.data.toSubwayInfoEntityList
 import com.hegunhee.subwayarrivalinfoapp.datasource.LocalDataSource
 import com.hegunhee.subwayarrivalinfoapp.datasource.RemoteDataSource
@@ -53,18 +54,18 @@ class DefaultRepository @Inject constructor(
         }
     }
 
-    override suspend fun getAllSubwayArrivalList(stationName : String): Result<List<SubwayArrivalSmallDataWithFavorite>> {
+    override suspend fun getAllSubwayArrivalList(stationName : String): Result<List<SubwayArrivalInfo>> {
         val favoriteList = localDataSource.getFavoritesList()
         return runCatching {
-            val subwayArrivalData = remoteDataSource.getSubwayInfo(stationName = stationName).realtimeArrivalResponseList.map { it.toSmallData() }
+            val subwayArrivalData = remoteDataSource.getSubwayInfo(stationName = stationName).realtimeArrivalResponseList
             subwayArrivalData.map { subwayArrivalSmallData ->
-                val isFavorite = favoriteList.any{favorites -> favorites.subwayInfo == subwayArrivalSmallData.subwayInfo}
-                subwayArrivalSmallData.toSubwayArrivalSmallDataWithFavorite(isFavorite)
+                val isFavorite = favoriteList.any{favorites -> favorites.subwayInfo == subwayArrivalSmallData.trainLineNm}
+                subwayArrivalSmallData.toSubwayArrivalInfo(isFavorite)
             }.toList()
         }
     }
 
-    override suspend fun getFavoriteSubwayInfoList(favorite: Favorites): Result<List<SubwayArrivalSmallDataWithFavorite>> {
+    override suspend fun getFavoriteSubwayInfoList(favorite: Favorites): Result<List<SubwayArrivalInfo>> {
         return getAllSubwayArrivalList(favorite.subwayName).map { subwayArrivalSmallData ->
             subwayArrivalSmallData.filter { it.fullName == favorite.subwayInfo }
         }

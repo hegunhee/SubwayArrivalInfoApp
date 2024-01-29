@@ -1,8 +1,8 @@
-package com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival
+package com.hegunhee.subwayarrivalinfoapp.model
 
 import com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites
 
-data class SubwayArrivalSmallDataWithFavorite(
+data class SubwayArrivalInfo(
     val nextStation : String,
     val time : Int,
     val message : String,
