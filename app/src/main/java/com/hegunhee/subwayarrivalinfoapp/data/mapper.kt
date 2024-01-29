@@ -1,6 +1,6 @@
 package com.hegunhee.subwayarrivalinfoapp.data
 
-import com.hegunhee.subwayarrivalinfoapp.Util.subway_line_limit
+import com.hegunhee.subwayarrivalinfoapp.util.subway_line_limit
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.RealtimeArrivalResponse
 import com.hegunhee.subwayarrivalinfoapp.data.json.subway_info.Row
