@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class InsertFavoritesUseCase @Inject constructor(private val repository: Repository) {
 
-    suspend operator fun invoke(favorites: Favorites){
+    suspend operator fun invoke(favorites: Favorites) {
         repository.insertFavorite(favorites)
     }
 }
