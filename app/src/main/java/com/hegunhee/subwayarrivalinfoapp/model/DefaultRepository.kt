@@ -45,7 +45,7 @@ class DefaultRepository @Inject constructor(
 
     override suspend fun saveAllSubwayListInLocalDB() : Result<Boolean> {
         return runCatching {
-            val subwayInfo = remoteDataSource.getAllSubwayList().searchInfoBySubwayNameService
+            val subwayInfo = remoteDataSource.getAllSubwayList().subwaySearchInfoResponse
             if(subwayInfo.result.isSuccess()){
                 localDataSource.insertSubwayInfoList(subwayInfo.toSubwayInfoEntityList())
             }
@@ -56,7 +56,7 @@ class DefaultRepository @Inject constructor(
     override suspend fun getAllSubwayArrivalList(stationName : String): Result<List<SubwayArrivalSmallDataWithFavorite>> {
         val favoriteList = localDataSource.getFavoritesList()
         return runCatching {
-            val subwayArrivalData = remoteDataSource.getSubwayInfo(stationName = stationName).realtimeArrivalList.map { it.toSmallData() }
+            val subwayArrivalData = remoteDataSource.getSubwayInfo(stationName = stationName).realtimeArrivalResponseList.map { it.toSmallData() }
             subwayArrivalData.map { subwayArrivalSmallData ->
                 val isFavorite = favoriteList.any{favorites -> favorites.subwayInfo == subwayArrivalSmallData.subwayInfo}
                 subwayArrivalSmallData.toSubwayArrivalSmallDataWithFavorite(isFavorite)

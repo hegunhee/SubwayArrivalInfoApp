@@ -1,7 +1,7 @@
 package com.hegunhee.subwayarrivalinfoapp.network
 
 import com.hegunhee.subwayarrivalinfoapp.BuildConfig
-import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalJson
+import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -14,5 +14,5 @@ interface SubwayArrivalApi {
         @Path("start_index") startIndex : Int = 1,
         @Path("end_index") endIndex : Int = 5,
         @Path("station") stationName : String
-    ) : SubwayArrivalJson
+    ) : SubwayArrivalResponse
 }
