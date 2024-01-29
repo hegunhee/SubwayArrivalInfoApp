@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.hegunhee.subwayarrivalinfoapp.R
-import com.hegunhee.subwayarrivalinfoapp.Util.SubwayLineColor
+import com.hegunhee.subwayarrivalinfoapp.util.SubwayLineColor
 
 @BindingAdapter("isBookMarked")
 fun ImageButton.setColors(isBookMarked : Boolean){

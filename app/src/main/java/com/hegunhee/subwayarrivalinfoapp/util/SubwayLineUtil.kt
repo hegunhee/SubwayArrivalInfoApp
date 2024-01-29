@@ -1,4 +1,4 @@
-package com.hegunhee.subwayarrivalinfoapp.Util
+package com.hegunhee.subwayarrivalinfoapp.util
 
 import com.hegunhee.subwayarrivalinfoapp.R
 
