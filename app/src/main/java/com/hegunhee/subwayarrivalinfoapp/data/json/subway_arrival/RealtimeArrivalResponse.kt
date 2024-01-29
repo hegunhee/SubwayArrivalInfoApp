@@ -1,8 +1,6 @@
 package com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival
 
 
-import android.util.Log
-import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -10,7 +8,7 @@ import com.squareup.moshi.JsonClass
 /**
  * Nullable 하게 처리하지않는 방식 고민 필요
  */
-data class RealtimeArrival(
+data class RealtimeArrivalResponse(
     @Json(name = "arvlCd") val arvlCd: String? = null,
     @Json(name = "arvlMsg2") val arvlMsg2: String,
     @Json(name = "arvlMsg3") val arvlMsg3: String? = null,
