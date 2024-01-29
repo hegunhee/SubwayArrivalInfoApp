@@ -16,15 +16,15 @@ interface Repository {
 
     suspend fun saveAllSubwayListInLocalDB() : Result<Boolean>
   
-    suspend fun getAllSubwayArrivalList(station_name : String) : Result<List<SubwayArrivalSmallDataWithFavorite>>
+    suspend fun getAllSubwayArrivalList(stationName : String) : Result<List<SubwayArrivalSmallDataWithFavorite>>
 
-    suspend fun getSubwayInfoByNameOrNull(station_name : String) : SubwayInfoEntity?
+    suspend fun getSubwayInfoByNameOrNull(stationName : String) : SubwayInfoEntity?
 
     suspend fun insertFavorite(favorites: Favorites)
 
     suspend fun getFavoriteSubwayInfoList(favorite : Favorites) : Result<List<SubwayArrivalSmallDataWithFavorite>>
 
-    suspend fun deleteFavorite(station_info : String)
+    suspend fun deleteFavorite(stationInfo : String)
 
     fun getFavoritesListByFlow() : Flow<List<Favorites>>
 }

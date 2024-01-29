@@ -6,10 +6,10 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class Row(
-    @Json(name ="FR_CODE") val fr_code: String,
-    @Json(name ="LINE_NUM") val line_num: String,
-    @Json(name ="STATION_CD") val station_cd: String,
-    @Json(name ="STATION_NM") val station_nm: String
+    @Json(name ="FR_CODE") val frCode: String,
+    @Json(name ="LINE_NUM") val lineNum: String,
+    @Json(name ="STATION_CD") val stationCd: String,
+    @Json(name ="STATION_NM") val stationNm: String
 ) {
-    fun getFormattedLineNum() = line_num.substring(1)
+    fun getFormattedLineNum() = lineNum.substring(1)
 }

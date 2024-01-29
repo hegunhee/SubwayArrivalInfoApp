@@ -11,7 +11,7 @@ data class SubwayArrivalSmallDataWithFavorite(
     val isFavorite : Boolean
 ) {
 
-    fun toFavorites(station_name : String) : Favorites{
-        return Favorites(fullName,station_name,stationLine)
+    fun toFavorites(stationName : String) : Favorites{
+        return Favorites(fullName,stationName,stationLine)
     }
 }
