@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class GetSortedSubwayArrivalListUseCase @Inject constructor(private val repository: Repository) {
 
-    suspend operator fun invoke(stationName : String) : Result<List<SubwayArrivalInfo>>{
+    suspend operator fun invoke(stationName: String): Result<List<SubwayArrivalInfo>> {
         return repository.getAllSubwayArrivalList(stationName)
     }
 

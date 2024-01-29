@@ -14,8 +14,9 @@ import javax.inject.Singleton
 @Singleton
 class DefaultRepository @Inject constructor(
     private val localDataSource: LocalDataSource,
-    private val remoteDataSource : RemoteDataSource
+    private val remoteDataSource: RemoteDataSource
 ) : Repository {
+
     override suspend fun insertSubwayInfoList(infoList: List<SubwayInfoEntity>) {
         localDataSource.insertSubwayInfoList(infoList)
     }
@@ -44,22 +45,23 @@ class DefaultRepository @Inject constructor(
         return localDataSource.getFavoritesListByFlow()
     }
 
-    override suspend fun saveAllSubwayListInLocalDB() : Result<Boolean> {
+    override suspend fun saveAllSubwayListInLocalDB(): Result<Boolean> {
         return runCatching {
             val subwayInfo = remoteDataSource.getAllSubwayList().subwaySearchInfoResponse
-            if(subwayInfo.result.isSuccess()){
+            if (subwayInfo.result.isSuccess()) {
                 localDataSource.insertSubwayInfoList(subwayInfo.toSubwayInfoEntityList())
             }
             return@runCatching subwayInfo.result.isSuccess()
         }
     }
 
-    override suspend fun getAllSubwayArrivalList(stationName : String): Result<List<SubwayArrivalInfo>> {
+    override suspend fun getAllSubwayArrivalList(stationName: String): Result<List<SubwayArrivalInfo>> {
         val favoriteList = localDataSource.getFavoritesList()
         return runCatching {
             val subwayArrivalData = remoteDataSource.getSubwayInfo(stationName = stationName).realtimeArrivalResponseList
             subwayArrivalData.map { subwayArrivalSmallData ->
-                val isFavorite = favoriteList.any{favorites -> favorites.subwayInfo == subwayArrivalSmallData.trainLineNm}
+                val isFavorite =
+                    favoriteList.any { favorites -> favorites.subwayInfo == subwayArrivalSmallData.trainLineNm }
                 subwayArrivalSmallData.toSubwayArrivalInfo(isFavorite)
             }.toList()
         }
