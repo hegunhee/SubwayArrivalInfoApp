@@ -2,7 +2,7 @@ package com.hegunhee.subwayarrivalinfoapp.domain.repository
 
 import com.hegunhee.subwayarrivalinfoapp.data.entity.Favorites
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
-import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithFavorite
+import com.hegunhee.subwayarrivalinfoapp.model.SubwayArrivalInfo
 import kotlinx.coroutines.flow.Flow
 
 interface Repository {
@@ -16,13 +16,13 @@ interface Repository {
 
     suspend fun saveAllSubwayListInLocalDB() : Result<Boolean>
   
-    suspend fun getAllSubwayArrivalList(stationName : String) : Result<List<SubwayArrivalSmallDataWithFavorite>>
+    suspend fun getAllSubwayArrivalList(stationName : String) : Result<List<SubwayArrivalInfo>>
 
     suspend fun getSubwayInfoByNameOrNull(stationName : String) : SubwayInfoEntity?
 
     suspend fun insertFavorite(favorites: Favorites)
 
-    suspend fun getFavoriteSubwayInfoList(favorite : Favorites) : Result<List<SubwayArrivalSmallDataWithFavorite>>
+    suspend fun getFavoriteSubwayInfoList(favorite : Favorites) : Result<List<SubwayArrivalInfo>>
 
     suspend fun deleteFavorite(stationInfo : String)
 

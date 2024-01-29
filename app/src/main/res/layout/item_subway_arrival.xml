@@ -8,7 +8,7 @@
             type="com.hegunhee.subwayarrivalinfoapp.ui.detail.DetailFragmentActionHandler" />
         <variable
             name="subwayArrivalData"
-            type="com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithFavorite" />
+            type="com.hegunhee.subwayarrivalinfoapp.model.SubwayArrivalInfo" />
 
         <variable
             name="stationName"

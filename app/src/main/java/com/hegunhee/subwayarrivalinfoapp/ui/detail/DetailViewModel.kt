@@ -2,7 +2,7 @@ package com.hegunhee.subwayarrivalinfoapp.ui.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hegunhee.subwayarrivalinfoapp.data.json.subway_arrival.SubwayArrivalSmallDataWithFavorite
+import com.hegunhee.subwayarrivalinfoapp.model.SubwayArrivalInfo
 import com.hegunhee.subwayarrivalinfoapp.domain.usecase.DeleteFavoritesUseCase
 import com.hegunhee.subwayarrivalinfoapp.domain.usecase.GetSortedSubwayArrivalListUseCase
 import com.hegunhee.subwayarrivalinfoapp.domain.usecase.InsertFavoritesUseCase
@@ -32,7 +32,7 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    override fun toggleFavorite(subwayArrivalData: SubwayArrivalSmallDataWithFavorite, stationName : String) {
+    override fun toggleFavorite(subwayArrivalData: SubwayArrivalInfo, stationName : String) {
         viewModelScope.launch(Dispatchers.IO) {
             if(subwayArrivalData.isFavorite){
                 deleteFavoritesUseCase(subwayArrivalData.fullName)
