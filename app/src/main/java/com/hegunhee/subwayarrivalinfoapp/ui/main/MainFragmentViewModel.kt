@@ -19,21 +19,24 @@ class MainFragmentViewModel @Inject constructor(
     private val toggleSubwayInfoBookMarkedUseCase: ToggleSubwayInfoBookMarkedUseCase
 ): ViewModel(), MainFragmentActionHandler{
 
-    val _searchText : MutableStateFlow<String> = MutableStateFlow<String>("")
-    val searchText : StateFlow<String> = _searchText.asStateFlow()
+    val searchText : MutableStateFlow<String> = MutableStateFlow("")
 
-    private val _navigateDetail : MutableSharedFlow<String> = MutableSharedFlow<String>()
-    val navigateDetail : SharedFlow<String> = _navigateDetail.asSharedFlow()
+    private val _navigationAction : MutableSharedFlow<MainNavigationAction> = MutableSharedFlow<MainNavigationAction>()
+    val navigationAction : SharedFlow<MainNavigationAction> = _navigationAction.asSharedFlow()
 
     private val _toastMessage : MutableSharedFlow<String> = MutableSharedFlow<String>()
     val toastMessage : SharedFlow<String> = _toastMessage.asSharedFlow()
 
-    val subwayInfoList : Flow<List<SubwayInfoEntity>> = searchText.combine(getSubwayInfoListByFlowUseCase()){ str, list ->
+    val subwayInfoList : StateFlow<List<SubwayInfoEntity>> = searchText.combine(getSubwayInfoListByFlowUseCase()){ str, list ->
         return@combine if(searchText.value.isBlank()) {
             list
         } else
             list.filter { str in it.subwayName }
-    }
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(500L),
+        initialValue = emptyList()
+    )
 
     fun fetchSubwayInfoList() = viewModelScope.launch {
         saveAllSubwayListInLocalDBUseCase().onSuccess { result ->
@@ -53,7 +56,7 @@ class MainFragmentViewModel @Inject constructor(
 
     override fun navigateToDetail(subwayName: String) {
         viewModelScope.launch {
-            _navigateDetail.emit(subwayName)
+            _navigationAction.emit(MainNavigationAction.Detail(subwayName))
         }
     }
 }
