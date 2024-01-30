@@ -13,11 +13,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainFragmentViewModel @Inject constructor(
+class MainViewModel @Inject constructor(
     private val getSubwayInfoListByFlowUseCase: GetSubwayInfoListByFlowUseCase,
     private val saveAllSubwayListInLocalDBUseCase: SaveAllSubwayListInLocalDBUseCase,
     private val toggleSubwayInfoBookMarkedUseCase: ToggleSubwayInfoBookMarkedUseCase
-): ViewModel(), MainFragmentActionHandler{
+): ViewModel(), MainActionHandler{
 
     val searchText : MutableStateFlow<String> = MutableStateFlow("")
 

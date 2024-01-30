@@ -5,7 +5,7 @@
 
         <variable
             name="eventHandler"
-            type="com.hegunhee.subwayarrivalinfoapp.ui.detail.DetailFragmentActionHandler" />
+            type="com.hegunhee.subwayarrivalinfoapp.ui.detail.DetailActionHandler" />
         <variable
             name="subwayArrivalData"
             type="com.hegunhee.subwayarrivalinfoapp.model.SubwayArrivalInfo" />

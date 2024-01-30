@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodel"
-            type="com.hegunhee.subwayarrivalinfoapp.ui.main.MainFragmentViewModel" />
+            type="com.hegunhee.subwayarrivalinfoapp.ui.main.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -19,7 +19,7 @@ class DetailViewModel @Inject constructor(
     private val getSortedSubwayArrivalListUseCase: GetSortedSubwayArrivalListUseCase,
     private val deleteFavoritesUseCase: DeleteFavoritesUseCase,
     private val insertFavoritesUseCase: InsertFavoritesUseCase
-) : ViewModel(), DetailFragmentActionHandler{
+) : ViewModel(), DetailActionHandler{
 
     private val _subwayArrivalListState : MutableStateFlow<SubwayArrivalListState> = MutableStateFlow(SubwayArrivalListState.Initialized)
     val subwayArrivalListState : StateFlow<SubwayArrivalListState> = _subwayArrivalListState.asStateFlow()
