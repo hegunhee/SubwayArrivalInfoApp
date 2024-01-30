@@ -24,10 +24,10 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = SubwayArrivalAdapter(actionHandler = viewModel, station_name = args.subwayNm)
+        adapter = SubwayArrivalAdapter(actionHandler = viewModel, stationName = args.subwayNm)
         binding.apply {
             viewmodel = viewModel
-            recyclerView.adapter = adapter
+            subwayRecyclerView.adapter = adapter
         }
         viewModel.fetchSubwayArrivalInfo(args.subwayNm)
         setActionBarTitle()
@@ -39,11 +39,11 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
     }
 
 
-    private fun observeData() = with(viewModel) {
+    private fun observeData() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 launch {
-                    stationArrivalListState.collect {
+                    viewModel.subwayArrivalListState.collect {
                         when(it){
                             is SubwayArrivalListState.Initialized -> {}
                             is SubwayArrivalListState.Success -> {

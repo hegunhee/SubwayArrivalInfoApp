@@ -21,14 +21,14 @@ class DetailViewModel @Inject constructor(
     private val insertFavoritesUseCase: InsertFavoritesUseCase
 ) : ViewModel(), DetailFragmentActionHandler{
 
-    private val _stationArrivalListState : MutableStateFlow<SubwayArrivalListState> = MutableStateFlow(SubwayArrivalListState.Initialized)
-    val stationArrivalListState : StateFlow<SubwayArrivalListState> = _stationArrivalListState.asStateFlow()
+    private val _subwayArrivalListState : MutableStateFlow<SubwayArrivalListState> = MutableStateFlow(SubwayArrivalListState.Initialized)
+    val subwayArrivalListState : StateFlow<SubwayArrivalListState> = _subwayArrivalListState.asStateFlow()
 
-    fun fetchSubwayArrivalInfo(station_name : String) = viewModelScope.launch{
-        getSortedSubwayArrivalListUseCase(station_name).onSuccess {
-            _stationArrivalListState.emit(SubwayArrivalListState.Success(it))
+    fun fetchSubwayArrivalInfo(stationName : String) = viewModelScope.launch{
+        getSortedSubwayArrivalListUseCase(stationName).onSuccess {
+            _subwayArrivalListState.emit(SubwayArrivalListState.Success(it))
         }.onFailure {
-            _stationArrivalListState.emit(SubwayArrivalListState.Failure)
+            _subwayArrivalListState.emit(SubwayArrivalListState.Failure)
         }
     }
 

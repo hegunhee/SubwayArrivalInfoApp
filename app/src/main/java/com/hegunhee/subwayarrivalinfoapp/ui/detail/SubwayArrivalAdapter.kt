@@ -10,13 +10,13 @@ import com.hegunhee.subwayarrivalinfoapp.databinding.ItemSubwayArrivalBinding
 
 class SubwayArrivalAdapter(
     private val actionHandler : DetailFragmentActionHandler,
-    private val station_name : String
+    private val stationName : String
 ) : ListAdapter<SubwayArrivalInfo,SubwayArrivalAdapter.SubwayArrivalViewHolder>(diffUtil) {
 
     inner class SubwayArrivalViewHolder(private val binding : ItemSubwayArrivalBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(subwayInfo: SubwayArrivalInfo) = with(binding) {
-            stationName = station_name
+            stationName = this@SubwayArrivalAdapter.stationName
             subwayArrivalData = subwayInfo
         }
     }
@@ -31,19 +31,13 @@ class SubwayArrivalAdapter(
     override fun onBindViewHolder(holder: SubwayArrivalViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
-}
+    companion object {
+        private val diffUtil = object :  DiffUtil.ItemCallback<SubwayArrivalInfo>() {
+            override fun areItemsTheSame(oldItem: SubwayArrivalInfo, newItem: SubwayArrivalInfo): Boolean =
+                oldItem.fullName == newItem.fullName
 
-internal object diffUtil : DiffUtil.ItemCallback<SubwayArrivalInfo>() {
-    override fun areItemsTheSame(
-        oldItem: SubwayArrivalInfo,
-        newItem: SubwayArrivalInfo
-    ): Boolean =
-        oldItem.fullName == newItem.fullName
-
-    override fun areContentsTheSame(
-        oldItem: SubwayArrivalInfo,
-        newItem: SubwayArrivalInfo
-    ): Boolean =
-        oldItem == newItem
-
+            override fun areContentsTheSame(oldItem: SubwayArrivalInfo, newItem: SubwayArrivalInfo): Boolean =
+                oldItem == newItem
+        }
+    }
 }
