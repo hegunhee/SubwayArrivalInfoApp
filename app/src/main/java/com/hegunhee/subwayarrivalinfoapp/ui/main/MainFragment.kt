@@ -30,9 +30,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         adapter = SubwayInfoAdapter(viewModel)
         binding.apply {
             viewmodel = viewModel
-            recyclerView.adapter = adapter
+            subwayRecyclerView.adapter = adapter
         }
-        initObserver()
+        observeData()
         setActionBarTitle()
         setHasOptionsMenu(true)
     }
@@ -57,27 +57,31 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
     }
 
-    private fun initObserver() = with(viewModel) {
+    private fun observeData() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 launch {
-                    viewModel.navigateDetail.collect{
-                        MainFragmentDirections.mainToDetail(it).let { direction ->
-                            findNavController().navigate(direction)
+                    viewModel.navigationAction.collect{
+                        when(it) {
+                            is MainNavigationAction.Detail -> {
+                                MainFragmentDirections.mainToDetail(it.subwayName).let { direction ->
+                                    findNavController().navigate(direction)
+                                }
+                            }
                         }
                     }
                 }
                 launch {
-                    subwayInfoList.collect {
-                        if(it.isEmpty() && searchText.value.isBlank()){
-                            fetchSubwayInfoList()
+                    viewModel.subwayInfoList.collect {
+                        if(it.isEmpty() && viewModel.searchText.value.isBlank()){
+                            viewModel.fetchSubwayInfoList()
                         }else{
                             adapter.submitList(it)
                         }
                     }
                 }
                 launch{
-                    toastMessage.collect{ message ->
+                    viewModel.toastMessage.collect{ message ->
                         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                     }
                 }

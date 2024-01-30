@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable
@@ -8,38 +9,34 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/searchEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@={viewmodel._searchText}"
+            android:text="@={viewmodel.searchText}"
             android:background="@drawable/border"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:paddingStart="10dp"
-            android:hint="지하철 역을 입력해주세요"
-            />
+            android:hint="지하철 역을 입력해주세요" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/subwayRecyclerView"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editText"
+            app:layout_constraintTop_toBottomOf="@id/searchEditText"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="10dp"
-            android:background="@color/white"
-            />
+            android:background="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
