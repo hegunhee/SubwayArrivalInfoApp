@@ -15,8 +15,8 @@ import com.hegunhee.subwayarrivalinfoapp.MainActivity
 import com.hegunhee.subwayarrivalinfoapp.R
 import com.hegunhee.subwayarrivalinfoapp.databinding.FragmentMainBinding
 import com.hegunhee.subwayarrivalinfoapp.ui.BaseFragment
+import com.hegunhee.subwayarrivalinfoapp.ui.common.subway.SubwayInfoAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
