@@ -10,7 +10,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,20 +20,22 @@ import javax.inject.Inject
 class FavoriteViewModel @Inject constructor(
     private val getFavoritesListByFlowUseCase: GetFavoritesListByFlowUseCase,
     private val deleteFavoritesUseCase: DeleteFavoritesUseCase
-): ViewModel(), FavoriteFragmentActionHandler{
+): ViewModel(), FavoriteActionHandler{
 
-    val favoriteList : Flow<List<Favorites>> = getFavoritesListByFlowUseCase()
+    private val _navigationAction : MutableSharedFlow<FavoriteNavigationAction> = MutableSharedFlow()
+    val navigationAction : SharedFlow<FavoriteNavigationAction> = _navigationAction.asSharedFlow()
 
-    private val _navigateToDetailFavorite : MutableSharedFlow<Favorites> = MutableSharedFlow<Favorites>()
-    val navigateToDetailFavorite : SharedFlow<Favorites> = _navigateToDetailFavorite.asSharedFlow()
-
+    val favoriteList : Flow<List<Favorites>> = getFavoritesListByFlowUseCase().stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(500L),
+            initialValue = emptyList()
+        )
 
     override fun showDetailFavorite(favorite: Favorites) {
         viewModelScope.launch {
-            _navigateToDetailFavorite.emit(favorite)
+            _navigationAction.emit(FavoriteNavigationAction.Detail(favorite))
         }
     }
-
 
     override fun deleteFavorite(stationInfo : String) {
          viewModelScope.launch(Dispatchers.IO){

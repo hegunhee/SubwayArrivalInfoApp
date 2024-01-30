@@ -23,7 +23,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <TextView
-            android:id="@+id/station_line"
+            android:id="@+id/stationLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/round_shape_20dp"
@@ -36,18 +36,18 @@
             tools:text="1호선" />
 
         <TextView
-            android:id="@+id/station_info"
+            android:id="@+id/stationInfo"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             tools:text="부평행 - 소요산"
-            app:layout_constraintTop_toTopOf="@id/station_line"
-            app:layout_constraintBottom_toBottomOf="@id/station_line"
+            app:layout_constraintTop_toTopOf="@id/stationLine"
+            app:layout_constraintBottom_toBottomOf="@id/stationLine"
             android:gravity="center_vertical"
             android:textSize="20dp"
             android:autoSizeTextType="uniform"
             android:text="@{subwayArrivalData.fullName}"
             android:textColor="@color/black"
-            app:layout_constraintStart_toEndOf="@id/station_line"
+            app:layout_constraintStart_toEndOf="@id/stationLine"
             android:layout_marginStart="10dp"
             />
 
@@ -59,8 +59,8 @@
             android:textSize="18dp"
             android:textColor="@color/black"
             app:setTime="@{subwayArrivalData.time}"
-            app:layout_constraintTop_toBottomOf="@id/station_line"
-            app:layout_constraintStart_toStartOf="@id/station_line"
+            app:layout_constraintTop_toBottomOf="@id/stationLine"
+            app:layout_constraintStart_toStartOf="@id/stationLine"
             />
 
         <TextView

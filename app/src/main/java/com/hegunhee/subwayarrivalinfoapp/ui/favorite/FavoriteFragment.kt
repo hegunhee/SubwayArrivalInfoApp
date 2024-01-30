@@ -25,7 +25,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment
         adapter = FavoriteAdapter(viewModel)
         binding.apply {
             viewmodel = viewModel
-            recyclerView.adapter = adapter
+            favoriteRecyclerView.adapter = adapter
         }
         setActionBarTitle()
         observeData()
@@ -35,18 +35,22 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment
         (requireActivity() as MainActivity).supportActionBar?.title = "즐겨찾기"
     }
 
-    private fun observeData() = with(viewModel) {
+    private fun observeData() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 launch {
-                    favoriteList.collect {
+                    viewModel.favoriteList.collect {
                         adapter.submitList(it)
                     }
                 }
                 launch {
-                    navigateToDetailFavorite.collect{
-                        FavoriteFragmentDirections.favoriteToFavoriteDetail(it).let { direction ->
-                            findNavController().navigate(direction)
+                    viewModel.navigationAction.collect {
+                        when(it) {
+                            is FavoriteNavigationAction.Detail -> {
+                                FavoriteFragmentDirections.favoriteToFavoriteDetail(favorites = it.favorite).let { direction ->
+                                    findNavController().navigate(direction)
+                                }
+                            }
                         }
                     }
                 }

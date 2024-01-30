@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -9,19 +11,17 @@
 
         <variable
             name="eventHandler"
-            type="com.hegunhee.subwayarrivalinfoapp.ui.favorite.FavoriteFragmentActionHandler" />
+            type="com.hegunhee.subwayarrivalinfoapp.ui.favorite.FavoriteActionHandler" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:onClick="@{() -> eventHandler.showDetailFavorite(favorite)}">
 
         <TextView
-            android:id="@+id/station_line"
+            android:id="@+id/stationLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/round_shape_20dp"
@@ -34,7 +34,7 @@
             tools:text="1호선" />
 
         <TextView
-            android:id="@+id/station_name"
+            android:id="@+id/stationName"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginStart="10dp"
@@ -42,21 +42,21 @@
             android:gravity="center_vertical"
             android:text="@{favorite.subwayName}"
             android:textColor="@color/black"
-            android:textSize="20dp"
-            app:layout_constraintBottom_toBottomOf="@id/station_line"
-            app:layout_constraintStart_toEndOf="@id/station_line"
-            app:layout_constraintTop_toTopOf="@id/station_line"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/stationLine"
+            app:layout_constraintStart_toEndOf="@id/stationLine"
+            app:layout_constraintTop_toTopOf="@id/stationLine"
             tools:text="부평" />
 
         <TextView
-            android:id="@+id/station_info"
+            android:id="@+id/stationInfo"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:text="@{favorite.subwayInfo}"
             android:textColor="@color/black"
-            android:textSize="20dp"
-            app:layout_constraintStart_toStartOf="@id/station_line"
-            app:layout_constraintTop_toBottomOf="@id/station_line"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@id/stationLine"
+            app:layout_constraintTop_toBottomOf="@id/stationLine"
             tools:text="부개 - 소요산 방향" />
 
 
