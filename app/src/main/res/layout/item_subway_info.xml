@@ -10,7 +10,7 @@
             type="com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity" />
         <variable
             name="eventHandler"
-            type="com.hegunhee.subwayarrivalinfoapp.ui.main.MainFragmentActionHandler" />
+            type="com.hegunhee.subwayarrivalinfoapp.ui.main.MainActionHandler" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

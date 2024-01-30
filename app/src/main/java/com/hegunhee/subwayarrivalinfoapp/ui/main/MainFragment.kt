@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
-    private val viewModel: MainFragmentViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
     private lateinit var adapter: SubwayInfoAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

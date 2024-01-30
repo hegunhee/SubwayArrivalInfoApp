@@ -9,7 +9,7 @@ import com.hegunhee.subwayarrivalinfoapp.model.SubwayArrivalInfo
 import com.hegunhee.subwayarrivalinfoapp.databinding.ItemSubwayArrivalBinding
 
 class SubwayArrivalAdapter(
-    private val actionHandler : DetailFragmentActionHandler,
+    private val actionHandler : DetailActionHandler,
     private val stationName : String
 ) : ListAdapter<SubwayArrivalInfo,SubwayArrivalAdapter.SubwayArrivalViewHolder>(diffUtil) {
 

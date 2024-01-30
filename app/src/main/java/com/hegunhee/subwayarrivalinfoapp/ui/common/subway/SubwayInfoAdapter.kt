@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hegunhee.subwayarrivalinfoapp.data.entity.SubwayInfoEntity
 import com.hegunhee.subwayarrivalinfoapp.databinding.ItemSubwayInfoBinding
-import com.hegunhee.subwayarrivalinfoapp.ui.main.MainFragmentActionHandler
+import com.hegunhee.subwayarrivalinfoapp.ui.main.MainActionHandler
 
 class SubwayInfoAdapter(
-    private val eventHandler: MainFragmentActionHandler
+    private val eventHandler: MainActionHandler
 ) : ListAdapter<SubwayInfoEntity, SubwayInfoAdapter.MainViewHolder>(diffUtil) {
 
     inner class MainViewHolder(private val binding : ItemSubwayInfoBinding) : RecyclerView.ViewHolder(binding.root){
