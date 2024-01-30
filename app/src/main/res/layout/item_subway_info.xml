@@ -25,7 +25,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:text="@{subwayInfoEntity.subwayName}"
             android:textColor="@color/black"
             tools:text="강남" />
@@ -53,12 +53,7 @@
             app:layout_constraintBottom_toBottomOf="@id/subway_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:isBookMarked="@{subwayInfoEntity.bookmarked}"
-            android:onClick="@{() -> eventHandler.toggleSubwayInfoBookMarked(subwayInfoEntity)}"
-
-
-            />
+            android:onClick="@{() -> eventHandler.toggleSubwayInfoBookMarked(subwayInfoEntity)}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    
-    
 </layout>

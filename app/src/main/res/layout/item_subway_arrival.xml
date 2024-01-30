@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -15,8 +16,7 @@
             type="String" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:background="@color/white"
         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
             app:layout_constraintTop_toTopOf="@id/stationLine"
             app:layout_constraintBottom_toBottomOf="@id/stationLine"
             android:gravity="center_vertical"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:autoSizeTextType="uniform"
             android:text="@{subwayArrivalData.fullName}"
             android:textColor="@color/black"
@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="6분 30초"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textColor="@color/black"
             app:setTime="@{subwayArrivalData.time}"
             app:layout_constraintTop_toBottomOf="@id/stationLine"
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="전역 도착"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:layout_marginStart="10dp"
             app:layout_constraintStart_toEndOf="@id/time"
             android:text="@{subwayArrivalData.message}"
@@ -87,6 +87,6 @@
             android:onClick="@{() -> eventHandler.toggleFavorite(subwayArrivalData,stationName)}"
             app:isBookMarked="@{subwayArrivalData.isFavorite}"
             android:background="@drawable/ic_star"
-            />
+            android:contentDescription="starButton" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
