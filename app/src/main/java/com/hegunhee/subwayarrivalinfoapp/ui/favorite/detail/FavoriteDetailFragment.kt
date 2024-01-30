@@ -28,18 +28,22 @@ class FavoriteDetailFragment :
         adapter = FavoriteDetailAdapter()
         binding.apply {
             viewmodel = viewModel
-            recyclerView.adapter = adapter
+            subwayRecyclerView.adapter = adapter
         }
         viewModel.getFavoriteSubwayInfo(args.favorites)
         setActionBarTitle()
         observeData()
     }
 
-    private fun observeData() = with(viewModel) {
+    private fun setActionBarTitle()   {
+        (requireActivity() as MainActivity).supportActionBar?.title = args.favorites.subwayInfo
+    }
+
+    private fun observeData() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 launch{
-                    subwayInfoListState.collect {
+                    viewModel.subwayInfoListState.collect {
                         when(it){
                             is SubwayInfoListState.Initialized -> {}
                             is SubwayInfoListState.Success -> {
@@ -53,9 +57,5 @@ class FavoriteDetailFragment :
                 }
             }
         }
-    }
-
-    private fun setActionBarTitle()   {
-        (requireActivity() as MainActivity).supportActionBar?.title = args.favorites.subwayInfo
     }
 }
