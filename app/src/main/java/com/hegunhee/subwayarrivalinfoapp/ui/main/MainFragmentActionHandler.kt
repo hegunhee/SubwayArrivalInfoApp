@@ -7,4 +7,6 @@ interface MainFragmentActionHandler {
     fun toggleSubwayInfoBookMarked(subwayInfoEntity: SubwayInfoEntity)
 
     fun navigateToDetail(subwayName : String)
+
+    fun navigateToFavorite()
 }

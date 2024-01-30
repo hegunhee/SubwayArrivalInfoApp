@@ -1,9 +1,6 @@
 package com.hegunhee.subwayarrivalinfoapp.ui.main
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -34,27 +31,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         }
         observeData()
         setActionBarTitle()
-        setHasOptionsMenu(true)
     }
 
     private fun setActionBarTitle() {
         (requireActivity() as MainActivity).supportActionBar?.title = "Main"
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.favorite_menu,menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.favorite -> {
-                findNavController().navigate(R.id.main_to_favorite)
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-
     }
 
     private fun observeData() {
@@ -67,6 +47,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
                                 MainFragmentDirections.mainToDetail(it.subwayName).let { direction ->
                                     findNavController().navigate(direction)
                                 }
+                            }
+                            MainNavigationAction.Favorite -> {
+                                findNavController().navigate(R.id.main_to_favorite)
                             }
                         }
                     }

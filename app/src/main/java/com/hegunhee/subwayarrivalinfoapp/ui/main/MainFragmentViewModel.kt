@@ -59,4 +59,10 @@ class MainFragmentViewModel @Inject constructor(
             _navigationAction.emit(MainNavigationAction.Detail(subwayName))
         }
     }
+
+    override fun navigateToFavorite() {
+        viewModelScope.launch {
+            _navigationAction.emit(MainNavigationAction.Favorite)
+        }
+    }
 }
