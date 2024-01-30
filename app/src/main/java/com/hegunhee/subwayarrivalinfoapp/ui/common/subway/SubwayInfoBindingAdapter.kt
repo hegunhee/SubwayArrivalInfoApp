@@ -1,4 +1,4 @@
-package com.hegunhee.subwayarrivalinfoapp.ui.main
+package com.hegunhee.subwayarrivalinfoapp.ui.common.subway
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView

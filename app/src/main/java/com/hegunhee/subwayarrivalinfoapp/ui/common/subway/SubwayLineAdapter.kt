@@ -1,4 +1,4 @@
-package com.hegunhee.subwayarrivalinfoapp.ui.main
+package com.hegunhee.subwayarrivalinfoapp.ui.common.subway
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.hegunhee.subwayarrivalinfoapp.databinding.ItemSubwayLineBinding
 
-class SubwayLineAdapter() : ListAdapter<String,SubwayLineAdapter.SubwayLineViewHolder>(diff_util) {
+class SubwayLineAdapter() : ListAdapter<String, SubwayLineAdapter.SubwayLineViewHolder>(diffUtil) {
 
     inner class SubwayLineViewHolder(private val binding : ItemSubwayLineBinding) : ViewHolder(binding.root){
 
@@ -23,15 +23,16 @@ class SubwayLineAdapter() : ListAdapter<String,SubwayLineAdapter.SubwayLineViewH
     override fun onBindViewHolder(holder: SubwayLineViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
-}
 
-internal object diff_util : DiffUtil.ItemCallback<String>(){
-    override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
-        return oldItem == newItem
+    companion object {
+        private val diffUtil = object :  DiffUtil.ItemCallback<String>(){
+            override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+                return oldItem == newItem
+            }
+
+            override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
-
-    override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
-        return oldItem == newItem
-    }
-
 }
